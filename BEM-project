@@ -1,0 +1,34 @@
+header (шапка с лого)
+
+root (для фона)
+
+page (для центрирования, фона, шрифтов)
+
+content (пока не понял зачем, но не могу ж без класса оставить)
+
+profile (профиль с его начинкой)
+    __avatar
+    __info (контейнер для имени, описания, аватара и кнопки редактирования профиля)
+    __name
+    __description
+    __edit-button
+    __new-photo-button
+
+content-gallery (Грид с фотками)
+
+cards (карточки с контентом)
+    __photo
+    __description
+    __like-button
+
+footer (подвал с лого)
+
+logo
+    _place -> logo_place_footer (а в базе он размерами и фоном лого хедера)
+
+edit-form
+    __close-button
+    __form-description
+    __profile-name
+    __profile-description
+    __submit-button
