@@ -16,11 +16,14 @@ profile (профиль с его начинкой)
     __new-photo-button
 
 content-gallery (Грид с фотками)
+    __cards (по сути контейнер для блоков card)
 
-cards (карточки с контентом)
+card (карточка с контентом)
     __photo
     __description
     __like-button
+        _status -> card__like-button_status_active (активный стоаус)
+    __info (контейнер для описания и лайка)
 
 footer (подвал с лого)
     __copyright
