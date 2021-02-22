@@ -1,0 +1,8 @@
+.profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+    margin: 0;
+    padding: 0 200px 50px 200px;
+}
