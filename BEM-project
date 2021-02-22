@@ -3,7 +3,7 @@ header (шапка с лого)
 root (для фона)
 
 page (для центрирования, фона, шрифтов)
-
+    __header (микс для header)
 content (пока не понял зачем, но не могу ж без класса оставить)
 
 profile (профиль с его начинкой)
@@ -22,9 +22,9 @@ cards (карточки с контентом)
     __like-button
 
 footer (подвал с лого)
+    __copyright
 
 logo
-    _place -> logo_place_footer (а в базе он размерами и фоном лого хедера)
 
 edit-form
     __close-button
