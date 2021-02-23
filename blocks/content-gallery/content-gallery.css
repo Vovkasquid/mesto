@@ -2,3 +2,9 @@
     margin: 0;
     padding: 0 200px 67px 200px;
 }
+
+@media screen and (max-width: 1135px) {
+    .content-gallery {
+        padding: 0 45px 48px 45px;
+    }
+}

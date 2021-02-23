@@ -9,3 +9,9 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+@media screen and (max-width: 1135px) {
+    .footer__copyright {
+        margin: 0 45px 36px 45px;
+    }
+}
