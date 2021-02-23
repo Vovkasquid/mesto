@@ -37,3 +37,4 @@ edit-form
     __profile-description
     __submit-button
     __form-container (контейнер для всех полей)
+    _status ->_status_active - класс активностей

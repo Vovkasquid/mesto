@@ -9,6 +9,13 @@
     top: -37px;
     right: -40px;
     border: none;
+    padding: 0;
+    opacity: 1;
+    transition: opacity .3s linear;
+}
+
+.edit-form__close-button:hover {
+    opacity: .6;
 }
 
 @media screen and (max-width: 600px) {
