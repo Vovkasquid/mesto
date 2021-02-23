@@ -7,3 +7,9 @@
     background-size: cover;
     border-radius: 50%; 
 }
+
+@media screen and (max-width: 825px) {
+    .profile__avatar {
+        margin-bottom: 26px;
+    }
+}

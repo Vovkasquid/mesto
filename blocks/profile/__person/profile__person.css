@@ -6,3 +6,10 @@
     justify-content: flex-start;
     align-items: center;
 }
+
+@media screen and (max-width: 825px) {
+    .profile__person {
+        padding-bottom: 36px;
+        flex-direction: column;
+    }
+}

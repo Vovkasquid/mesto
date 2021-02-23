@@ -10,9 +10,18 @@
     background-position: center;
     border: 1px solid #FFFFFF;
     opacity: 1;
-    transition: opacity 0.3s linear;
+    transition: opacity .3s linear;
 }
 
 .profile__edit-button:hover {
-    opacity: 0.6;
+    opacity: .6;
+}
+
+@media screen and (max-width: 825px) {
+    .profile__edit-button {
+        width: 18px;
+        height: 18px;
+        margin-top: 3px;
+        margin-left: 10px;
+    }
 }
