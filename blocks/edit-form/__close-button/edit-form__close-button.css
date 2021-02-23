@@ -10,3 +10,11 @@
     right: -40px;
     border: none;
 }
+
+@media screen and (max-width: 600px) {
+    .edit-form__close-button {
+        background-image: url('../../../images/close-button-mobile.svg');
+        top: -50px;
+        right: -2px; 
+    }
+}

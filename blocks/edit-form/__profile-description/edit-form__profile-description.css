@@ -12,3 +12,9 @@
 .edit-form__profile-description:focus {
     outline: none;
 }
+
+@media screen and (max-width: 600px) {
+    .edit-form__profile-description {
+        margin: 0 0 45px 0;  
+    }
+}

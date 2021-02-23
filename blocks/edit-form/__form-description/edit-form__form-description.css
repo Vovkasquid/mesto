@@ -5,3 +5,11 @@
     line-height: 29px;
     margin: 0 0 54px 0;
 }
+
+@media screen and (max-width: 600px) {
+    .edit-form__form-description {
+        font-size: 18px;
+        line-height: 22px;
+        margin: 0 0 75px 0;
+    }
+}
