@@ -9,4 +9,4 @@
 
 
 ## Ссылка на GitHub pages
-[Задеплоенный проект](https://github.com/Vovkasquid/mesto/settings)
+[Задеплоенный проект](https://vovkasquid.github.io/mesto/)
