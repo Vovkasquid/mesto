@@ -36,3 +36,4 @@ edit-form
     __profile-name
     __profile-description
     __submit-button
+    __form-container (контейнер для всех полей)

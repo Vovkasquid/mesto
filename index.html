@@ -21,12 +21,12 @@
           <li class="profile__info">
             <div class="profile__name-container">
               <h1 class="profile__name">Владимир Блинов</h1>
-              <button class="profile__edit-button"></button>
+              <button type="button" class="profile__edit-button"></button>
             </div>
             <p class="profile__description">Капитан очень ближнего плавания</p>
           </li>
         </ul>
-        <button class="profile__new-photo-button"></button>
+        <button type="button" class="profile__new-photo-button"></button>
       </section>
 
       <!-- Секция с фотографиями профиля-->
@@ -36,42 +36,42 @@
             <img src="./images/Lytkarino-min.jpg" alt="Фотография сухого камыша на закате около Лыткаринского карьера" class="card__photo">
             <div class="card__info">
               <p class="card__description">Лыткарино</p>
-              <button class="card__like-button"></button>
+              <button type="button" class="card__like-button"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/Oreshek-min.jpg" alt="Фотография памятника защитникам крепости Орешек" class="card__photo">
             <div class="card__info">
               <p class="card__description">Крепость Орешек</p>
-              <button class="card__like-button"></button>
+              <button type="button" class="card__like-button"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/Repino-min.jpg" alt="Фотография птицы на пляже около Репино" class="card__photo">
             <div class="card__info">
               <p class="card__description">Репино</p>
-              <button class="card__like-button"></button>
+              <button type="button" class="card__like-button"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/SaintP-min.jpg" alt="Фотография вязанной игрушки на статуе пегаса в Санкт-Петербурге" class="card__photo">
             <div class="card__info">
               <p class="card__description">Санкт-Петербург</p>
-              <button class="card__like-button"></button>
+              <button type="button" class="card__like-button"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/Terney-min.JPG" alt="Фотография скал и моря близ Тернея" class="card__photo">
             <div class="card__info">
               <p class="card__description">Терней</p>
-              <button class="card__like-button"></button>
+              <button type="button" class="card__like-button"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/Vantoviy-min.jpg" alt="Фотография июньского рассвета под Вантовым мостом в Санкт-Петербурге" class="card__photo">
             <div class="card__info">
               <p class="card__description">Вантовый мост</p>
-              <button class="card__like-button"></button>
+              <button type="button" class="card__like-button"></button>
             </div>
           </li>
         </ul>
@@ -82,6 +82,17 @@
       <!--Подвал с копирайтом-->
         <h2 class="footer__copyright">&copy; 2020 Mesto Russia</h2>
     </footer>
+
+    <!--ПопАп с изменением имени-->
+    <form class="edit-form">
+      <ul class="edit-form__form-container">
+        <h2 class="edit-form__form-description">Редактировать профиль</h2>
+        <input type="text" class="edit-form__profile-name" placeholder="Имя" value="" required>
+        <input type="text" class="edit-form__profile-description" placeholder="Описание" value="" required>
+        <button type="submit" class="edit-form__submit-button">Сохранить</button>
+        <button type="button" class="edit-form__close-button"></button>
+      </ul>
+    </form>
   </div>
 </body>
 </html>
