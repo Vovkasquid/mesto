@@ -1,3 +1,6 @@
 .profile__info {
     padding-left: 30px;
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column;
 }
