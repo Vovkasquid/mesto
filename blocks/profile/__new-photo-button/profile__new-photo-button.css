@@ -24,3 +24,9 @@
         height: 50px;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .profile__new-photo-button {
+        background-image: url('../../../images/add-button-mobile.svg');
+    }
+}
