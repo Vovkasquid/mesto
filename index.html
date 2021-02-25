@@ -84,15 +84,15 @@
     </footer>
 
     <!--ПопАп с изменением имени-->
-    <form class="edit-form">
-      <ul class="edit-form__form-container">
-        <li><h2 class="edit-form__form-description">Редактировать профиль</h2></li>
-        <li><input type="text" class="edit-form__profile-name" placeholder="Имя" value="" required></li>
-        <li><input type="text" class="edit-form__profile-description" placeholder="Описание" value="" required></li>
-        <li><button aria-label="Сохранить" type="submit" class="edit-form__submit-button">Сохранить</button></li>
-        <li><button aria-label="Закрыть" type="button" class="edit-form__close-button"></button></li>
-      </ul>
-    </form>
+    <div class="edit-form">
+      <form name="editProfileForm" class="edit-form__form-container">
+        <h2 class="edit-form__form-description">Редактировать профиль</h2>
+        <input type="text" class="edit-form__profile-name" placeholder="Имя" value="" required>
+        <input type="text" class="edit-form__profile-description" placeholder="Описание" value="" required>
+        <button aria-label="Сохранить" type="submit" class="edit-form__submit-button">Сохранить</button>
+        <button aria-label="Закрыть" type="button" class="edit-form__close-button"></button>
+      </form>
+    </div>
   </div>
   <script src="./scripts/popup.js"></script> 
 </body>
