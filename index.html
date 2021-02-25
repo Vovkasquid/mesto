@@ -17,7 +17,7 @@
       <!-- Секция с именем пользователя, аватаркой, кнопками редактирования профиля и добавления нового контента -->
       <section class="profile">
         <div class="profile__person">
-          <img src="./images/avatar.JPG" alt="Фотография профиля" class="profile__avatar"></img>
+          <img src="./images/avatar.JPG" alt="Фотография профиля" class="profile__avatar">
           <div class="profile__info">
             <div class="profile__name-container">
               <h1 class="profile__name">Владимир Блинов</h1>
@@ -84,14 +84,15 @@
     </footer>
 
     <!--ПопАп с изменением имени-->
-  <div class="edit-form">
-    <form name="editProfileForm" class="edit-form__form-container">
-      <h2 class="edit-form__form-description">Редактировать профиль</h2>
-      <input type="text" name="editProfileName" class="edit-form__profile-info-input edit-form__profile-info-input_type_name" placeholder="Имя" value="" required>
-      <input type="text" name="editProfileDescription" class="edit-form__profile-info-input edit-form__profile-info-input_type_description" placeholder="Описание" value="" required>
-      <button aria-label="Сохранить" type="submit" class="edit-form__submit-button">Сохранить</button>
-      <button aria-label="Закрыть" type="button" class="edit-form__close-button"></button>
-    </form>
+    <div class="edit-form">
+      <form name="editProfileForm" class="edit-form__form-container">
+        <h2 class="edit-form__form-description">Редактировать профиль</h2>
+        <input type="text" name="editProfileName" class="edit-form__profile-info-input edit-form__profile-info-input_type_name" placeholder="Имя" value="" required>
+        <input type="text" name="editProfileDescription" class="edit-form__profile-info-input edit-form__profile-info-input_type_description" placeholder="Описание" value="" required>
+        <button aria-label="Сохранить" type="submit" class="edit-form__submit-button">Сохранить</button>
+        <button aria-label="Закрыть" type="button" class="edit-form__close-button"></button>
+      </form>
+    </div>
   </div>
   <script src="./scripts/popup.js"></script>
 </body>
