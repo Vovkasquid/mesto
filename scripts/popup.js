@@ -4,11 +4,13 @@ let editButton = document.querySelector('.profile__edit-button');
 let closePopupButton = document.querySelector('.edit-form__close-button');
 let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
+let editFormProfileName = document.querySelector('.edit-form__profile-info-input_type_name');
+let editFormProfileDescription = document.querySelector('.edit-form__profile-info-input_type_description');
 
 //Пишем обработчики, которые потом будут применяться при кликах на кнопки
 function openPopupHandler () {
-  document.querySelector('.edit-form__profile-name').value = document.      querySelector('.profile__name').textContent;
-  document.querySelector('.edit-form__profile-description').value = document.querySelector('.profile__description').textContent;
+  editFormProfileName.value = profileName.textContent;
+  editFormProfileDescription.value = profileDescription.textContent;
   editForm.classList.add('edit-form_status_active');
 }
 
@@ -18,8 +20,8 @@ function closePopupHandler () {
 
 function editFormSubmitHandler (event) {
   event.preventDefault();
-  profileName.textContent = document.querySelector('.edit-form__profile-name').value;
-  profileDescription.textContent = document.querySelector('.edit-form__profile-description').value;
+  profileName.textContent = editFormProfileName.value;
+  profileDescription.textContent = editFormProfileDescription.value;
   closePopupHandler();
 }
 
