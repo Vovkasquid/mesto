@@ -1,25 +1,25 @@
 .profile__description {
-    margin: 0px;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 22px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 400px;
-    text-align: start;
+  margin: 0px;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 400px;
+  text-align: start;
 }
 
 @media screen and (max-width: 825px) {
-    .profile__description {
-        font-size: 14px;
-        line-height: 17px;
-        text-align: center;
-    }
+  .profile__description {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 600px) {
-    .profile__description {
-        max-width: 240px;
-    }
+  .profile__description {
+    max-width: 240px;
+  }
 }

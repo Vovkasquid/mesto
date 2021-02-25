@@ -1,27 +1,27 @@
 .edit-form__close-button {
-    width: 40px;
-    height: 40px;
-    background-color: transparent;
-    background-image: url('../../../images/close-button.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    position: absolute;
-    top: -37px;
-    right: -40px;
-    border: none;
-    padding: 0;
-    opacity: 1;
-    transition: opacity .3s linear;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  background-image: url('../../../images/close-button.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: -37px;
+  right: -40px;
+  border: none;
+  padding: 0;
+  opacity: 1;
+  transition: opacity .3s linear;
 }
 
 .edit-form__close-button:hover {
-    opacity: .6;
+  opacity: .6;
 }
 
 @media screen and (max-width: 600px) {
-    .edit-form__close-button {
-        background-image: url('../../../images/close-button-mobile.svg');
-        top: -50px;
-        right: -2px; 
-    }
+  .edit-form__close-button {
+    background-image: url('../../../images/close-button-mobile.svg');
+    top: -50px;
+    right: -2px;
+  }
 }

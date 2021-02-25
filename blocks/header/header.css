@@ -1,15 +1,15 @@
 .header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 45px 0 41px 0;
-    border-bottom: 1px solid rgba(84,84,84,0.7);
-    min-width: 320px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 45px 0 41px 0;
+  border-bottom: 1px solid rgba(84,84,84,0.7);
+  min-width: 320px;
 }
 
 @media screen and (max-width: 1135px) {
-    .header {
-        padding: 28px 0 42px 0;
-    }
+  .header {
+    padding: 28px 0 42px 0;
+  }
 }

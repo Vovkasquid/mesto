@@ -1,25 +1,25 @@
 .footer__copyright {
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 22px;
-    color: #545454;
-    margin: 0 200px 60px 200px;
-    max-width: 190px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #545454;
+  margin: 0 200px 60px 200px;
+  max-width: 190px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 1135px) {
-    .footer__copyright {
-        margin: 0 45px 36px 45px;
-    }
+  .footer__copyright {
+    margin: 0 45px 36px 45px;
+  }
 }
 
 @media screen and (max-width: 825px) {
-    .footer__copyright {
-        margin: 0 19px 36px 19px;
-        font-size: 14px;
-        line-height: 17px;
-    }
+  .footer__copyright {
+    margin: 0 19px 36px 19px;
+    font-size: 14px;
+    line-height: 17px;
+  }
 }

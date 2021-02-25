@@ -1,16 +1,16 @@
 .content-gallery__cards {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
-    gap: 17px;
-    justify-items: center;
-    align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  gap: 17px;
+  justify-items: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 1135px) {
-    .content-gallery__cards {
-        gap: 20px;
-    }
+  .content-gallery__cards {
+      gap: 20px;
+  }
 }
