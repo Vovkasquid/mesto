@@ -1,11 +1,16 @@
-//Получаем необходимые нам элементы и записываем их в переменные
-let editForm = document.querySelector('.edit-form');
-let editButton = document.querySelector('.profile__edit-button');
-let closePopupButton = document.querySelector('.edit-form__close-button');
-let profileName = document.querySelector('.profile__name');
-let profileDescription = document.querySelector('.profile__description');
-let editFormProfileName = document.querySelector('.edit-form__info-input_type_name');
-let editFormProfileDescription = document.querySelector('.edit-form__info-input_type_description');
+//Получаем Попап с редактированием профиля
+const editForm = document.querySelector('.edit-form_type_profile');
+//Получаем кнопку редактирования профиля
+const editButton = document.querySelector('.profile__edit-button');
+//Получаем кнопку закрытия Попапа с редактированием профиля
+const closePopupButton = editForm.querySelector('.edit-form__close-button');
+//Получаем текущее имя профиля
+const profileName = document.querySelector('.profile__name');
+//Получаем текущее описание профиля
+const profileDescription = document.querySelector('.profile__description');
+//Получаем поля ввода первого Попапа
+const editFormProfileName = document.querySelector('.edit-form__info-input_type_name');
+const editFormProfileDescription = document.querySelector('.edit-form__info-input_type_description');
 
 //Массив с первоначальными карточками
 const initialCards = [
@@ -35,6 +40,38 @@ const initialCards = [
   }
 ];
 
+//Получаем Темплейт карточки
+const cardTemplate = document.querySelector('.card-template');
+
+//Получаем список с карточками
+const contentGalleryCardsList = document.querySelector('.content-gallery__cards');
+
+//Функция создания карточки
+function createCardDomNode(item) {
+  /*Создаём временные переменне. newCard для заполнения новой карточки
+  и cardDescription и CardPhoto - элементы новых карточек*/
+  const newCard = cardTemplate.content.cloneNode(true);
+  const cardDescription = newCard.querySelector('.card__description');
+  const cardPhoto = newCard.querySelector('.card__photo');
+  //Заполняем поля новой карточки элементами поступившего в функцию объекта
+  cardDescription.textContent = item.name;
+  cardPhoto.src = item.link;
+  cardPhoto.alt = item.name;
+  //Возвращаем карточку
+  return newCard;
+}
+
+//Функция отрисовки карточки на странице
+function renderInitialCards() {
+  const result = initialCards.map(function (item){
+    const card = createCardDomNode(item);
+    //TODO добавить слушателя
+    return card;
+  });
+  contentGalleryCardsList.append(...result);
+}
+
+
 //Пишем обработчики, которые потом будут применяться при кликах на кнопки
 function openPopupHandler () {
   editFormProfileName.value = profileName.textContent;
@@ -53,6 +90,8 @@ function editFormSubmitHandler (event) {
   closePopupHandler();
 }
 
+//Рендерим начальные карточки
+renderInitialCards();
 //Вешаем слушателей на кнопки и форму
 editButton.addEventListener('click', openPopupHandler);
 closePopupButton.addEventListener('click', closePopupHandler);

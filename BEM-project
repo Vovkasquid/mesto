@@ -32,6 +32,7 @@ footer (подвал с лого)
 logo
 
 edit-form (формы изменения)
+  _type_ place && profile (модификаторы без стилей для js)
   __close-button
   __form-description
   __info-input (поля для ввода)

@@ -32,7 +32,7 @@
       <!-- Секция с фотографиями профиля-->
       <section class="content-gallery">
         <ul class="content-gallery__cards">
-          <li class="card">
+          <!--<li class="card">
             <img src="./images/Lytkarino-min.jpg" alt="Фотография сухого камыша на закате около Лыткаринского карьера" class="card__photo">
             <div class="card__info">
               <h2 class="card__description">Лыткарино</h2>
@@ -79,7 +79,7 @@
               <button aria-label="Нравится" type="button" class="card__like-button"></button>
             </div>
             <button aria-label="Удалить место" type="button" class="card__delete-button"></button>
-          </li>
+          </li> -->
         </ul>
       </section>
     </main>
@@ -90,7 +90,7 @@
     </footer>
 
     <!--ПопАп с изменением имени-->
-    <div class="edit-form">
+    <div class="edit-form edit-form_type_profile">
       <form name="editProfileForm" class="edit-form__form-container">
         <h2 class="edit-form__form-description">Редактировать профиль</h2>
         <input type="text" name="editProfileName" class="edit-form__info-input edit-form__info-input_type_name" placeholder="Имя" value="" required>
@@ -101,7 +101,7 @@
     </div>
 
     <!--ПопАп с добавлением фото-->
-    <div class="edit-form">
+    <div class="edit-form edit-form_type_place">
       <form name="editProfileForm" class="edit-form__form-container">
         <h2 class="edit-form__form-description">Новое место</h2>
         <input type="text" name="editPlaceName" class="edit-form__info-input edit-form__info-input_type_place" placeholder="Название" value="" required>
@@ -124,9 +124,9 @@
   <!--Template для класса card. С его помощью будем создавать новые карточки-->
   <template class="card-template">
     <li class="card">
-      <img src="./images/Lytkarino-min.jpg" alt="Фотография сухого камыша на закате около Лыткаринского карьера" class="card__photo">
+      <img src="#" alt="#" class="card__photo">
       <div class="card__info">
-        <h2 class="card__description">Лыткарино</h2>
+        <h2 class="card__description"></h2>
         <button aria-label="Нравится" type="button" class="card__like-button"></button>
       </div>
       <button aria-label="Удалить место" type="button" class="card__delete-button"></button>
