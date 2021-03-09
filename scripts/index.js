@@ -26,6 +26,16 @@ const profileDescription = document.querySelector('.profile__description');
 const editFormProfileName = document.querySelector('.edit-form__info-input_type_name');
 const editFormProfileDescription = document.querySelector('.edit-form__info-input_type_description');
 
+//Получаем поля ввода второго Попапа
+const editFormPlaceName = document.querySelector('.edit-form__info-input_type_place');
+const editFormPlaceLink = document.querySelector('.edit-form__info-input_type_link');
+
+//Получаем Темплейт карточки
+const cardTemplate = document.querySelector('.card-template');
+
+//Получаем список с карточками
+const contentGalleryCardsList = document.querySelector('.content-gallery__cards');
+
 //Массив с первоначальными карточками
 const initialCards = [
   {
@@ -53,12 +63,6 @@ const initialCards = [
     link: 'https://sun9-65.userapi.com/impg/PPWM1zcTf4CaUaqYEExjfgUEokOtZRHTGN2X3g/CEHzEWwZJ8c.jpg?size=2560x1707&quality=96&sign=52fbfed632c675c51876067bf25f685d&type=album'
   }
 ];
-
-//Получаем Темплейт карточки
-const cardTemplate = document.querySelector('.card-template');
-
-//Получаем список с карточками
-const contentGalleryCardsList = document.querySelector('.content-gallery__cards');
 
 //Функция создания карточки
 function createCardDomNode(item) {
@@ -93,7 +97,6 @@ function openPopupHandler (popupOpen) {
       editFormProfileName.value = profileName.textContent;
       editFormProfileDescription.value = profileDescription.textContent;
     }
-
     popupOpen.classList.add('edit-form_status_active');
 }
 
@@ -101,11 +104,28 @@ function closePopupHandler (popupClose) {
   popupClose.classList.remove('edit-form_status_active');
 }
 
+//Обработчик события для закрытия первой формы
 function editFormSubmitHandler (event) {
   event.preventDefault();
   profileName.textContent = editFormProfileName.value;
   profileDescription.textContent = editFormProfileDescription.value;
   closePopupHandler(editForm);
+}
+
+//Обработчик события для второй формы
+function editFormNewCardSubmitHandler (event) {
+  event.preventDefault();
+  //Необходимо создать новую карточку с новыми полями
+  const newPlace = { name: editFormPlaceName.value, link: editFormPlaceLink.value };
+  console.log(editFormPlaceName.value);
+  console.log(editFormPlaceLink.value);
+  const newPlaceCard = createCardDomNode(newPlace);
+  //Добавляем карточку на страницу
+  contentGalleryCardsList.prepend(newPlaceCard);
+  //Обнуляем поля ввода
+  editFormPlaceName.value = "";
+  editFormPlaceLink.value = "";
+  closePopupHandler(editFormNewPlace);
 }
 
 //Рендерим начальные карточки
@@ -118,3 +138,5 @@ addCardButton.addEventListener('click', () => {openPopupHandler(editFormNewPlace
 closePopupPlaceButton.addEventListener('click', () => {closePopupHandler(editFormNewPlace);});
 //Сохранение первого попапа
 editForm.addEventListener('submit', editFormSubmitHandler);
+//Сохранение второго попапа
+editFormNewPlace.addEventListener('submit', editFormNewCardSubmitHandler);
