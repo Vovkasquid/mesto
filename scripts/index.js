@@ -36,6 +36,11 @@ const cardTemplate = document.querySelector('.card-template');
 //Получаем список с карточками
 const contentGalleryCardsList = document.querySelector('.content-gallery__cards');
 
+//Получаем изображение и описание фуллвью попапа + сам попап
+const fullViewPopupImg = document.querySelector('.image-popup__picture');
+const fullViewPopupDescr = document.querySelector('.image-popup__description');
+const fullViewPopup = document.querySelector('.image-popup');
+
 //Массив с первоначальными карточками
 const initialCards = [
   {
@@ -93,12 +98,24 @@ function deleteCardListener(evt) {
   card.remove();
 }
 
+//Обработчик открывания попапа с фулвью попапом
+function openFullViewPopup(evt) {
+  const target = evt.target;
+  //Заполняем атрибуты попапа
+  fullViewPopupImg.src = target.src;
+  fullViewPopupDescr.textContent = target.alt;
+  //показываем попап
+  fullViewPopup.classList.add('image-popup_status_active');
+}
+
 //Функция навешивания слушателей на кнпоки карточки
 function addCardsListeners(card) {
   const likeBtn = card.querySelector('.card__like-button');
   likeBtn.addEventListener('click', toggleLikeButton);
   const deleteCardBtn = card.querySelector('.card__delete-button');
   deleteCardBtn.addEventListener('click', deleteCardListener);
+  const cardImage = card.querySelector('.card__photo');
+  cardImage.addEventListener('click', openFullViewPopup);
 }
 
 //Функция отрисовки карточки на странице
