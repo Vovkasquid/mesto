@@ -121,6 +121,17 @@
   </div>
 
   </div>
-  <script src="./scripts/popup.js"></script>
+  <!--Template для класса card. С его помощью будем создавать новые карточки-->
+  <template class="card-template">
+    <li class="card">
+      <img src="./images/Lytkarino-min.jpg" alt="Фотография сухого камыша на закате около Лыткаринского карьера" class="card__photo">
+      <div class="card__info">
+        <h2 class="card__description">Лыткарино</h2>
+        <button aria-label="Нравится" type="button" class="card__like-button"></button>
+      </div>
+      <button aria-label="Удалить место" type="button" class="card__delete-button"></button>
+    </li>
+  </template>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>
