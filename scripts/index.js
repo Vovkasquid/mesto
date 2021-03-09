@@ -1,49 +1,35 @@
 //Получаем Попап с редактированием профиля
 const editForm = document.querySelector('.edit-form_type_profile');
-
 //Получаем Попап с добавление карточки
 const editFormNewPlace = document.querySelector('.edit-form_type_place');
-
 //Получаем кнопку редактирования профиля
 const editButton = document.querySelector('.profile__edit-button');
-
 //Получаем кнопку добавления карточки
 const addCardButton = document.querySelector('.profile__new-photo-button');
-
 //Получаем кнопку закрытия Попапа с редактированием профиля
 const closePopupProfileButton = editForm.querySelector('.edit-form__close-button_type_profile');
-
 //Получаем кнопку закрытия Попапа с добавлением карточки
 const closePopupPlaceButton = editFormNewPlace.querySelector('.edit-form__close-button_type_place');
-
 //Получаем текущее имя профиля
 const profileName = document.querySelector('.profile__name');
-
 //Получаем текущее описание профиля
 const profileDescription = document.querySelector('.profile__description');
-
 //Получаем поля ввода первого Попапа
 const editFormProfileName = document.querySelector('.edit-form__info-input_type_name');
 const editFormProfileDescription = document.querySelector('.edit-form__info-input_type_description');
-
 //Получаем поля ввода второго Попапа
 const editFormPlaceName = document.querySelector('.edit-form__info-input_type_place');
 const editFormPlaceLink = document.querySelector('.edit-form__info-input_type_link');
-
 //Получаем Темплейт карточки
 const cardTemplate = document.querySelector('.card-template');
-
 //Получаем список с карточками
 const contentGalleryCardsList = document.querySelector('.content-gallery__cards');
-
 //Получаем изображение и описание фуллвью попапа + сам попап
 const fullViewPopupImg = document.querySelector('.image-popup__picture');
 const fullViewPopupDescr = document.querySelector('.image-popup__description');
 const fullViewPopup = document.querySelector('.image-popup');
-
 //Получаем кнопку закрытия фуллвью попапа
 const fullViewPopupCloseBtn = document.querySelector('.image-popup__close-button');
-
 //Массив с первоначальными карточками
 const initialCards = [
   {
