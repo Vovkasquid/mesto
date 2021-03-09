@@ -1,13 +1,27 @@
 //Получаем Попап с редактированием профиля
 const editForm = document.querySelector('.edit-form_type_profile');
+
+//Получаем Попап с добавление карточки
+const editFormNewPlace = document.querySelector('.edit-form_type_place');
+
 //Получаем кнопку редактирования профиля
 const editButton = document.querySelector('.profile__edit-button');
+
+//Получаем кнопку добавления карточки
+const addCardButton = document.querySelector('.profile__new-photo-button');
+
 //Получаем кнопку закрытия Попапа с редактированием профиля
-const closePopupButton = editForm.querySelector('.edit-form__close-button');
+const closePopupProfileButton = editForm.querySelector('.edit-form__close-button_type_profile');
+
+//Получаем кнопку закрытия Попапа с добавлением карточки
+const closePopupPlaceButton = editFormNewPlace.querySelector('.edit-form__close-button_type_place');
+
 //Получаем текущее имя профиля
 const profileName = document.querySelector('.profile__name');
+
 //Получаем текущее описание профиля
 const profileDescription = document.querySelector('.profile__description');
+
 //Получаем поля ввода первого Попапа
 const editFormProfileName = document.querySelector('.edit-form__info-input_type_name');
 const editFormProfileDescription = document.querySelector('.edit-form__info-input_type_description');
@@ -73,14 +87,18 @@ function renderInitialCards() {
 
 
 //Пишем обработчики, которые потом будут применяться при кликах на кнопки
-function openPopupHandler () {
-  editFormProfileName.value = profileName.textContent;
-  editFormProfileDescription.value = profileDescription.textContent;
-  editForm.classList.add('edit-form_status_active');
+function openPopupHandler (popupOpen) {
+  /*Проверяем какой попап пришёл. Если редактирования имени,то надо предварительно заполнить поля*/
+    if (popupOpen.classList.contains('edit-form_type_profile')) {
+      popupOpen.value = profileName.textContent;
+      popupOpen.value = profileDescription.textContent;
+    }
+
+    popupOpen.classList.add('edit-form_status_active');
 }
 
-function closePopupHandler () {
-  editForm.classList.remove('edit-form_status_active');
+function closePopupHandler (popupClose) {
+  popupClose.classList.remove('edit-form_status_active');
 }
 
 function editFormSubmitHandler (event) {
@@ -92,7 +110,13 @@ function editFormSubmitHandler (event) {
 
 //Рендерим начальные карточки
 renderInitialCards();
-//Вешаем слушателей на кнопки и форму
-editButton.addEventListener('click', openPopupHandler);
-closePopupButton.addEventListener('click', closePopupHandler);
+//Вешаем слушателей на открытие и закрытие первого попапа
+editButton.addEventListener('click', () => {openPopupHandler(editForm);});
+closePopupProfileButton.addEventListener('click', () => {closePopupHandler(editForm);});
+//Вешаем слушателей на открытие и закрытие второго попапа
+addCardButton.addEventListener('click', () => {openPopupHandler(editFormNewPlace);});
+closePopupPlaceButton.addEventListener('click', () => {closePopupHandler(editFormNewPlace);});
+
+
+//TODO сделать сохранение (изменить editForm и дёргать его через другой класс)
 editForm.addEventListener('submit', editFormSubmitHandler);
