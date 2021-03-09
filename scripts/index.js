@@ -85,10 +85,20 @@ function toggleLikeButton(evt) {
   likeBtn.classList.toggle('card__like-button_status_active');
 }
 
+//Обработчик удаления карточки
+function deleteCardListener(evt) {
+  //Вытаскиваем карточку из таргета
+  const target = evt.target;
+  const card = target.closest('.card');
+  card.remove();
+}
+
 //Функция навешивания слушателей на кнпоки карточки
 function addCardsListeners(card) {
   const likeBtn = card.querySelector('.card__like-button');
   likeBtn.addEventListener('click', toggleLikeButton);
+  const deleteCardBtn = card.querySelector('.card__delete-button');
+  deleteCardBtn.addEventListener('click', deleteCardListener);
 }
 
 //Функция отрисовки карточки на странице
@@ -130,8 +140,6 @@ function editFormNewCardSubmitHandler (event) {
   event.preventDefault();
   //Необходимо создать новую карточку с новыми полями
   const newPlace = { name: editFormPlaceName.value, link: editFormPlaceLink.value };
-  console.log(editFormPlaceName.value);
-  console.log(editFormPlaceLink.value);
   const newPlaceCard = createCardDomNode(newPlace);
   //Добавляем слушателей карточке
   addCardsListeners(newPlaceCard);
