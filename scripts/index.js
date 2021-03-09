@@ -4,8 +4,8 @@ let editButton = document.querySelector('.profile__edit-button');
 let closePopupButton = document.querySelector('.edit-form__close-button');
 let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
-let editFormProfileName = document.querySelector('.edit-form__profile-info-input_type_name');
-let editFormProfileDescription = document.querySelector('.edit-form__profile-info-input_type_description');
+let editFormProfileName = document.querySelector('.edit-form__info-input_type_name');
+let editFormProfileDescription = document.querySelector('.edit-form__info-input_type_description');
 
 //Пишем обработчики, которые потом будут применяться при кликах на кнопки
 function openPopupHandler () {

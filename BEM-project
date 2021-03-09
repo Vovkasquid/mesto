@@ -34,7 +34,7 @@ logo
 edit-form (формы изменения)
   __close-button
   __form-description
-  __profile-info-input (поля для ввода)
+  __info-input (поля для ввода)
     _type -> name & description (стилей не будет, не будет и в структуре файловой. Модификаторы для js)
   __submit-button
   __form-container (контейнер для всех полей)

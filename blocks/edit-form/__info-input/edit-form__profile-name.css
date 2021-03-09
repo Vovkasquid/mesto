@@ -1,4 +1,4 @@
-.edit-form__profile-info-input {
+.edit-form__info-input {
   border: none;
   border-bottom: 1px solid rgba(0,0,0,.2);
   outline: none;
@@ -11,10 +11,10 @@
   width: 100%;
 }
 
-.edit-form__profile-info-input:last-child {
+.edit-form__info-input:last-child {
   margin: 0;
 }
 
-.edit-form__profile-info-input:focus {
+.edit-form__info-input:focus {
   outline: none;
 }
