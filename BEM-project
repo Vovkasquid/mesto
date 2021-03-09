@@ -3,39 +3,44 @@ header (шапка с лого)
 root (для фона)
 
 page (для центрирования, фона, шрифтов)
-    __header (микс для header)
+  __header (микс для header)
 content (пока не понял зачем, но не могу ж без класса оставить)
 
 profile (профиль с его начинкой)
-    __avatar
-    __info (контейнер для имени, описания, аватара и кнопки редактирования профиля)
-    __name-container (контейнер для имени и кнопки)
-    __name
-    __description
-    __edit-button
-    __new-photo-button
+  __avatar
+  __info (контейнер для имени, описания, аватара и кнопки редактирования профиля)
+  __name-container (контейнер для имени и кнопки)
+  __name
+  __description
+  __edit-button
+  __new-photo-button
 
 content-gallery (Грид с фотками)
-    __cards (по сути контейнер для блоков card)
+  __cards (по сути контейнер для блоков card)
 
 card (карточка с контентом)
-    __photo
-    __description
-    __like-button
-        _status -> card__like-button_status_active (активный статус)
-    __delete-button
-    __info (контейнер для описания и лайка)
+  __photo
+  __description
+  __like-button
+      _status -> card__like-button_status_active (активный статус)
+  __delete-button
+  __info (контейнер для описания и лайка)
 
 footer (подвал с лого)
-    __copyright
+  __copyright
 
 logo
 
-edit-form
-    __close-button
-    __form-description
-    __profile-info-input (поля для ввода)
-      _type -> name & description (стилей не будет, не будет и в структуре файловой. Модификаторы для js)
-    __submit-button
-    __form-container (контейнер для всех полей)
-    _status ->_status_active - класс активностей
+edit-form (формы изменения)
+  __close-button
+  __form-description
+  __profile-info-input (поля для ввода)
+    _type -> name & description (стилей не будет, не будет и в структуре файловой. Модификаторы для js)
+  __submit-button
+  __form-container (контейнер для всех полей)
+  _status ->_status_active - класс активностей
+
+image-popup (попап с картинкой)
+  __close-button (кнопка закрытия)
+  __picture (сама картинка)
+  __description (подпись к картинке)
