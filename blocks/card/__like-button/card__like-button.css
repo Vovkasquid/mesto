@@ -12,6 +12,10 @@
   padding-bottom: 30px;
 }
 
+.card__like-button:focus{
+  outline: none;
+}
+
 .card__like-button:hover {
   opacity: 0.5;
 }

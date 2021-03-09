@@ -79,11 +79,24 @@ function createCardDomNode(item) {
   return newCard;
 }
 
+//Функция выставления лайка
+function toggleLikeButton(evt) {
+  const likeBtn = evt.target;
+  likeBtn.classList.toggle('card__like-button_status_active');
+}
+
+//Функция навешивания слушателей на кнпоки карточки
+function addCardsListeners(card) {
+  const likeBtn = card.querySelector('.card__like-button');
+  likeBtn.addEventListener('click', toggleLikeButton);
+}
+
 //Функция отрисовки карточки на странице
 function renderInitialCards() {
   const result = initialCards.map(function (item){
     const card = createCardDomNode(item);
-    //TODO добавить слушателя
+    //Навешиваем слушателей на карточку
+    addCardsListeners(card);
     return card;
   });
   contentGalleryCardsList.append(...result);
@@ -120,6 +133,8 @@ function editFormNewCardSubmitHandler (event) {
   console.log(editFormPlaceName.value);
   console.log(editFormPlaceLink.value);
   const newPlaceCard = createCardDomNode(newPlace);
+  //Добавляем слушателей карточке
+  addCardsListeners(newPlaceCard);
   //Добавляем карточку на страницу
   contentGalleryCardsList.prepend(newPlaceCard);
   //Обнуляем поля ввода
