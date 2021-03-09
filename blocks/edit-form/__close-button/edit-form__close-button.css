@@ -18,6 +18,10 @@
   opacity: .6;
 }
 
+.edit-form__close-button:focus {
+  outline: none;
+}
+
 @media screen and (max-width: 600px) {
   .edit-form__close-button {
     background-image: url('../../../images/close-button-mobile.svg');

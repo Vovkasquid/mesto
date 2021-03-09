@@ -1,3 +1,5 @@
 .edit-form_status_active {
-    display: flex;
+    visibility: visible;
+    opacity: 1;
+    background-color: rgba(0,0,0,.5);
 }
