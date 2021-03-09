@@ -41,6 +41,9 @@ const fullViewPopupImg = document.querySelector('.image-popup__picture');
 const fullViewPopupDescr = document.querySelector('.image-popup__description');
 const fullViewPopup = document.querySelector('.image-popup');
 
+//Получаем кнопку закрытия фуллвью попапа
+const fullViewPopupCloseBtn = document.querySelector('.image-popup__close-button');
+
 //Массив с первоначальными карточками
 const initialCards = [
   {
@@ -106,6 +109,11 @@ function openFullViewPopup(evt) {
   fullViewPopupDescr.textContent = target.alt;
   //показываем попап
   fullViewPopup.classList.add('image-popup_status_active');
+}
+
+//Обработчик закрытия попапа с фулвью попапом
+function closeFullViewPopup() {
+  fullViewPopup.classList.remove('image-popup_status_active');
 }
 
 //Функция навешивания слушателей на кнпоки карточки
@@ -180,3 +188,5 @@ closePopupPlaceButton.addEventListener('click', () => {closePopupHandler(editFor
 editForm.addEventListener('submit', editFormSubmitHandler);
 //Сохранение второго попапа
 editFormNewPlace.addEventListener('submit', editFormNewCardSubmitHandler);
+//Закрытие фуллвьюпопапа
+fullViewPopupCloseBtn.addEventListener('click', closeFullViewPopup);
