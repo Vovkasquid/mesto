@@ -22,7 +22,8 @@ card (карточка с контентом)
     __photo
     __description
     __like-button
-        _status -> card__like-button_status_active (активный стоаус)
+        _status -> card__like-button_status_active (активный статус)
+    __delete-button
     __info (контейнер для описания и лайка)
 
 footer (подвал с лого)
