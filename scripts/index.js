@@ -90,8 +90,8 @@ function renderInitialCards() {
 function openPopupHandler (popupOpen) {
   /*Проверяем какой попап пришёл. Если редактирования имени,то надо предварительно заполнить поля*/
     if (popupOpen.classList.contains('edit-form_type_profile')) {
-      popupOpen.value = profileName.textContent;
-      popupOpen.value = profileDescription.textContent;
+      editFormProfileName.value = profileName.textContent;
+      editFormProfileDescription.value = profileDescription.textContent;
     }
 
     popupOpen.classList.add('edit-form_status_active');
@@ -105,7 +105,7 @@ function editFormSubmitHandler (event) {
   event.preventDefault();
   profileName.textContent = editFormProfileName.value;
   profileDescription.textContent = editFormProfileDescription.value;
-  closePopupHandler();
+  closePopupHandler(editForm);
 }
 
 //Рендерим начальные карточки
@@ -116,7 +116,5 @@ closePopupProfileButton.addEventListener('click', () => {closePopupHandler(editF
 //Вешаем слушателей на открытие и закрытие второго попапа
 addCardButton.addEventListener('click', () => {openPopupHandler(editFormNewPlace);});
 closePopupPlaceButton.addEventListener('click', () => {closePopupHandler(editFormNewPlace);});
-
-
-//TODO сделать сохранение (изменить editForm и дёргать его через другой класс)
+//Сохранение первого попапа
 editForm.addEventListener('submit', editFormSubmitHandler);
