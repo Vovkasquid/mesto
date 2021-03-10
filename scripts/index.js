@@ -139,21 +139,32 @@ function renderInitialCards() {
 }
 
 
-//Пишем обработчики, которые потом будут применяться при кликах на кнопки
-function openPopupHandler (popupOpen) {
-  /*Проверяем какой попап пришёл. Если редактирования имени,то надо предварительно заполнить поля*/
-    if (popupOpen.classList.contains('edit-form_type_profile')) {
-      editFormProfileName.value = profileName.textContent;
-      editFormProfileDescription.value = profileDescription.textContent;
-    }
-    openPopup(popupOpen);
+//Обработчик для первичного заполнения полей и открытия
+//Попапа изменения профиля
+function openPopupProfileHandler (popupOpen) {
+  //Заполняем поля формы
+  editFormProfileName.value = profileName.textContent;
+  editFormProfileDescription.value = profileDescription.textContent;
+  openPopup(popupOpen);
 }
 
+//Обработчик для первичного заполнения полей и открытия
+//Попапа добавления новой карточки
+function openPopupNewCardHandler (popupOpen) {
+  //Предварительно очищаем поля ввода от возможных
+  //Старых значений
+  editFormPlaceName.value = "";
+  editFormPlaceLink.value = "";
+  //Открываем попап
+  openPopup(popupOpen);
+}
 //Обработчик события для закрытия первой формы
 function editFormSubmitHandler (event) {
   event.preventDefault();
+  //Передаём поля в форму
   profileName.textContent = editFormProfileName.value;
   profileDescription.textContent = editFormProfileDescription.value;
+  //Закрываем форму
   closePopup(editForm);
 }
 
@@ -167,19 +178,16 @@ function editFormNewCardSubmitHandler (event) {
   addCardsListeners(newPlaceCard);
   //Добавляем карточку на страницу
   contentGalleryCardsList.prepend(newPlaceCard);
-  //Обнуляем поля ввода
-  editFormPlaceName.value = "";
-  editFormPlaceLink.value = "";
   closePopup(editFormNewPlace);
 }
 
 //Рендерим начальные карточки
 renderInitialCards();
 //Вешаем слушателей на открытие и закрытие первого попапа
-editButton.addEventListener('click', () => {openPopupHandler(editForm);});
+editButton.addEventListener('click', () => {openPopupProfileHandler(editForm);});
 closePopupProfileButton.addEventListener('click', () => {closePopup(editForm);});
 //Вешаем слушателей на открытие и закрытие второго попапа
-addCardButton.addEventListener('click', () => {openPopupHandler(editFormNewPlace);});
+addCardButton.addEventListener('click', () => {openPopupNewCardHandler(editFormNewPlace);});
 closePopupPlaceButton.addEventListener('click', () => {closePopup(editFormNewPlace);});
 //Сохранение первого попапа
 editForm.addEventListener('submit', editFormSubmitHandler);
