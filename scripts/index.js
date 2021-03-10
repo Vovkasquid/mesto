@@ -100,7 +100,7 @@ function toggleLikeButton(evt) {
 }
 
 //Обработчик удаления карточки
-function deleteCardListener(evt) {
+function deleteCard(evt) {
   //Вытаскиваем карточку из таргета
   const target = evt.target;
   const card = target.closest('.card');
@@ -122,7 +122,7 @@ function addCardsListeners(card) {
   const likeBtn = card.querySelector('.card__like-button');
   likeBtn.addEventListener('click', toggleLikeButton);
   const deleteCardBtn = card.querySelector('.card__delete-button');
-  deleteCardBtn.addEventListener('click', deleteCardListener);
+  deleteCardBtn.addEventListener('click', deleteCard);
   const cardImage = card.querySelector('.card__photo');
   cardImage.addEventListener('click', openFullViewPopup);
 }
@@ -137,7 +137,6 @@ function renderInitialCards() {
   });
   contentGalleryCardsList.append(...result);
 }
-
 
 //Обработчик для первичного заполнения полей и открытия
 //Попапа изменения профиля
