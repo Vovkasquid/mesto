@@ -117,11 +117,6 @@ function openFullViewPopup(evt) {
   openPopup(fullViewPopup);
 }
 
-//Обработчик закрытия попапа с фулвью попапом
-function closeFullViewPopup() {
-  fullViewPopup.classList.remove('image-popup_status_active');
-}
-
 //Функция навешивания слушателей на кнпоки карточки
 function addCardsListeners(card) {
   const likeBtn = card.querySelector('.card__like-button');
@@ -152,10 +147,6 @@ function openPopupHandler (popupOpen) {
       editFormProfileDescription.value = profileDescription.textContent;
     }
     openPopup(popupOpen);
-}
-
-function closePopupHandler (popupClose) {
-  popupClose.classList.remove('edit-form_status_active');
 }
 
 //Обработчик события для закрытия первой формы
