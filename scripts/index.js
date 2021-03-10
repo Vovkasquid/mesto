@@ -112,6 +112,7 @@ function openFullViewPopup(evt) {
   const target = evt.target;
   //Заполняем атрибуты попапа
   fullViewPopupImg.src = target.src;
+  fullViewPopupImg.alt = target.alt;
   fullViewPopupDescr.textContent = target.alt;
   //показываем попап
   openPopup(fullViewPopup);
