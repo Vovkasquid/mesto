@@ -47,7 +47,7 @@ function closePopup(popup) {
   let activeClassPopup = popup.classList[0];
   //Собираем модификатор
   activeClassPopup += '_status_active';
-  //Открываем попап
+  //Закрываем попап
   popup.classList.remove(activeClassPopup);
 }
 
