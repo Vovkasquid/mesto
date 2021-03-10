@@ -89,6 +89,8 @@ function createCardDomNode(item) {
   cardDescription.textContent = item.name;
   cardPhoto.src = item.link;
   cardPhoto.alt = item.name;
+  //Навешиваем слушателей на карточку
+  addCardsListeners(newCard);
   //Возвращаем карточку
   return newCard;
 }
@@ -132,8 +134,6 @@ function addCardsListeners(card) {
 function renderInitialCards() {
   const result = initialCards.map(function (item){
     const card = createCardDomNode(item);
-    //Навешиваем слушателей на карточку
-    addCardsListeners(card);
     return card;
   });
   contentGalleryCardsList.append(...result);
@@ -174,8 +174,6 @@ function editFormNewCardSubmitHandler (event) {
   //Необходимо создать новую карточку с новыми полями
   const newPlace = { name: editFormPlaceName.value, link: editFormPlaceLink.value };
   const newPlaceCard = createCardDomNode(newPlace);
-  //Добавляем слушателей карточке
-  addCardsListeners(newPlaceCard);
   //Добавляем карточку на страницу
   contentGalleryCardsList.prepend(newPlaceCard);
   closePopup(editFormNewPlace);
