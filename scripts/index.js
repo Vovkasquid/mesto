@@ -33,22 +33,12 @@ const fullViewPopupCloseBtn = document.querySelector('.image-popup__close-button
 
 //Функция открытия любого попапа
 function openPopup(popup) {
-  //Получаем класс попапа
-  let activeClassPopup = popup.classList[0];
-  //Собираем модификатор
-  activeClassPopup += '_status_active';
-  //Открываем попап
-  popup.classList.add(activeClassPopup);
+  popup.classList.add('popup_status_active');
 }
 
 //Функция закрытия любого попапа
 function closePopup(popup) {
-  //Получаем класс попапа
-  let activeClassPopup = popup.classList[0];
-  //Собираем модификатор
-  activeClassPopup += '_status_active';
-  //Закрываем попап
-  popup.classList.remove(activeClassPopup);
+  popup.classList.remove('popup_status_active');
 }
 
 //Функция создания карточки

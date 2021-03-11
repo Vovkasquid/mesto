@@ -25,6 +25,8 @@
 @import url(../blocks/card/__photo/card__photo.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_status/popup_status_active.css);
 @import url(../blocks/edit-form/edit-form.css);
 @import url(../blocks/edit-form/_status/edit-form_status_active.css);
 @import url(../blocks/edit-form/__form-container/edit-form__form-container.css);
