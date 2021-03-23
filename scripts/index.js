@@ -156,3 +156,13 @@ editForm.addEventListener('submit', editFormSubmitHandler);
 editFormNewPlace.addEventListener('submit', editFormNewCardSubmitHandler);
 //Закрытие фуллвьюпопапа
 fullViewPopupCloseBtn.addEventListener('click', () => {closePopup(fullViewPopup)});
+
+//Активируем валидацию
+enableValidation({
+  formSelector: '.edit-form__form-container',
+  inputSelector: '.edit-form__info-input',
+  submitButtonSelector: '.edit-form__submit-button',
+  inactiveButtonClass: 'edit-form__submit-button_disabled',
+  inputErrorClass: 'edit-form__info-input_error',
+  errorClass: 'edit-form__error-text_active'
+});
