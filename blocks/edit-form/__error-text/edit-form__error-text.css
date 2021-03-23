@@ -1,0 +1,8 @@
+.edit-form__error-text {
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  margin: -25px 0 13px 0;
+  display: none;
+}

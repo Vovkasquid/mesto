@@ -45,7 +45,9 @@
       <form name="editProfileForm" class="edit-form__form-container">
         <h2 class="edit-form__form-description">Редактировать профиль</h2>
         <input type="text" name="editProfileName" class="edit-form__info-input edit-form__info-input_type_name" placeholder="Имя" value="" required>
+        <span class="edit-form__error-text"></span>
         <input type="text" name="editProfileDescription" class="edit-form__info-input edit-form__info-input_type_description" placeholder="Описание" value="" required>
+        <span class="edit-form__error-text"></span>
         <button aria-label="Сохранить" type="submit" class="edit-form__submit-button edit-form__submit-button_type_profile">Сохранить</button>
         <button aria-label="Закрыть" type="button" class="edit-form__close-button edit-form__close-button_type_profile"></button>
       </form>
@@ -56,7 +58,9 @@
       <form name="editProfileForm" class="edit-form__form-container">
         <h2 class="edit-form__form-description edit-form__form-description">Новое место</h2>
         <input type="text" name="editPlaceName" class="edit-form__info-input edit-form__info-input_type_place" placeholder="Название" value="" required>
+        <span class="edit-form__error-text">Каждый может, а ты нет</span>
         <input type="text" name="editLinkPlace" class="edit-form__info-input edit-form__info-input_type_link" placeholder="Ссылка на картинку" value="" required>
+        <span class="edit-form__error-text">Каждый может, а ты нет</span>
         <button aria-label="Сохранить" type="submit" class="edit-form__submit-button edit-form__submit-button_type_place">Создать</button>
         <button aria-label="Закрыть" type="button" class="edit-form__close-button edit-form__close-button_type_place"></button>
       </form>
