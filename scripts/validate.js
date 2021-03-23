@@ -69,7 +69,7 @@ const setEventListeners = (formElement, inputSelector, submitButtonSelector, ina
     inputElement.addEventListener('input', function () {
       checkInputValidity(formElement, inputElement, inputErrorClass, errorClass);
       // Проверяем состояние кнопки при изменении
-      toggleButtonState(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement, inactiveButtonClass);
     });
   });
 };
