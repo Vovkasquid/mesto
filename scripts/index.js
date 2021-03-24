@@ -39,6 +39,13 @@ function openPopup(popup) {
 //Функция закрытия любого попапа
 function closePopup(popup) {
   popup.classList.remove('popup_status_active');
+  //Cнимаем слушатель с клавиатуры
+  removeKeyboardListener();
+}
+
+//Функция для снятия слушателя клавиатуры с документа
+function removeKeyboardListener() {
+  document.removeEventListener('keydown', closePopupKeyBoardHandler);
 }
 
 //Функция создания карточки
@@ -83,6 +90,13 @@ function openFullViewPopup(evt) {
   openPopup(fullViewPopup);
 }
 
+//Слушатель, закрывающий попапы при нажатии эскейп
+function closePopupKeyBoardHandler(event) {
+  console.log(event.key);
+  //Escape - Esc
+  
+}
+
 //Функция навешивания слушателей на кнпоки карточки
 function addCardsListeners(card) {
   const likeBtn = card.querySelector('.card__like-button');
@@ -120,6 +134,8 @@ function openPopupProfileHandler (popupOpen) {
   const submitDisabledClass = 'edit-form__submit-button_disabled';
   const inputList = Array.from(popupOpen.querySelectorAll('.edit-form__info-input'));
   toggleButtonState(inputList, buttonElement, submitDisabledClass);
+  //Навешиваем слушатель на документ, чтобы отлавливать нажатия клавиатуры и закрывать попап
+  document.addEventListener('keydown', closePopupKeyBoardHandler);
 }
 
 //Обработчик для первичного заполнения полей и открытия
@@ -141,6 +157,8 @@ function openPopupNewCardHandler (popupOpen) {
   const submitDisabledClass = 'edit-form__submit-button_disabled';
   const inputList = Array.from(popupOpen.querySelectorAll('.edit-form__info-input'));
   toggleButtonState(inputList, buttonElement, submitDisabledClass);
+  //Навешиваем слушатель на документ, чтобы отлавливать нажатия клавиатуры и закрывать попап
+  document.addEventListener('keydown', closePopupKeyBoardHandler);
 }
 //Обработчик события для закрытия первой формы
 function editFormSubmitHandler (event) {
@@ -187,3 +205,5 @@ enableValidation({
   inputErrorClass: 'edit-form__info-input_error',
   errorClass: 'edit-form__error-text_active'
 });
+
+
