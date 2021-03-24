@@ -92,9 +92,18 @@ function openFullViewPopup(evt) {
 
 //Слушатель, закрывающий попапы при нажатии эскейп
 function closePopupKeyBoardHandler(event) {
-  console.log(event.key);
+  /*console.log(event.key);
   //Escape - Esc
-  
+  console.log(event.target);*/
+  //Проверяем какая клавиша была нажата
+  if (event.key === 'Escape') {
+    //Проверяем какой попап открыл, чтобы закрыть его
+    if (editForm.classList.contains('popup_status_active')) {
+      closePopup(editForm);
+    } else {
+      closePopup((editFormNewPlace));
+    }
+  }
 }
 
 //Функция навешивания слушателей на кнпоки карточки
