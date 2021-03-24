@@ -108,6 +108,11 @@ function openPopupProfileHandler (popupOpen) {
   //Заполняем поля формы
   editFormProfileName.value = profileName.textContent;
   editFormProfileDescription.value = profileDescription.textContent;
+  //Предварительно удаляем старые ошибки
+  const inputErrorClass = 'edit-form__info-input_error';
+  const errorClass = 'edit-form__error-text_active';
+  hideInputError(editForm, editFormProfileName, inputErrorClass, errorClass);
+  hideInputError(editForm, editFormProfileDescription, inputErrorClass, errorClass);
   //Открываем форму
   openPopup(popupOpen);
   //Выставляем актуальное состояние кнопки сохранения
@@ -124,6 +129,11 @@ function openPopupNewCardHandler (popupOpen) {
   //Старых значений
   editFormPlaceName.value = "";
   editFormPlaceLink.value = "";
+  //Предварительно удаляем старые ошибки
+  const inputErrorClass = 'edit-form__info-input_error';
+  const errorClass = 'edit-form__error-text_active';
+  hideInputError(editFormNewPlace, editFormPlaceName, inputErrorClass, errorClass);
+  hideInputError(editFormNewPlace, editFormPlaceLink, inputErrorClass, errorClass);
   //Открываем попап
   openPopup(popupOpen);
   //Выставляем актуальное состояние кнопки сохранения
