@@ -108,7 +108,13 @@ function openPopupProfileHandler (popupOpen) {
   //Заполняем поля формы
   editFormProfileName.value = profileName.textContent;
   editFormProfileDescription.value = profileDescription.textContent;
+  //Открываем форму
   openPopup(popupOpen);
+  //Выставляем актуальное состояние кнопки сохранения
+  const buttonElement = popupOpen.querySelector('.edit-form__submit-button');
+  const submitDisabledClass = 'edit-form__submit-button_disabled';
+  const inputList = Array.from(popupOpen.querySelectorAll('.edit-form__info-input'));
+  toggleButtonState(inputList, buttonElement, submitDisabledClass);
 }
 
 //Обработчик для первичного заполнения полей и открытия
@@ -120,6 +126,11 @@ function openPopupNewCardHandler (popupOpen) {
   editFormPlaceLink.value = "";
   //Открываем попап
   openPopup(popupOpen);
+  //Выставляем актуальное состояние кнопки сохранения
+  const buttonElement = popupOpen.querySelector('.edit-form__submit-button');
+  const submitDisabledClass = 'edit-form__submit-button_disabled';
+  const inputList = Array.from(popupOpen.querySelectorAll('.edit-form__info-input'));
+  toggleButtonState(inputList, buttonElement, submitDisabledClass);
 }
 //Обработчик события для закрытия первой формы
 function editFormSubmitHandler (event) {
