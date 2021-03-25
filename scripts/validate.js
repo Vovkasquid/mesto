@@ -1,3 +1,13 @@
+//Объявляем validationConfig - объект, со всеми нужны селекторами
+const validationConfig = {
+  formSelector: '.edit-form__form-container',
+  inputSelector: '.edit-form__info-input',
+  submitButtonSelector: '.edit-form__submit-button',
+  inactiveButtonClass: 'edit-form__submit-button_disabled',
+  inputErrorClass: 'edit-form__info-input_error',
+  errorClass: 'edit-form__error-text_active'
+};
+
 const showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
   //Получаем по id span
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
