@@ -21,6 +21,10 @@ const profileDescription = document.querySelector('.profile__description');
 //Получаем поля ввода первого Попапа
 const editFormProfileName = document.querySelector('.edit-form__info-input_type_name');
 const editFormProfileDescription = document.querySelector('.edit-form__info-input_type_description');
+//Получаем список всех полей попапа editForm
+const inputListEditForm = Array.from(editForm.querySelectorAll('.edit-form__info-input'));
+//Получаем список всех полей попапа editFormNewPlace
+const inputListEditFormNewPlace = Array.from(editFormNewPlace.querySelectorAll('.edit-form__info-input'));
 //Получаем поля ввода второго Попапа
 const editFormPlaceName = document.querySelector('.edit-form__info-input_type_place');
 const editFormPlaceLink = document.querySelector('.edit-form__info-input_type_link');
@@ -174,10 +178,9 @@ function openPopupProfileHandler () {
   //Открываем форму
   openPopup(editForm);
   //Выставляем актуальное состояние кнопки сохранения
-  const buttonElement = editForm.querySelector('.edit-form__submit-button');
-  const submitDisabledClass = 'edit-form__submit-button_disabled';
-  const inputList = Array.from(editForm.querySelectorAll('.edit-form__info-input'));
-  toggleButtonState(inputList, buttonElement, submitDisabledClass);
+  const buttonElement = editForm.querySelector(validationConfig.submitButtonSelector);
+  const submitDisabledClass = validationConfig.inactiveButtonClass;
+  toggleButtonState(inputListEditForm, buttonElement, submitDisabledClass);
 }
 
 //Обработчик для первичного заполнения полей и открытия
