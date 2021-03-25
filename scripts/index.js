@@ -42,6 +42,7 @@ function openPopup(popup) {
 
 //Функция закрытия любого попапа
 function closePopup(popup) {
+  //Закрываем попап
   popup.classList.remove('popup_status_active');
   //Cнимаем слушатель с клавиатуры
   removeKeyboardEscListener();
@@ -108,6 +109,10 @@ function openFullViewPopup(evt) {
   fullViewPopupImg.src = target.src;
   fullViewPopupImg.alt = target.alt;
   fullViewPopupDescr.textContent = target.alt;
+  //Навешиваем слушатель на документ, чтобы отлавливать нажатия клавиатуры и закрывать попап
+  setKeyboardEscListener();
+  //Навешиваем слушатель на документ, чтобы отлавливать клики по оверлею
+  setClickOverlayDocumentListener();
   //показываем попап
   openPopup(fullViewPopup);
 }
@@ -118,8 +123,10 @@ function closePopupKeyBoardHandler(event) {
     //Проверяем какой попап открыл, чтобы закрыть его
     if (editForm.classList.contains('popup_status_active')) {
       closePopup(editForm);
-    } else {
+    } else if (editFormNewPlace.classList.contains('popup_status_active')) {
       closePopup((editFormNewPlace));
+    } else {
+      closePopup(fullViewPopup);
     }
   }
 }
