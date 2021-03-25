@@ -66,6 +66,7 @@ function setKeyboardEscListener() {
 
 //Функция для навешивания слушателя клика по оверлею на документ
 function setClickOverlayDocumentListener() {
+  console.log("слушатель на документ оверлея повешен");
   document.addEventListener('click', closePopupOverlayClickHandler);
 }
 
@@ -128,6 +129,9 @@ function closePopupOverlayClickHandler(event) {
   console.log(event.target.classList.contains('popup'));
   console.log('Таргет:');
   console.log(event.target);
+  if (event.target.classList.contains('popup')) {
+    closePopup(event.target);
+  }
 }
 
 //Функция, останавливающая всплытие клика на контейнере
