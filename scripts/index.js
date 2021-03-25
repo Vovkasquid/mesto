@@ -120,14 +120,10 @@ function openFullViewPopup(evt) {
 //Слушатель, закрывающий попапы при нажатии эскейп
 function closePopupKeyBoardHandler(event) {
   if (event.key === 'Escape') {
-    //Проверяем какой попап открыл, чтобы закрыть его
-    if (editForm.classList.contains('popup_status_active')) {
-      closePopup(editForm);
-    } else if (editFormNewPlace.classList.contains('popup_status_active')) {
-      closePopup((editFormNewPlace));
-    } else {
-      closePopup(fullViewPopup);
-    }
+    //Ищем открытый попап
+    const openedPopup = document.querySelector('.popup_status_active');
+    //закрываем попап
+    closePopup(openedPopup);
   }
 }
 
