@@ -44,6 +44,19 @@ const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) 
   errorElement.textContent = '';
 };
 
+//Функция очистки всех полей формы от ошибок
+const resetFormInputError = (formElement) => {
+  //Получаем все поля формы
+  const formInputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
+  //Получаем дополнительные данные, для передачи в функцию скрытия ошибки
+  const inputErrorClass = validationConfig.inputErrorClass;
+  const errorClass = validationConfig.errorClass;
+  //Перебираем поля и каждое очищаем
+  formInputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, inputErrorClass, errorClass);
+  });
+}
+
 const checkInputValidity = (formElement, inputElement, inputErrorClass, errorClass) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass);

@@ -165,21 +165,18 @@ function renderInitialCards() {
 
 //Обработчик для первичного заполнения полей и открытия
 //Попапа изменения профиля
-function openPopupProfileHandler (popupOpen) {
+function openPopupProfileHandler () {
   //Заполняем поля формы
   editFormProfileName.value = profileName.textContent;
   editFormProfileDescription.value = profileDescription.textContent;
   //Предварительно удаляем старые ошибки
-  const inputErrorClass = 'edit-form__info-input_error';
-  const errorClass = 'edit-form__error-text_active';
-  hideInputError(editForm, editFormProfileName, inputErrorClass, errorClass);
-  hideInputError(editForm, editFormProfileDescription, inputErrorClass, errorClass);
+  resetFormInputError(editForm);
   //Открываем форму
-  openPopup(popupOpen);
+  openPopup(editForm);
   //Выставляем актуальное состояние кнопки сохранения
-  const buttonElement = popupOpen.querySelector('.edit-form__submit-button');
+  const buttonElement = editForm.querySelector('.edit-form__submit-button');
   const submitDisabledClass = 'edit-form__submit-button_disabled';
-  const inputList = Array.from(popupOpen.querySelectorAll('.edit-form__info-input'));
+  const inputList = Array.from(editForm.querySelectorAll('.edit-form__info-input'));
   toggleButtonState(inputList, buttonElement, submitDisabledClass);
 }
 
@@ -227,7 +224,7 @@ function editFormNewCardSubmitHandler (event) {
 //Рендерим начальные карточки
 renderInitialCards();
 //Вешаем слушателей на открытие и закрытие первого попапа
-editButton.addEventListener('click', () => {openPopupProfileHandler(editForm);});
+editButton.addEventListener('click', openPopupProfileHandler);
 closePopupProfileButton.addEventListener('click', () => {closePopup(editForm);});
 //Вешаем слушателей на открытие и закрытие второго попапа
 addCardButton.addEventListener('click', () => {openPopupNewCardHandler(editFormNewPlace);});
