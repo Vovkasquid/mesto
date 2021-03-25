@@ -1,7 +1,11 @@
 //Получаем Попап с редактированием профиля
 const editForm = document.querySelector('.edit-form_type_profile');
+//Получаем контейнер попапа с редактированием профиля
+const editFormContainer = editForm.querySelector('.edit-form__form-container');
 //Получаем Попап с добавление карточки
 const editFormNewPlace = document.querySelector('.edit-form_type_place');
+//Получаем контейнер попапа с добавлением карточки
+const editFormNewPlaceContainer = editFormNewPlace.querySelector('.edit-form__form-container');
 //Получаем кнопку редактирования профиля
 const editButton = document.querySelector('.profile__edit-button');
 //Получаем кнопку добавления карточки
@@ -40,12 +44,29 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove('popup_status_active');
   //Cнимаем слушатель с клавиатуры
-  removeKeyboardListener();
+  removeKeyboardEscListener();
+  //Снимаем слушатель на документ, чтобы отлавливать клики по оверлею
+  removeClickOverlayDocumentListener();
 }
 
 //Функция для снятия слушателя клавиатуры с документа
-function removeKeyboardListener() {
+function removeKeyboardEscListener() {
   document.removeEventListener('keydown', closePopupKeyBoardHandler);
+}
+
+//Функция для снятия слушателя клика по оверлею с документа
+function removeClickOverlayDocumentListener() {
+  document.removeEventListener('click', closePopupOverlayClickHandler);
+}
+
+//Функция, для навешивания слушателя клавиатуры на документ
+function setKeyboardEscListener() {
+  document.addEventListener('keydown', closePopupKeyBoardHandler);
+}
+
+//Функция для навешивания слушателя клика по оверлею на документ
+function setClickOverlayDocumentListener() {
+  document.addEventListener('click', closePopupOverlayClickHandler);
 }
 
 //Функция создания карточки
@@ -92,10 +113,6 @@ function openFullViewPopup(evt) {
 
 //Слушатель, закрывающий попапы при нажатии эскейп
 function closePopupKeyBoardHandler(event) {
-  /*console.log(event.key);
-  //Escape - Esc
-  console.log(event.target);*/
-  //Проверяем какая клавиша была нажата
   if (event.key === 'Escape') {
     //Проверяем какой попап открыл, чтобы закрыть его
     if (editForm.classList.contains('popup_status_active')) {
@@ -104,6 +121,24 @@ function closePopupKeyBoardHandler(event) {
       closePopup((editFormNewPlace));
     }
   }
+}
+
+//Слушатель, закрывающий попап по клику мимо него
+function closePopupOverlayClickHandler(event) {
+  console.log(event.target.classList.contains('popup'));
+  console.log('Таргет:');
+  console.log(event.target);
+}
+
+//Функция, останавливающая всплытие клика на контейнере
+function stopPopupPropagation(event) {
+  event.stopPropagation();
+  console.log('слушатель повешен и работает');
+}
+
+//Функция, навешивающая слушатель клика на контейнер
+function setFormContainerListener(container) {
+  container.addEventListener('click', stopPopupPropagation);
 }
 
 //Функция навешивания слушателей на кнпоки карточки
@@ -144,7 +179,9 @@ function openPopupProfileHandler (popupOpen) {
   const inputList = Array.from(popupOpen.querySelectorAll('.edit-form__info-input'));
   toggleButtonState(inputList, buttonElement, submitDisabledClass);
   //Навешиваем слушатель на документ, чтобы отлавливать нажатия клавиатуры и закрывать попап
-  document.addEventListener('keydown', closePopupKeyBoardHandler);
+  setKeyboardEscListener();
+  //Навешиваем слушатель на документ, чтобы отлавливать клики по оверлею
+  setClickOverlayDocumentListener();
 }
 
 //Обработчик для первичного заполнения полей и открытия
@@ -167,7 +204,9 @@ function openPopupNewCardHandler (popupOpen) {
   const inputList = Array.from(popupOpen.querySelectorAll('.edit-form__info-input'));
   toggleButtonState(inputList, buttonElement, submitDisabledClass);
   //Навешиваем слушатель на документ, чтобы отлавливать нажатия клавиатуры и закрывать попап
-  document.addEventListener('keydown', closePopupKeyBoardHandler);
+  setKeyboardEscListener();
+  //Навешиваем слушатель на документ, чтобы отлавливать клики по оверлею
+  setClickOverlayDocumentListener();
 }
 //Обработчик события для закрытия первой формы
 function editFormSubmitHandler (event) {
@@ -204,6 +243,9 @@ editForm.addEventListener('submit', editFormSubmitHandler);
 editFormNewPlace.addEventListener('submit', editFormNewCardSubmitHandler);
 //Закрытие фуллвьюпопапа
 fullViewPopupCloseBtn.addEventListener('click', () => {closePopup(fullViewPopup)});
+//Навешиваем слушателей на контейнеры, чтобы они останавливали клики по ним
+setFormContainerListener(editFormContainer);
+setFormContainerListener(editFormNewPlaceContainer);
 
 //Активируем валидацию
 enableValidation({
@@ -214,5 +256,3 @@ enableValidation({
   inputErrorClass: 'edit-form__info-input_error',
   errorClass: 'edit-form__error-text_active'
 });
-
-
