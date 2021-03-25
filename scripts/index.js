@@ -38,6 +38,10 @@ const fullViewPopupCloseBtn = document.querySelector('.image-popup__close-button
 
 //Функция открытия любого попапа
 function openPopup(popup) {
+  //Навешиваем слушатель на документ, чтобы отлавливать нажатия клавиатуры и закрывать попап
+  setKeyboardEscListener();
+  //Навешиваем слушатель на документ, чтобы отлавливать клики по оверлею
+  setClickOverlayDocumentListener();
   popup.classList.add('popup_status_active');
 }
 
@@ -109,10 +113,6 @@ function openFullViewPopup(evt) {
   fullViewPopupImg.src = target.src;
   fullViewPopupImg.alt = target.alt;
   fullViewPopupDescr.textContent = target.alt;
-  //Навешиваем слушатель на документ, чтобы отлавливать нажатия клавиатуры и закрывать попап
-  setKeyboardEscListener();
-  //Навешиваем слушатель на документ, чтобы отлавливать клики по оверлею
-  setClickOverlayDocumentListener();
   //показываем попап
   openPopup(fullViewPopup);
 }
@@ -185,10 +185,6 @@ function openPopupProfileHandler (popupOpen) {
   const submitDisabledClass = 'edit-form__submit-button_disabled';
   const inputList = Array.from(popupOpen.querySelectorAll('.edit-form__info-input'));
   toggleButtonState(inputList, buttonElement, submitDisabledClass);
-  //Навешиваем слушатель на документ, чтобы отлавливать нажатия клавиатуры и закрывать попап
-  setKeyboardEscListener();
-  //Навешиваем слушатель на документ, чтобы отлавливать клики по оверлею
-  setClickOverlayDocumentListener();
 }
 
 //Обработчик для первичного заполнения полей и открытия
@@ -210,10 +206,6 @@ function openPopupNewCardHandler (popupOpen) {
   const submitDisabledClass = 'edit-form__submit-button_disabled';
   const inputList = Array.from(popupOpen.querySelectorAll('.edit-form__info-input'));
   toggleButtonState(inputList, buttonElement, submitDisabledClass);
-  //Навешиваем слушатель на документ, чтобы отлавливать нажатия клавиатуры и закрывать попап
-  setKeyboardEscListener();
-  //Навешиваем слушатель на документ, чтобы отлавливать клики по оверлею
-  setClickOverlayDocumentListener();
 }
 //Обработчик события для закрытия первой формы
 function editFormSubmitHandler (event) {
