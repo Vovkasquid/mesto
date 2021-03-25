@@ -28,10 +28,11 @@ const editFormPlaceLink = document.querySelector('.edit-form__info-input_type_li
 const cardTemplate = document.querySelector('.card-template');
 //Получаем список с карточками
 const contentGalleryCardsList = document.querySelector('.content-gallery__cards');
-//Получаем изображение и описание фуллвью попапа + сам попап
+//Получаем изображение и описание фуллвью попапа + сам попап + контейнер
 const fullViewPopupImg = document.querySelector('.image-popup__picture');
 const fullViewPopupDescr = document.querySelector('.image-popup__description');
 const fullViewPopup = document.querySelector('.image-popup');
+const fullViewPopupContainer = fullViewPopup.querySelector('.image-popup__container');
 //Получаем кнопку закрытия фуллвью попапа
 const fullViewPopupCloseBtn = document.querySelector('.image-popup__close-button');
 
@@ -252,7 +253,7 @@ fullViewPopupCloseBtn.addEventListener('click', () => {closePopup(fullViewPopup)
 //Навешиваем слушателей на контейнеры, чтобы они останавливали клики по ним
 setFormContainerListener(editFormContainer);
 setFormContainerListener(editFormNewPlaceContainer);
-
+setFormContainerListener(fullViewPopupContainer);
 //Активируем валидацию
 enableValidation({
   formSelector: '.edit-form__form-container',
