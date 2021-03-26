@@ -178,30 +178,22 @@ function openPopupProfileHandler () {
   //Открываем форму
   openPopup(editForm);
   //Выставляем актуальное состояние кнопки сохранения
-  const buttonElement = editForm.querySelector(validationConfig.submitButtonSelector);
-  const submitDisabledClass = validationConfig.inactiveButtonClass;
-  toggleButtonState(inputListEditForm, buttonElement, submitDisabledClass);
+  checkFormButtonState(editForm, inputListEditForm);
 }
 
 //Обработчик для первичного заполнения полей и открытия
 //Попапа добавления новой карточки
-function openPopupNewCardHandler (popupOpen) {
+function openPopupNewCardHandler () {
   //Предварительно очищаем поля ввода от возможных
   //Старых значений
   editFormPlaceName.value = "";
   editFormPlaceLink.value = "";
   //Предварительно удаляем старые ошибки
-  const inputErrorClass = 'edit-form__info-input_error';
-  const errorClass = 'edit-form__error-text_active';
-  hideInputError(editFormNewPlace, editFormPlaceName, inputErrorClass, errorClass);
-  hideInputError(editFormNewPlace, editFormPlaceLink, inputErrorClass, errorClass);
+  resetFormInputError(editFormNewPlace)
   //Открываем попап
-  openPopup(popupOpen);
+  openPopup(editFormNewPlace);
   //Выставляем актуальное состояние кнопки сохранения
-  const buttonElement = popupOpen.querySelector('.edit-form__submit-button');
-  const submitDisabledClass = 'edit-form__submit-button_disabled';
-  const inputList = Array.from(popupOpen.querySelectorAll('.edit-form__info-input'));
-  toggleButtonState(inputList, buttonElement, submitDisabledClass);
+  checkFormButtonState(editFormNewPlace, inputListEditFormNewPlace);
 }
 //Обработчик события для закрытия первой формы
 function editFormSubmitHandler (event) {
@@ -230,7 +222,7 @@ renderInitialCards();
 editButton.addEventListener('click', openPopupProfileHandler);
 closePopupProfileButton.addEventListener('click', () => {closePopup(editForm);});
 //Вешаем слушателей на открытие и закрытие второго попапа
-addCardButton.addEventListener('click', () => {openPopupNewCardHandler(editFormNewPlace);});
+addCardButton.addEventListener('click', openPopupNewCardHandler);
 closePopupPlaceButton.addEventListener('click', () => {closePopup(editFormNewPlace);});
 //Сохранение первого попапа
 editForm.addEventListener('submit', editFormSubmitHandler);

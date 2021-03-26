@@ -35,6 +35,15 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   }
 }
 
+//Функция, для проверки состояния кнопки формы
+const checkFormButtonState = (formElement, formInputList) => {
+  //Получаем необходимые элементы
+  const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
+  const submitDisabledClass = validationConfig.inactiveButtonClass;
+  //Выставляем состояние кнопки
+  toggleButtonState(formInputList, buttonElement, submitDisabledClass);
+}
+
 const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) => {
   //Получаем по id span
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
