@@ -125,9 +125,9 @@ function openFullViewPopup(evt) {
 function closePopupKeyBoardHandler(event) {
   if (event.key === 'Escape') {
     //Ищем открытый попап
-    const openPopup = document.querySelector('.popup_status_active');
+    const openedPopup = document.querySelector('.popup_status_active');
     //закрываем попап
-    closePopup(openPopup);
+    closePopup(openedPopup);
   }
 }
 
