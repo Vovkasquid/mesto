@@ -36,6 +36,7 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
 }
 
 //Функция, для проверки состояния кнопки формы
+//TODO надо что-то сделать с toggleButtonState
 const checkFormButtonState = (formElement, formInputList) => {
   //Получаем необходимые элементы
   const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
