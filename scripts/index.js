@@ -111,7 +111,7 @@ function deleteCard(evt) {
 }
 
 //Обработчик открывания попапа с фулвью попапом
-function openFullViewPopup(evt) {
+const openFullViewPopup = function (evt) {
   const target = evt.target;
   //Заполняем атрибуты попапа
   fullViewPopupImg.src = target.src;
