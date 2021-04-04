@@ -39,6 +39,10 @@ const fullViewPopup = document.querySelector('.image-popup');
 const fullViewPopupContainer = fullViewPopup.querySelector('.image-popup__container');
 //Получаем кнопку закрытия фуллвью попапа
 const fullViewPopupCloseBtn = document.querySelector('.image-popup__close-button');
+//Получаем объекты класса валидации
+const profileFormValidationObject = new FormValidator(validationConfig, editFormContainer);
+const placeFormValidationObject = new FormValidator(validationConfig, editFormNewPlaceContainer);
+
 
 //Функция открытия любого попапа
 function openPopup(popup) {
@@ -197,4 +201,7 @@ setFormContainerListener(editFormContainer);
 setFormContainerListener(editFormNewPlaceContainer);
 setFormContainerListener(fullViewPopupContainer);
 //Активируем валидацию
-enableValidation(validationConfig);
+//enableValidation(validationConfig);
+
+profileFormValidationObject.enableValidation();
+placeFormValidationObject.enableValidation();

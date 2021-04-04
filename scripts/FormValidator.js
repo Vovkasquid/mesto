@@ -1,7 +1,7 @@
 class FormValidator {
   //Конструктор. Принимает объект настроек, декомпозируем его + принимаем форму
-  constructor({formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}, formItem) {
-    this._formItem = formItem;
+  constructor({formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}, formElement) {
+    this._formElement = formElement;
     this._formSelector = formSelector;
     this._inputSelector = inputSelector;
     this._submitButtonSelector = submitButtonSelector;
@@ -10,9 +10,9 @@ class FormValidator {
     this._errorClass = errorClass;
   }
 
-  _showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
+  _showInputError = () => {
     //Получаем по id span
-    this._errorElement = formElement.querySelector(`.${this._inputElement.id}-error`);
+    this._errorElement = this._formElement.querySelector(`.${this._inputElement.id}-error`);
     //Добавляем классы ошибки и текст ошибки
     this._inputElement.classList.add(this._inputErrorClass);
     this._errorElement.textContent = this._errorMessage;
@@ -38,14 +38,14 @@ class FormValidator {
   }
   _checkFormButtonState = () => {
     //Получаем необходимые элементы
-    this._buttonElement = formElement.querySelector(this._submitButtonSelector);
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     this._submitDisabledClass = this._inactiveButtonClass;
     //Выставляем состояние кнопки
     this._toggleButtonState();
   }
   _hideInputError = () => {
     //Получаем по id span
-    this._errorElement = formElement.querySelector(`.${this._inputElement.id}-error`);
+    this._errorElement = this._formElement.querySelector(`.${this._inputElement.id}-error`);
     //Удаляем классы ошибки и зануляем текст
     this._inputElement.classList.remove(this._inputErrorClass);
     this._errorElement.classList.remove(this._errorClass);
@@ -54,24 +54,25 @@ class FormValidator {
 
   _checkInputValidity = () => {
     if (!this._inputElement.validity.valid) {
-      showInputError();
+      this._showInputError();
     } else {
-      hideInputError();
+      this._hideInputError();
     }
-  };
+  }
 
   _setEventListeners = () => {
     //Получаем массив всех инпутов формы
-    this._inputList = Array.from(formElement.querySelectorAll(this.inputSelector));
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     //Получаем ссылку на кнпоку
-    this._buttonElement = formElement.querySelector(this._submitButtonSelector);
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     // Проверяем состояние кнопки в самом начале
     this._toggleButtonState();
 
     //Перебираем все найденные инпуты
     this._inputList.forEach((inputElement) => {
+      this._inputElement = inputElement;
       //Вешаем слушателей на ввод и проверяем валидность
-      inputElement.addEventListener('input', function () {
+      this._inputElement.addEventListener('input', () => {
         this._checkInputValidity();
         // Проверяем состояние кнопки при изменении
         this._toggleButtonState();
@@ -80,12 +81,14 @@ class FormValidator {
   };
 
   enableValidation = () => {
+    console.log("enableValidation");
     //Массив форм не нужен, есть одна форма
     //И перебирать формы не надо
     //отменяем отправку форму по сабмиту
-    this._formItem.addEventListener('submit', function (evt) {
+    this._formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
-      this._setEventListeners();
     });
+    //Вешаем слушателей полей ввода
+    this._setEventListeners();
   };
 }
