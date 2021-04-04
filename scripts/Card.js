@@ -34,7 +34,7 @@ class Card {
   _deleteCard(evt) {
     //Вытаскиваем карточку из таргета
     this._target = evt.target;
-    this._card = target.closest('.card');
+    this._card = this._target.closest('.card');
     this._card.remove();
   }
 

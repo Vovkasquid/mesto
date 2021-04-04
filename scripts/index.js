@@ -211,7 +211,8 @@ function editFormNewCardSubmitHandler (event) {
   event.preventDefault();
   //Необходимо создать новую карточку с новыми полями
   const newPlace = { name: editFormPlaceName.value, link: editFormPlaceLink.value };
-  const newPlaceCard = createCardDomNode(newPlace);
+  const newPlaceObjectCart = new Card(newPlace, cardTemplate, openFullViewPopup);
+  const newPlaceCard = newPlaceObjectCart.createCardDomNode();
   //Добавляем карточку на страницу
   contentGalleryCardsList.prepend(newPlaceCard);
   closePopup(editFormNewPlace);
