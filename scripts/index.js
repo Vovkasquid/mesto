@@ -142,7 +142,6 @@ function openPopupProfileHandler () {
   //Открываем форму
   openPopup(editForm);
   //Выставляем актуальное состояние кнопки сохранения
-  //Надо что-то делать с этой функцией
   checkFormButtonState(editForm, inputListEditForm);
 }
 
