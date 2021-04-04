@@ -1,4 +1,4 @@
-class Cards {
+class Card {
   //конструктор - данные, темплейт, колбек openFullViewPopup (открытие фуллвь попапа)
   constructor(placeData, templateCard, openFullViewPopup) {
     this._placeData = placeData;
@@ -11,7 +11,7 @@ class Cards {
   createCardDomNode() {
     /*Создаём временные переменне. newCard для заполнения новой карточки
     и cardDescription и CardPhoto - элементы новых карточек*/
-    this._newCard = templateCard.content.cloneNode(true);
+    this._newCard =this._templateCard.content.cloneNode(true);
     this._cardDescription = this._newCard.querySelector('.card__description');
     this._cardPhoto = this._newCard.querySelector('.card__photo');
     //Заполняем поля новой карточки элементами поступившего в функцию объекта
