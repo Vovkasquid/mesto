@@ -8,18 +8,18 @@ class Cards {
   }
   //Публичный метод один - возвращает элемент карточки
   //Функция создания карточки (Публичный метод)
-  createCardDomNode(item) {
+  createCardDomNode() {
     /*Создаём временные переменне. newCard для заполнения новой карточки
     и cardDescription и CardPhoto - элементы новых карточек*/
     this._newCard = templateCard.content.cloneNode(true);
     this._cardDescription = this._newCard.querySelector('.card__description');
     this._cardPhoto = this._newCard.querySelector('.card__photo');
     //Заполняем поля новой карточки элементами поступившего в функцию объекта
-    this._cardDescription.textContent = item.name;
-    this._cardPhoto.src = item.link;
-    this._cardPhoto.alt = item.name;
+    this._cardDescription.textContent = this._placeData.name;
+    this._cardPhoto.src = this._placeData.link;
+    this._cardPhoto.alt = this._placeData.name;
     //Навешиваем слушателей на карточку
-    this._addCardsListeners(newCard);
+    this._addCardsListeners();
     //Возвращаем карточку
     return this._newCard;
   }
@@ -41,12 +41,12 @@ class Cards {
   //Обработчик открывания попапа с фулвью попапом передан колбеком
 
   //Функция навешивания слушателей на кнопки карточки
-  _addCardsListeners(card) {
-    this._likeBtn = card.querySelector('.card__like-button');
+  _addCardsListeners() {
+    this._likeBtn = this._newCard.querySelector('.card__like-button');
     this._likeBtn.addEventListener('click', this._toggleLikeButton);
-    this._deleteCardBtn = card.querySelector('.card__delete-button');
+    this._deleteCardBtn = this._newCard.querySelector('.card__delete-button');
     this._deleteCardBtn.addEventListener('click', this._deleteCard);
-    this._cardImage = card.querySelector('.card__photo');
+    this._cardImage = this._newCard.querySelector('.card__photo');
     this._cardImage.addEventListener('click', this._openFullViewPopup);
   }
 

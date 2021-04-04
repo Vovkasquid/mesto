@@ -161,7 +161,7 @@ function addCardsListeners(card) {
 //Функция отрисовки карточки на странице
 function renderInitialCards() {
   const result = initialCards.map(function (item){
-    const card = createCardDomNode(item);
+    const card = new Card(item, );
     return card;
   });
   contentGalleryCardsList.append(...result);
