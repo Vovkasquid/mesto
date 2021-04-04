@@ -79,37 +79,6 @@ function setClickOverlayDocumentListener() {
   document.addEventListener('click', closePopupOverlayClickHandler);
 }
 
-//Функция создания карточки
-function createCardDomNode(item) {
-  /*Создаём временные переменне. newCard для заполнения новой карточки
-  и cardDescription и CardPhoto - элементы новых карточек*/
-  const newCard = cardTemplate.content.cloneNode(true);
-  const cardDescription = newCard.querySelector('.card__description');
-  const cardPhoto = newCard.querySelector('.card__photo');
-  //Заполняем поля новой карточки элементами поступившего в функцию объекта
-  cardDescription.textContent = item.name;
-  cardPhoto.src = item.link;
-  cardPhoto.alt = item.name;
-  //Навешиваем слушателей на карточку
-  addCardsListeners(newCard);
-  //Возвращаем карточку
-  return newCard;
-}
-
-//Функция выставления лайка
-function toggleLikeButton(evt) {
-  const likeBtn = evt.target;
-  likeBtn.classList.toggle('card__like-button_status_active');
-}
-
-//Обработчик удаления карточки
-function deleteCard(evt) {
-  //Вытаскиваем карточку из таргета
-  const target = evt.target;
-  const card = target.closest('.card');
-  card.remove();
-}
-
 //Обработчик открывания попапа с фулвью попапом
 const openFullViewPopup = function (evt) {
   const target = evt.target;
@@ -146,16 +115,6 @@ function stopPopupPropagation(event) {
 //Функция, навешивающая слушатель клика на контейнер
 function setFormContainerListener(container) {
   container.addEventListener('click', stopPopupPropagation);
-}
-
-//Функция навешивания слушателей на кнпоки карточки
-function addCardsListeners(card) {
-  const likeBtn = card.querySelector('.card__like-button');
-  likeBtn.addEventListener('click', toggleLikeButton);
-  const deleteCardBtn = card.querySelector('.card__delete-button');
-  deleteCardBtn.addEventListener('click', deleteCard);
-  const cardImage = card.querySelector('.card__photo');
-  cardImage.addEventListener('click', openFullViewPopup);
 }
 
 //Функция отрисовки карточки на странице
