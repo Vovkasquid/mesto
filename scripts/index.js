@@ -40,8 +40,8 @@ const fullViewPopupContainer = fullViewPopup.querySelector('.image-popup__contai
 //Получаем кнопку закрытия фуллвью попапа
 const fullViewPopupCloseBtn = document.querySelector('.image-popup__close-button');
 //Получаем объекты класса валидации
-//const profileFormValidationObject = new FormValidator(validationConfig, editFormContainer);
-//const placeFormValidationObject = new FormValidator(validationConfig, editFormNewPlaceContainer);
+const profileValidation = new FormValidator(validationConfig, editFormContainer);
+const placeValidation = new FormValidator(validationConfig, editFormNewPlaceContainer);
 
 
 //Функция открытия любого попапа
@@ -138,11 +138,11 @@ function openPopupProfileHandler () {
   editFormProfileName.value = profileName.textContent;
   editFormProfileDescription.value = profileDescription.textContent;
   //Предварительно удаляем старые ошибки
-  resetFormInputError(editForm);
+  profileValidation.resetFormInputError();
   //Открываем форму
   openPopup(editForm);
   //Выставляем актуальное состояние кнопки сохранения
-  checkFormButtonState(editForm, inputListEditForm);
+  profileValidation.checkFormButtonState();
 }
 
 //Обработчик для первичного заполнения полей и открытия
@@ -153,11 +153,11 @@ function openPopupNewCardHandler () {
   editFormPlaceName.value = "";
   editFormPlaceLink.value = "";
   //Предварительно удаляем старые ошибки
-  resetFormInputError(editFormNewPlace)
+  placeValidation.resetFormInputError();
   //Открываем попап
   openPopup(editFormNewPlace);
   //Выставляем актуальное состояние кнопки сохранения
-  checkFormButtonState(editFormNewPlace, inputListEditFormNewPlace);
+  placeValidation.checkFormButtonState();
 }
 //Обработчик события для закрытия первой формы
 function editFormSubmitHandler (event) {
@@ -201,6 +201,5 @@ setFormContainerListener(editFormNewPlaceContainer);
 setFormContainerListener(fullViewPopupContainer);
 //Активируем валидацию
 //enableValidation(validationConfig);
-
-//profileFormValidationObject.enableValidation();
-//placeFormValidationObject.enableValidation();
+profileValidation.enableValidation();
+placeValidation.enableValidation();

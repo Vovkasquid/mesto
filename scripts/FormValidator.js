@@ -38,12 +38,12 @@ class FormValidator {
   }
 
   //Функция, для проверки состояния кнопки формы
-  checkFormButtonState = (formElement, formInputList) => {
+  checkFormButtonState = () => {
     //Получаем необходимые элементы
     //Получаем все поля формы
     const formInputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     //Выставляем состояние кнопки
-    toggleButtonState(formInputList);
+    this._toggleButtonState(formInputList);
   }
 
   _hideInputError = (inputElement) => {
@@ -61,7 +61,7 @@ class FormValidator {
     const formInputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     //Перебираем поля и каждое очищаем
     formInputList.forEach((inputElement) => {
-      hideInputError(inputElement);
+      this._hideInputError(inputElement);
     });
   }
 
@@ -75,16 +75,16 @@ class FormValidator {
 
   _setEventListeners = () => {
     //Получаем массив всех инпутов
-    const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
+    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     //Получаем ссылку на кнпоку
-    this._buttonElement = formElement.querySelector(this._submitButtonSelector);
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     // Проверяем состояние кнопки в самом начале
     this._toggleButtonState(inputList);
 
     //Перебираем все найденные инпуты
     inputList.forEach((inputElement) => {
       //Вешаем слушателей на ввод и проверяем валидность
-      inputElement.addEventListener('input', function () {
+      inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         // Проверяем состояние кнопки при изменении
         this._toggleButtonState(inputList);
@@ -92,7 +92,7 @@ class FormValidator {
     });
   };
 
-  _enableValidation = () => {
+  enableValidation = () => {
     //отменяем отправку форму по сабмиту
     this._formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();

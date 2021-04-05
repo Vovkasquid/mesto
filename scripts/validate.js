@@ -7,7 +7,7 @@ const validationConfig = {
   inputErrorClass: 'edit-form__info-input_error',
   errorClass: 'edit-form__error-text_active'
 };
-
+/*
 const showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
   //Получаем по id span
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -107,3 +107,4 @@ const enableValidation = ({formSelector, inputSelector, submitButtonSelector, in
     setEventListeners(formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass);
   });
 };
+*/
