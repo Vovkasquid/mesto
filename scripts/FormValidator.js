@@ -8,6 +8,7 @@ class FormValidator {
     this._inactiveButtonClass = inactiveButtonClass;
     this._inputErrorClass = inputErrorClass;
     this._errorClass = errorClass;
+    this._formInputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
   }
 
   _showInputError = (inputElement, errorMessage) => {
@@ -19,16 +20,16 @@ class FormValidator {
     this._errorElement.classList.add(this._errorClass);
   };
 
-  _hasInvalidInput = (inputList) => {
+  _hasInvalidInput = () => {
     //Проводим древнюю тёмную магию с помощью some
-    return inputList.some((inputElement) => {
+    return this._formInputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
 
-  _toggleButtonState = (inputList) => {
+  _toggleButtonState = () => {
     //Проверяем на валидность и, если надо, меняем состояние кнопки
-    if (this._hasInvalidInput(inputList)) {
+    if (this._hasInvalidInput()) {
       this._buttonElement.classList.add(this._inactiveButtonClass);
       this._buttonElement.setAttribute('disabled', true);
     } else {
@@ -39,11 +40,8 @@ class FormValidator {
 
   //Функция, для проверки состояния кнопки формы
   checkFormButtonState = () => {
-    //Получаем необходимые элементы
-    //Получаем все поля формы
-    const formInputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     //Выставляем состояние кнопки
-    this._toggleButtonState(formInputList);
+    this._toggleButtonState();
   }
 
   _hideInputError = (inputElement) => {
@@ -57,10 +55,8 @@ class FormValidator {
 
   //Функция очистки всех полей формы от ошибок
   resetFormInputError = () => {
-    //Получаем все поля формы
-    const formInputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     //Перебираем поля и каждое очищаем
-    formInputList.forEach((inputElement) => {
+    this._formInputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
   }
@@ -74,20 +70,19 @@ class FormValidator {
   };
 
   _setEventListeners = () => {
-    //Получаем массив всех инпутов
-    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    //Получаем ссылку на кнпоку
+    //Массив всех инпутов есть в приватном свойстве
+    //Получаем ссылку на кнопку
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     // Проверяем состояние кнопки в самом начале
-    this._toggleButtonState(inputList);
+    this._toggleButtonState();
 
     //Перебираем все найденные инпуты
-    inputList.forEach((inputElement) => {
+    this._formInputList.forEach((inputElement) => {
       //Вешаем слушателей на ввод и проверяем валидность
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         // Проверяем состояние кнопки при изменении
-        this._toggleButtonState(inputList);
+        this._toggleButtonState();
       });
     });
   };
