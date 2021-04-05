@@ -1,4 +1,4 @@
-class Card {
+export default class Card {
   //конструктор - данные, темплейт, колбек openFullViewPopup (открытие фуллвь попапа)
   constructor(placeData, templateCard, openFullViewPopup) {
     this._placeData = placeData;

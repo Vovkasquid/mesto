@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
   //Конструктор. Принимает объект настроек, декомпозируем его + принимаем форму
   constructor({formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}, formElement) {
     this._formElement = formElement;

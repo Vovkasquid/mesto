@@ -1,3 +1,9 @@
+//Проводим необходимые импорты
+import {initialCards} from './initial-cards.js';
+import {validationConfig} from './validate.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 //Получаем Попап с редактированием профиля
 const editForm = document.querySelector('.edit-form_type_profile');
 //Получаем контейнер попапа с редактированием профиля
@@ -42,7 +48,6 @@ const fullViewPopupCloseBtn = document.querySelector('.image-popup__close-button
 //Получаем объекты класса валидации
 const profileValidation = new FormValidator(validationConfig, editFormContainer);
 const placeValidation = new FormValidator(validationConfig, editFormNewPlaceContainer);
-
 
 //Функция открытия любого попапа
 function openPopup(popup) {

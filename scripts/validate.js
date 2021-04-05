@@ -1,5 +1,5 @@
 //Объявляем validationConfig - объект, со всеми нужны селекторами
-const validationConfig = {
+export const validationConfig = {
   formSelector: '.edit-form__form-container',
   inputSelector: '.edit-form__info-input',
   submitButtonSelector: '.edit-form__submit-button',

@@ -1,5 +1,5 @@
 //Массив с первоначальными карточками
-const initialCards = [
+export const initialCards = [
   {
     name: 'Лыткарино',
     link: 'https://sun9-35.userapi.com/impg/5dNmV-IcN0BafK_xK8xv2XT1ulh2NO9YJBTvqQ/dImxq2hEho4.jpg?size=2560x1707&quality=96&sign=28edc76e95462d7a0ac529e9bc21d0f1&type=album'
