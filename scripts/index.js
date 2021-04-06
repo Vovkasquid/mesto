@@ -46,9 +46,13 @@ const fullViewPopupContainer = fullViewPopup.querySelector('.image-popup__contai
 //Получаем кнопку закрытия фуллвью попапа
 const fullViewPopupCloseBtn = document.querySelector('.image-popup__close-button');
 //Получаем объекты класса валидации
-const profileValidation = new FormValidator(validationConfig, editFormContainer);
-const placeValidation = new FormValidator(validationConfig, editFormNewPlaceContainer);
+const profileValidation = createFormValidatorObj(validationConfig, editFormContainer);
+const placeValidation = createFormValidatorObj(validationConfig, editFormNewPlaceContainer);
 
+//Функция создание объекта валидации
+function createFormValidatorObj (config, formElement) {
+  return new FormValidator(config, formElement);
+}
 //Функция открытия любого попапа
 function openPopup(popup) {
   //Навешиваем слушатель на документ, чтобы отлавливать нажатия клавиатуры и закрывать попап
