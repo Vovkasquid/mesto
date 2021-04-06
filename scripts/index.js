@@ -126,12 +126,15 @@ function setFormContainerListener(container) {
   container.addEventListener('click', stopPopupPropagation);
 }
 
+//Функция создания объекта класса Card
+function createCardObject(placeData, templateCard, openFullViewPopup) {
+  return new Card(placeData, templateCard, openFullViewPopup);
+}
 //Функция отрисовки карточки на странице
 function renderInitialCards() {
-  const result = initialCards.map(function (item){
-    const card = new Card(item, cardTemplate, openFullViewPopup);
-    const cardNode = card.createCardDomNode();
-    return cardNode;
+  const result = initialCards.map(function (item) {
+    const card = createCardObject(item, cardTemplate, openFullViewPopup);
+    return card.createCardDomNode();
   });
   contentGalleryCardsList.append(...result);
 }
@@ -179,7 +182,7 @@ function editFormNewCardSubmitHandler (event) {
   event.preventDefault();
   //Необходимо создать новую карточку с новыми полями
   const newPlace = { name: editFormPlaceName.value, link: editFormPlaceLink.value };
-  const newPlaceObjectCart = new Card(newPlace, cardTemplate, openFullViewPopup);
+  const newPlaceObjectCart = createCardObject(newPlace, cardTemplate, openFullViewPopup);
   const newPlaceCard = newPlaceObjectCart.createCardDomNode();
   //Добавляем карточку на страницу
   contentGalleryCardsList.prepend(newPlaceCard);

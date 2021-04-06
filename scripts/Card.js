@@ -46,7 +46,6 @@ export default class Card {
     this._likeBtn.addEventListener('click', this._toggleLikeButton);
     this._deleteCardBtn = this._newCard.querySelector('.card__delete-button');
     this._deleteCardBtn.addEventListener('click', this._deleteCard);
-    this._cardImage = this._newCard.querySelector('.card__photo');
-    this._cardImage.addEventListener('click', this._openFullViewPopup);
+    this._cardPhoto.addEventListener('click', this._openFullViewPopup);
   }
 }
