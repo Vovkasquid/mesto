@@ -1,8 +1,9 @@
 //Проводим необходимые импорты
-import {initialCards} from './initial-cards.js';
-import {validationConfig} from './validate.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import {initialCards} from './utils/initial-cards.js';
+import {validationConfig} from './utils/validate.js';
+import Card from './components/Card.js';
+import FormValidator from './components/FormValidator.js';
+import Section from "./components/Section.js";
 
 //Получаем Попап с редактированием профиля
 const editForm = document.querySelector('.edit-form_type_profile');
@@ -38,6 +39,8 @@ const editFormPlaceLink = document.querySelector('.edit-form__info-input_type_li
 const cardTemplate = document.querySelector('.card-template');
 //Получаем список с карточками
 const contentGalleryCardsList = document.querySelector('.content-gallery__cards');
+//Сохраним селектор списка с карточками
+const contentGallerySelector = '.content-gallery__cards';
 //Получаем изображение и описание фуллвью попапа + сам попап + контейнер
 const fullViewPopupImg = document.querySelector('.image-popup__picture');
 const fullViewPopupDescr = document.querySelector('.image-popup__description');
@@ -193,6 +196,23 @@ function editFormNewCardSubmitHandler (event) {
   closePopup(editFormNewPlace);
 }
 
+//Колбек отрисовки карточки. Создаёт карточку и добавляет её в контейнер
+const renderer = (item, container) => {
+  const card = createCardObject(item, cardTemplate, openFullViewPopup);
+  const cardDomNode = card.createCardDomNode();
+  container.append(cardDomNode);
+}
+
+//Создаём экземпляр Секции
+const checkInitObj = {initialCards, renderer};
+const oneItem = {
+  name: 'Лыткарино',
+  link: 'https://sun9-35.userapi.com/impg/5dNmV-IcN0BafK_xK8xv2XT1ulh2NO9YJBTvqQ/dImxq2hEho4.jpg?size=2560x1707&quality=96&sign=28edc76e95462d7a0ac529e9bc21d0f1&type=album'
+};
+const section = new Section({initialCards, renderer}, contentGallerySelector);
+//Рендерим начальные карточки
+section.renderAllElements();
+/*
 //Рендерим начальные карточки
 renderInitialCards();
 //Вешаем слушателей на открытие и закрытие первого попапа
@@ -215,3 +235,4 @@ setFormContainerListener(fullViewPopupContainer);
 //enableValidation(validationConfig);
 profileValidation.enableValidation();
 placeValidation.enableValidation();
+*/
