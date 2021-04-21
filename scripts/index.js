@@ -6,6 +6,7 @@ import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
 import Popup from './components/Popup.js';
 import PopupWithImage from './components/PopupWithImage.js';
+import UserInfo from './components/UserInfo.js';
 
 //Получаем Попап с редактированием профиля
 const editForm = document.querySelector('.edit-form_type_profile');
@@ -213,6 +214,12 @@ const section = new Section({initialCards, renderer}, contentGallerySelector);
 //Рендерим начальные карточки
 section.renderAllElements();
 
+/*
+//Дебажим UserInfo
+const userInfo = new UserInfo('.profile__name', '.profile__description');
+console.log(userInfo.getUserInfo());
+userInfo.setUserInfo('Вася Иванов', 'Разработчик');
+*/
 
 
 /*

@@ -14,7 +14,7 @@ export default class PopupWithImage extends Popup {
     this._fullViewPopupImg.src = target.src;
     this._fullViewPopupImg.alt = target.alt;
     this._fullViewPopupDescr.textContent = target.alt;
-    //показываем попап
+    //показываем попап, дёргая метод предка
     super.open();
     console.log('Отработал метод Open класса PopupWithImage');
   }
