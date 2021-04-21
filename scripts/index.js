@@ -4,7 +4,6 @@ import {validationConfig} from './utils/validate.js';
 import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
-import Popup from './components/Popup.js';
 import PopupWithImage from './components/PopupWithImage.js';
 import PopupWithForm from './components/PopupWithForm.js';
 import UserInfo from './components/UserInfo.js';
@@ -22,51 +21,20 @@ const editButton = document.querySelector('.profile__edit-button');
 //Получаем кнопку добавления карточки
 const addCardButton = document.querySelector('.profile__new-photo-button');
 //Получаем кнопку закрытия Попапа с редактированием профиля
-const closePopupProfileButton = editForm.querySelector('.edit-form__close-button_type_profile');
-//Получаем кнопку закрытия Попапа с добавлением карточки
-const closePopupPlaceButton = editFormNewPlace.querySelector('.edit-form__close-button_type_place');
-//Получаем текущее имя профиля
-const profileName = document.querySelector('.profile__name');
-//Получаем текущее описание профиля
-const profileDescription = document.querySelector('.profile__description');
-//Получаем поля ввода первого Попапа
 const editFormProfileName = document.querySelector('.edit-form__info-input_type_name');
 const editFormProfileDescription = document.querySelector('.edit-form__info-input_type_description');
 //Получаем список всех полей попапа editForm
-const inputListEditForm = Array.from(editForm.querySelectorAll('.edit-form__info-input'));
-//Получаем список всех полей попапа editFormNewPlace
-const inputListEditFormNewPlace = Array.from(editFormNewPlace.querySelectorAll('.edit-form__info-input'));
-//Получаем поля ввода второго Попапа
 const editFormPlaceName = document.querySelector('.edit-form__info-input_type_place');
 const editFormPlaceLink = document.querySelector('.edit-form__info-input_type_link');
 //Получаем Темплейт карточки
 const cardTemplate = document.querySelector('.card-template');
 //Получаем список с карточками
-const contentGalleryCardsList = document.querySelector('.content-gallery__cards');
-//Сохраним селектор списка с карточками
 const contentGallerySelector = '.content-gallery__cards';
-//Получаем изображение и описание фуллвью попапа + сам попап + контейнер
-const fullViewPopupImg = document.querySelector('.image-popup__picture');
-const fullViewPopupDescr = document.querySelector('.image-popup__description');
-const fullViewPopup = document.querySelector('.image-popup');
-const fullViewPopupContainer = fullViewPopup.querySelector('.image-popup__container');
-//Получаем кнопку закрытия фуллвью попапа
-const fullViewPopupCloseBtn = document.querySelector('.image-popup__close-button');
-//Получаем объекты класса валидации
 const profileValidation = createFormValidatorObj(validationConfig, editFormContainer);
 const placeValidation = createFormValidatorObj(validationConfig, editFormNewPlaceContainer);
-
 //Функция создание объекта валидации
 function createFormValidatorObj (config, formElement) {
   return new FormValidator(config, formElement);
-}
-//Функция открытия любого попапа
-function openPopup(popup) {
-  //Навешиваем слушатель на документ, чтобы отлавливать нажатия клавиатуры и закрывать попап
-  setKeyboardEscListener();
-  //Навешиваем слушатель на документ, чтобы отлавливать клики по оверлею
-  setClickOverlayDocumentListener();
-  popup.classList.add('popup_status_active');
 }
 
 //Функция закрытия любого попапа
@@ -99,17 +67,6 @@ function setClickOverlayDocumentListener() {
   document.addEventListener('click', closePopupOverlayClickHandler);
 }
 
-//Обработчик открывания попапа с фулвью попапом
-const openFullViewPopup = function (evt) {
-  const target = evt.target;
-  //Заполняем атрибуты попапа
-  fullViewPopupImg.src = target.src;
-  fullViewPopupImg.alt = target.alt;
-  fullViewPopupDescr.textContent = target.alt;
-  //показываем попап
-  openPopup(fullViewPopup);
-}
-
 //Слушатель, закрывающий попапы при нажатии эскейп
 function closePopupKeyBoardHandler(event) {
   if (event.key === 'Escape') {
@@ -127,30 +84,10 @@ function closePopupOverlayClickHandler(event) {
   }
 }
 
-//Функция, останавливающая всплытие клика на контейнере
-function stopPopupPropagation(event) {
-  event.stopPropagation();
-}
-
-//Функция, навешивающая слушатель клика на контейнер
-function setFormContainerListener(container) {
-  container.addEventListener('click', stopPopupPropagation);
-}
-
 //Функция создания объекта класса Card
 function createCardObject(placeData, templateCard, openFullViewPopup) {
   return new Card(placeData, templateCard, openFullViewPopup);
 }
-//Функция отрисовки карточки на странице
-function renderInitialCards() {
-  const result = initialCards.map(function (item) {
-    const card = createCardObject(item, cardTemplate, openFullViewPopup);
-    return card.createCardDomNode();
-  });
-  contentGalleryCardsList.append(...result);
-}
-
-
 
 //Обработчик события для закрытия первой формы
 const editFormSubmitHandler = function  (event) {
@@ -210,17 +147,11 @@ const openPopupNewCardHandler = function () {
   placeValidation.checkFormButtonState();
 }
 
-
 //Вешаем слушателей на открытие и первого попапа
 editButton.addEventListener('click', openPopupProfileHandler);
 //Вешаем слушателей на открытие и закрытие второго попапа
 addCardButton.addEventListener('click', openPopupNewCardHandler);
 
-/*
-//Сохранение первого попапа
-editForm.addEventListener('submit', editProfilePopup.close.bind(editProfilePopup));
-//Сохранение второго попапа
-editFormNewPlace.addEventListener('submit', createCardPopup.close.bind(createCardPopup));*/
 
 //Колбек отрисовки карточки. Создаёт карточку и добавляет её в контейнер
 const renderer = (item, container) => {
@@ -235,40 +166,6 @@ const section = new Section({initialCards, renderer}, contentGallerySelector);
 //Рендерим начальные карточки
 section.renderAllElements();
 
-/*
-//Дебажим UserInfo
-const userInfo = new UserInfo('.profile__name', '.profile__description');
-console.log(userInfo.getUserInfo());
-userInfo.setUserInfo('Вася Иванов', 'Разработчик');
-*/
-
-
-/*
-//Дебажим класс Popup
-const testPopup = new Popup('.edit-form_type_profile');
-testPopup.open();
-
- */
-/*
-//Рендерим начальные карточки
-renderInitialCards();
-//Вешаем слушателей на открытие и закрытие первого попапа
-editButton.addEventListener('click', openPopupProfileHandler);
-closePopupProfileButton.addEventListener('click', () => {closePopup(editForm);});
-//Вешаем слушателей на открытие и закрытие второго попапа
-addCardButton.addEventListener('click', openPopupNewCardHandler);
-closePopupPlaceButton.addEventListener('click', () => {closePopup(editFormNewPlace);});
-//Сохранение первого попапа
-editForm.addEventListener('submit', editFormSubmitHandler);
-//Сохранение второго попапа
-editFormNewPlace.addEventListener('submit', editFormNewCardSubmitHandler);
-//Закрытие фуллвьюпопапа
-fullViewPopupCloseBtn.addEventListener('click', () => {closePopup(fullViewPopup)});
-//Навешиваем слушателей на контейнеры, чтобы они останавливали клики по ним
-setFormContainerListener(editFormContainer);
-setFormContainerListener(editFormNewPlaceContainer);
-setFormContainerListener(fullViewPopupContainer);
- */
 //Активируем валидацию
 profileValidation.enableValidation();
 placeValidation.enableValidation();
