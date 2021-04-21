@@ -5,7 +5,7 @@ export default class Section {
     //renderer - колбек отрисовки карточек
     this._renderer = renderer;
     this._container = document.querySelector(containerSelector);
-    console.log('Отработал конструктор');
+    console.log('Отработал конструктор Section');
   }
 
   renderAllElements() {

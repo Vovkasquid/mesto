@@ -200,18 +200,14 @@ function editFormNewCardSubmitHandler (event) {
 const renderer = (item, container) => {
   const card = createCardObject(item, cardTemplate, openFullViewPopup);
   const cardDomNode = card.createCardDomNode();
-  container.append(cardDomNode);
+  container.prepend(cardDomNode);
 }
 
 //Создаём экземпляр Секции
-const checkInitObj = {initialCards, renderer};
-const oneItem = {
-  name: 'Лыткарино',
-  link: 'https://sun9-35.userapi.com/impg/5dNmV-IcN0BafK_xK8xv2XT1ulh2NO9YJBTvqQ/dImxq2hEho4.jpg?size=2560x1707&quality=96&sign=28edc76e95462d7a0ac529e9bc21d0f1&type=album'
-};
 const section = new Section({initialCards, renderer}, contentGallerySelector);
 //Рендерим начальные карточки
 section.renderAllElements();
+
 /*
 //Рендерим начальные карточки
 renderInitialCards();
@@ -231,8 +227,7 @@ fullViewPopupCloseBtn.addEventListener('click', () => {closePopup(fullViewPopup)
 setFormContainerListener(editFormContainer);
 setFormContainerListener(editFormNewPlaceContainer);
 setFormContainerListener(fullViewPopupContainer);
+ */
 //Активируем валидацию
-//enableValidation(validationConfig);
 profileValidation.enableValidation();
 placeValidation.enableValidation();
-*/
