@@ -6,6 +6,7 @@ import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
 import Popup from './components/Popup.js';
 import PopupWithImage from './components/PopupWithImage.js';
+import PopupWithForm from './components/PopupWithForm.js';
 import UserInfo from './components/UserInfo.js';
 
 //Получаем Попап с редактированием профиля
@@ -200,6 +201,22 @@ function editFormNewCardSubmitHandler (event) {
 }
 //Дебажим класс PopupWithImage
 const popupWithImage = new PopupWithImage('.image-popup');
+
+//Дебажим класс PopupWithForm
+const editProfilePopup = new PopupWithForm('.edit-form_type_profile', editFormSubmitHandler);
+const createCardPopup = new PopupWithForm('.edit-form_type_place', editFormNewCardSubmitHandler);
+
+
+//Вешаем слушателей на открытие и первого попапа
+editButton.addEventListener('click', editProfilePopup.open.bind(editProfilePopup));
+//Вешаем слушателей на открытие и закрытие второго попапа
+addCardButton.addEventListener('click', createCardPopup.open.bind(createCardPopup));
+
+
+//Сохранение первого попапа
+editForm.addEventListener('submit', editProfilePopup.close.bind(editProfilePopup));
+//Сохранение второго попапа
+editFormNewPlace.addEventListener('submit', createCardPopup.close.bind(createCardPopup));
 
 //Колбек отрисовки карточки. Создаёт карточку и добавляет её в контейнер
 const renderer = (item, container) => {
