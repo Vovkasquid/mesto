@@ -150,34 +150,8 @@ function renderInitialCards() {
   contentGalleryCardsList.append(...result);
 }
 
-//Обработчик для первичного заполнения полей и открытия
-//Попапа изменения профиля
-function openPopupProfileHandler () {
-  //Заполняем поля формы
-  editFormProfileName.value = profileName.textContent;
-  editFormProfileDescription.value = profileDescription.textContent;
-  //Предварительно удаляем старые ошибки
-  profileValidation.resetFormInputError();
-  //Открываем форму
-  openPopup(editForm);
-  //Выставляем актуальное состояние кнопки сохранения
-  profileValidation.checkFormButtonState();
-}
 
-//Обработчик для первичного заполнения полей и открытия
-//Попапа добавления новой карточки
-function openPopupNewCardHandler () {
-  //Предварительно очищаем поля ввода от возможных
-  //Старых значений
-  editFormPlaceName.value = "";
-  editFormPlaceLink.value = "";
-  //Предварительно удаляем старые ошибки
-  placeValidation.resetFormInputError();
-  //Открываем попап
-  openPopup(editFormNewPlace);
-  //Выставляем актуальное состояние кнопки сохранения
-  placeValidation.checkFormButtonState();
-}
+
 //Обработчик события для закрытия первой формы
 const editFormSubmitHandler = function  (event) {
   console.log('отработал сабмит формы с именем');
@@ -207,11 +181,40 @@ const popupWithImage = new PopupWithImage('.image-popup');
 const editProfilePopup = new PopupWithForm('.edit-form_type_profile', editFormSubmitHandler);
 const createCardPopup = new PopupWithForm('.edit-form_type_place', editFormNewCardSubmitHandler);
 
+//Создаём экземпляр UserInfo
+const userInfo = new UserInfo('.profile__name', '.profile__description');
+
+//Обработчик для первичного заполнения полей и открытия
+//Попапа изменения профиля
+const openPopupProfileHandler = function () {
+  //Заполняем поля формы
+  const profileData = userInfo.getUserInfo();
+  editFormProfileName.value = profileData.userName;
+  editFormProfileDescription.value = profileData.userDescription;
+  //Предварительно удаляем старые ошибки
+  profileValidation.resetFormInputError();
+  //Открываем форму
+  editProfilePopup.open();
+  //Выставляем актуальное состояние кнопки сохранения
+  profileValidation.checkFormButtonState();
+}
+
+//Обработчик для первичного заполнения полей и открытия
+//Попапа добавления новой карточки
+const openPopupNewCardHandler = function () {
+  //Предварительно удаляем старые ошибки
+  placeValidation.resetFormInputError();
+  //Открываем попап
+  createCardPopup.open();
+  //Выставляем актуальное состояние кнопки сохранения
+  placeValidation.checkFormButtonState();
+}
+
 
 //Вешаем слушателей на открытие и первого попапа
-editButton.addEventListener('click', editProfilePopup.open.bind(editProfilePopup));
+editButton.addEventListener('click', openPopupProfileHandler);
 //Вешаем слушателей на открытие и закрытие второго попапа
-addCardButton.addEventListener('click', createCardPopup.open.bind(createCardPopup));
+addCardButton.addEventListener('click', openPopupNewCardHandler);
 
 /*
 //Сохранение первого попапа
