@@ -167,10 +167,11 @@ const editFormNewCardSubmitHandler = function (event) {
   event.preventDefault();
   //Необходимо создать новую карточку с новыми полями
   const newPlace = { name: editFormPlaceName.value, link: editFormPlaceLink.value };
-  const newPlaceObjectCart = createCardObject(newPlace, cardTemplate, openFullViewPopup);
-  const newPlaceCard = newPlaceObjectCart.createCardDomNode();
+  //const newPlaceObjectCart = createCardObject(newPlace, cardTemplate, openFullViewPopup);
+  //const newPlaceCard = newPlaceObjectCart.createCardDomNode();
   //Добавляем карточку на страницу
-  contentGalleryCardsList.prepend(newPlaceCard);
+  //contentGalleryCardsList.prepend(newPlaceCard);
+  section.addItem(newPlace);
   createCardPopup.close();
 }
 //Дебажим класс PopupWithImage
