@@ -157,8 +157,7 @@ const editFormSubmitHandler = function  (event) {
   console.log('отработал сабмит формы с именем');
   event.preventDefault();
   //Передаём поля в форму
-  profileName.textContent = editFormProfileName.value;
-  profileDescription.textContent = editFormProfileDescription.value;
+  userInfo.setUserInfo(editFormProfileName.value, editFormProfileDescription.value);
   //Закрываем форму
   closePopup(editForm);
 }
