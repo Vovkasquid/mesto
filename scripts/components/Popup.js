@@ -4,6 +4,7 @@ export default class Popup {
     //Сразу ищем Дом-элемент по селектору
     this._popupContainer = document.querySelector(popupSelector);
     this._closeButton = this._popupContainer.querySelector('.popup__close-btn');
+    console.log('Отработал конструктор Popup');
   }
 
   //Метод навешивания слушателей закрытия попапа по esc, оверлею и кнопке закрытия
@@ -14,7 +15,7 @@ export default class Popup {
     document.addEventListener('click', this._handleOverleyClick.bind(this));
     //слушатель закрытия по кнопке закрытия
     this._closeButton.addEventListener('click', this.close.bind(this));
-
+    console.log('Слушатели Popup установлены');
   }
 
   //Метод снимания слушателей закрытия попапа по esc, оверлею и кнопке закрытия
@@ -25,7 +26,7 @@ export default class Popup {
     document.removeEventListener('click', this._handleOverleyClick.bind(this));
     //слушатель закрытия по кнопке закрытия
     this._closeButton.removeEventListener('click', this.close.bind(this));
-
+    console.log('Слушатели Popup сняты');
   }
 
   //метод открытия попапа
@@ -34,14 +35,16 @@ export default class Popup {
     this.setEventListeners();
     //Открываем попап
     this._popupContainer.classList.add('popup_status_active');
+    console.log('Отработал метод открытия Popup');
   }
-  //метод закрытия попапа
 
+  //метод закрытия попапа
   close() {
     //Снимаем общие слушатели
     this.removeEventListeners();
     //Закрываем попап
     this._popupContainer.classList.remove('popup_status_active');
+    console.log('Отработал метод закрытия Popup');
   }
 
   //Метод, закрывающий попапы при нажатии эскейп
@@ -50,6 +53,7 @@ export default class Popup {
       //закрываем попап
       this.close();
     }
+    console.log('Отработал обработчик закрытия на экспейп Popup');
   }
 
   //Метод, закрывающий попапа при клике по оверлею
@@ -58,5 +62,6 @@ export default class Popup {
     if (event.target.classList.contains('popup')) {
       this.close();
     }
+    console.log('Отработал обработчик закрытия на Оверлей Popup');
   }
 }

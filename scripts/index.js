@@ -3,7 +3,8 @@ import {initialCards} from './utils/initial-cards.js';
 import {validationConfig} from './utils/validate.js';
 import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
-import Section from "./components/Section.js";
+import Section from './components/Section.js';
+import Popup from './components/Popup.js';
 
 //Получаем Попап с редактированием профиля
 const editForm = document.querySelector('.edit-form_type_profile');
@@ -208,6 +209,9 @@ const section = new Section({initialCards, renderer}, contentGallerySelector);
 //Рендерим начальные карточки
 section.renderAllElements();
 
+//Дебажим класс Popup
+const testPopup = new Popup('.edit-form_type_profile');
+testPopup.open();
 /*
 //Рендерим начальные карточки
 renderInitialCards();
