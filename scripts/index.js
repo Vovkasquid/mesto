@@ -159,7 +159,7 @@ const editFormSubmitHandler = function  (event) {
   //Передаём поля в форму
   userInfo.setUserInfo(editFormProfileName.value, editFormProfileDescription.value);
   //Закрываем форму
-  closePopup(editForm);
+  editProfilePopup.close();
 }
 
 //Обработчик события для второй формы
@@ -171,7 +171,7 @@ const editFormNewCardSubmitHandler = function (event) {
   const newPlaceCard = newPlaceObjectCart.createCardDomNode();
   //Добавляем карточку на страницу
   contentGalleryCardsList.prepend(newPlaceCard);
-  closePopup(editFormNewPlace);
+  createCardPopup.close();
 }
 //Дебажим класс PopupWithImage
 const popupWithImage = new PopupWithImage('.image-popup');
