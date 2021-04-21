@@ -44,20 +44,18 @@ function createCardObject(placeData, templateCard, openFullViewPopup) {
 }
 
 //Обработчик события для закрытия первой формы
-const editFormSubmitHandler = function  (event) {
+const editFormSubmitHandler = function  ({editProfileName, editProfileDescription}) {
   console.log('отработал сабмит формы с именем');
-  event.preventDefault();
   //Передаём поля в форму
-  userInfo.setUserInfo(editFormProfileName.value, editFormProfileDescription.value);
+  userInfo.setUserInfo(editProfileName, editProfileDescription);
   //Закрываем форму
   editProfilePopup.close();
 }
 
 //Обработчик события для второй формы
-const editFormNewCardSubmitHandler = function (event) {
-  event.preventDefault();
+const editFormNewCardSubmitHandler = function ({editPlaceName, editLinkPlace}) {
   //Необходимо создать новую карточку с новыми полями
-  const newPlace = { name: editFormPlaceName.value, link: editFormPlaceLink.value };
+  const newPlace = { name: editPlaceName, link: editLinkPlace };
   //Добавляем элемент на страницу
   section.addItem(newPlace);
   createCardPopup.close();
