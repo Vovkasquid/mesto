@@ -26,7 +26,6 @@ function createCardObject(placeData, templateCard, openFullViewPopup) {
 
 //Обработчик события для закрытия первой формы
 const editFormSubmitHandler = function  ({editProfileName, editProfileDescription}) {
-  console.log('отработал сабмит формы с именем');
   //Передаём поля в форму
   userInfo.setUserInfo(editProfileName, editProfileDescription);
   //Закрываем форму

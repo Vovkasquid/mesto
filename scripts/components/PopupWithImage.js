@@ -6,7 +6,6 @@ export default class PopupWithImage extends Popup {
     //Сразу ищем элементы, которые нужно будет изменять при открытии
     this._fullViewPopupImg = document.querySelector('.image-popup__picture');
     this._fullViewPopupDescr = document.querySelector('.image-popup__description');
-    console.log('Отработал конструктор PopupWithImage');
   }
   open(evt) {
     const target = evt.target;
@@ -16,6 +15,5 @@ export default class PopupWithImage extends Popup {
     this._fullViewPopupDescr.textContent = target.alt;
     //показываем попап, дёргая метод предка
     super.open();
-    console.log('Отработал метод Open класса PopupWithImage');
   }
 }
