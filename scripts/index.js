@@ -5,6 +5,7 @@ import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
 import Popup from './components/Popup.js';
+import PopupWithImage from './components/PopupWithImage.js';
 
 //Получаем Попап с редактированием профиля
 const editForm = document.querySelector('.edit-form_type_profile');
@@ -196,10 +197,13 @@ function editFormNewCardSubmitHandler (event) {
   contentGalleryCardsList.prepend(newPlaceCard);
   closePopup(editFormNewPlace);
 }
+//Дебажим класс PopupWithImage
+const popupWithImage = new PopupWithImage('.image-popup');
 
 //Колбек отрисовки карточки. Создаёт карточку и добавляет её в контейнер
 const renderer = (item, container) => {
-  const card = createCardObject(item, cardTemplate, openFullViewPopup);
+  //Биндим контекст на объекте. А то потеряется, проверено.
+  const card = createCardObject(item, cardTemplate, popupWithImage.open.bind(popupWithImage));
   const cardDomNode = card.createCardDomNode();
   container.prepend(cardDomNode);
 }
@@ -209,9 +213,14 @@ const section = new Section({initialCards, renderer}, contentGallerySelector);
 //Рендерим начальные карточки
 section.renderAllElements();
 
+
+
+/*
 //Дебажим класс Popup
 const testPopup = new Popup('.edit-form_type_profile');
 testPopup.open();
+
+ */
 /*
 //Рендерим начальные карточки
 renderInitialCards();
