@@ -7,29 +7,10 @@ import Section from './components/Section.js';
 import PopupWithImage from './components/PopupWithImage.js';
 import PopupWithForm from './components/PopupWithForm.js';
 import UserInfo from './components/UserInfo.js';
+import { editFormContainer, editFormNewPlaceContainer,
+  editButton, addCardButton, editFormProfileName,
+  editFormProfileDescription, cardTemplate, contentGallerySelector } from './utils/constants.js'
 
-//Получаем Попап с редактированием профиля
-const editForm = document.querySelector('.edit-form_type_profile');
-//Получаем контейнер попапа с редактированием профиля
-const editFormContainer = editForm.querySelector('.edit-form__form-container');
-//Получаем Попап с добавление карточки
-const editFormNewPlace = document.querySelector('.edit-form_type_place');
-//Получаем контейнер попапа с добавлением карточки
-const editFormNewPlaceContainer = editFormNewPlace.querySelector('.edit-form__form-container');
-//Получаем кнопку редактирования профиля
-const editButton = document.querySelector('.profile__edit-button');
-//Получаем кнопку добавления карточки
-const addCardButton = document.querySelector('.profile__new-photo-button');
-//Получаем кнопку закрытия Попапа с редактированием профиля
-const editFormProfileName = document.querySelector('.edit-form__info-input_type_name');
-const editFormProfileDescription = document.querySelector('.edit-form__info-input_type_description');
-//Получаем список всех полей попапа editForm
-const editFormPlaceName = document.querySelector('.edit-form__info-input_type_place');
-const editFormPlaceLink = document.querySelector('.edit-form__info-input_type_link');
-//Получаем Темплейт карточки
-const cardTemplate = document.querySelector('.card-template');
-//Получаем список с карточками
-const contentGallerySelector = '.content-gallery__cards';
 const profileValidation = createFormValidatorObj(validationConfig, editFormContainer);
 const placeValidation = createFormValidatorObj(validationConfig, editFormNewPlaceContainer);
 
