@@ -179,7 +179,8 @@ function openPopupNewCardHandler () {
   placeValidation.checkFormButtonState();
 }
 //Обработчик события для закрытия первой формы
-function editFormSubmitHandler (event) {
+const editFormSubmitHandler = function  (event) {
+  console.log('отработал сабмит формы с именем');
   event.preventDefault();
   //Передаём поля в форму
   profileName.textContent = editFormProfileName.value;
@@ -189,7 +190,7 @@ function editFormSubmitHandler (event) {
 }
 
 //Обработчик события для второй формы
-function editFormNewCardSubmitHandler (event) {
+const editFormNewCardSubmitHandler = function (event) {
   event.preventDefault();
   //Необходимо создать новую карточку с новыми полями
   const newPlace = { name: editFormPlaceName.value, link: editFormPlaceLink.value };
@@ -212,11 +213,11 @@ editButton.addEventListener('click', editProfilePopup.open.bind(editProfilePopup
 //Вешаем слушателей на открытие и закрытие второго попапа
 addCardButton.addEventListener('click', createCardPopup.open.bind(createCardPopup));
 
-
+/*
 //Сохранение первого попапа
 editForm.addEventListener('submit', editProfilePopup.close.bind(editProfilePopup));
 //Сохранение второго попапа
-editFormNewPlace.addEventListener('submit', createCardPopup.close.bind(createCardPopup));
+editFormNewPlace.addEventListener('submit', createCardPopup.close.bind(createCardPopup));*/
 
 //Колбек отрисовки карточки. Создаёт карточку и добавляет её в контейнер
 const renderer = (item, container) => {
