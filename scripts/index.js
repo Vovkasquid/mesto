@@ -32,56 +32,10 @@ const cardTemplate = document.querySelector('.card-template');
 const contentGallerySelector = '.content-gallery__cards';
 const profileValidation = createFormValidatorObj(validationConfig, editFormContainer);
 const placeValidation = createFormValidatorObj(validationConfig, editFormNewPlaceContainer);
+
 //Функция создание объекта валидации
 function createFormValidatorObj (config, formElement) {
   return new FormValidator(config, formElement);
-}
-
-//Функция закрытия любого попапа
-function closePopup(popup) {
-  //Закрываем попап
-  popup.classList.remove('popup_status_active');
-  //Cнимаем слушатель с клавиатуры
-  removeKeyboardEscListener();
-  //Снимаем слушатель на документ, чтобы отлавливать клики по оверлею
-  removeClickOverlayDocumentListener();
-}
-
-//Функция для снятия слушателя клавиатуры с документа
-function removeKeyboardEscListener() {
-  document.removeEventListener('keydown', closePopupKeyBoardHandler);
-}
-
-//Функция для снятия слушателя клика по оверлею с документа
-function removeClickOverlayDocumentListener() {
-  document.removeEventListener('click', closePopupOverlayClickHandler);
-}
-
-//Функция, для навешивания слушателя клавиатуры на документ
-function setKeyboardEscListener() {
-  document.addEventListener('keydown', closePopupKeyBoardHandler);
-}
-
-//Функция для навешивания слушателя клика по оверлею на документ
-function setClickOverlayDocumentListener() {
-  document.addEventListener('click', closePopupOverlayClickHandler);
-}
-
-//Слушатель, закрывающий попапы при нажатии эскейп
-function closePopupKeyBoardHandler(event) {
-  if (event.key === 'Escape') {
-    //Ищем открытый попап
-    const openedPopup = document.querySelector('.popup_status_active');
-    //закрываем попап
-    closePopup(openedPopup);
-  }
-}
-
-//Слушатель, закрывающий попап по клику мимо него
-function closePopupOverlayClickHandler(event) {
-  if (event.target.classList.contains('popup')) {
-    closePopup(event.target);
-  }
 }
 
 //Функция создания объекта класса Card
@@ -104,10 +58,7 @@ const editFormNewCardSubmitHandler = function (event) {
   event.preventDefault();
   //Необходимо создать новую карточку с новыми полями
   const newPlace = { name: editFormPlaceName.value, link: editFormPlaceLink.value };
-  //const newPlaceObjectCart = createCardObject(newPlace, cardTemplate, openFullViewPopup);
-  //const newPlaceCard = newPlaceObjectCart.createCardDomNode();
-  //Добавляем карточку на страницу
-  //contentGalleryCardsList.prepend(newPlaceCard);
+  //Добавляем элемент на страницу
   section.addItem(newPlace);
   createCardPopup.close();
 }
