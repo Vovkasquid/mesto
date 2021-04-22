@@ -12,16 +12,16 @@ import { editFormContainer, editFormNewPlaceContainer,
   editFormProfileDescription, cardTemplate, contentGallerySelector } from './utils/constants.js';
 import '../pages/index.css'; //стили для вебпака
 
-const profileValidation = createFormValidatorObj(validationConfig, editFormContainer);
-const placeValidation = createFormValidatorObj(validationConfig, editFormNewPlaceContainer);
+const profileValidation = createFormValidatorItem(validationConfig, editFormContainer);
+const placeValidation = createFormValidatorItem(validationConfig, editFormNewPlaceContainer);
 
 //Функция создание объекта валидации
-function createFormValidatorObj (config, formElement) {
+function createFormValidatorItem (config, formElement) {
   return new FormValidator(config, formElement);
 }
 
 //Функция создания объекта класса Card
-function createCardObject(placeData, templateCard, openFullViewPopup) {
+function createCardItem(placeData, templateCard, openFullViewPopup) {
   return new Card(placeData, templateCard, openFullViewPopup);
 }
 
@@ -86,7 +86,7 @@ addCardButton.addEventListener('click', openPopupNewCardHandler);
 //Колбек отрисовки карточки. Создаёт карточку и добавляет её в контейнер
 const renderer = (item, container) => {
   //Биндим контекст на объекте. А то потеряется, проверено.
-  const card = createCardObject(item, cardTemplate, popupWithImage.open.bind(popupWithImage));
+  const card = createCardItem(item, cardTemplate, popupWithImage.open.bind(popupWithImage));
   const cardDomNode = card.createCardDomNode();
   container.prepend(cardDomNode);
 }
