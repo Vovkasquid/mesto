@@ -1,5 +1,6 @@
 node_modules
 dist
-.idea/
+# IntellijIdea files
+*.iml
 .idea
-.idea
+out
