@@ -37,6 +37,6 @@ export default class PopupWithForm extends Popup {
     //Сбрасываем форму
     this._formContainer.reset();
     //Снимаем новый слушатель
-    this._popupContainer.removeEventListener('submit', this._submitHandler.bind(this));
+    this._popupContainer.removeEventListener('submit', this._submitHandler);
   }
 }
