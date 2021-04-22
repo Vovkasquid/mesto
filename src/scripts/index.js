@@ -9,7 +9,8 @@ import PopupWithForm from './components/PopupWithForm.js';
 import UserInfo from './components/UserInfo.js';
 import { editFormContainer, editFormNewPlaceContainer,
   editButton, addCardButton, editFormProfileName,
-  editFormProfileDescription, cardTemplate, contentGallerySelector } from './utils/constants.js'
+  editFormProfileDescription, cardTemplate, contentGallerySelector } from './utils/constants.js';
+import '../pages/index.css'; //стили для вебпака
 
 const profileValidation = createFormValidatorObj(validationConfig, editFormContainer);
 const placeValidation = createFormValidatorObj(validationConfig, editFormNewPlaceContainer);
