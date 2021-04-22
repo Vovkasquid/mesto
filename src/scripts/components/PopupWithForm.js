@@ -22,11 +22,13 @@ export default class PopupWithForm extends Popup {
     //Вызываем сначала метод предка
     super.setEventListeners();
     //Вешаем слушатель на сабмит по форме
-    this._popupContainer.addEventListener('submit', (event) => {
-      event.preventDefault();
-      //Вызываем колбек для установки данных в формы
-      this._submitCallback(this._getInputValues());
-    });
+    this._popupContainer.addEventListener('submit', this._submitHandler);
+  }
+
+  _submitHandler = event => {
+    event.preventDefault();
+    //Вызываем колбек для установки данных в формы
+    this._submitCallback(this._getInputValues());
   }
 
   close() {
@@ -35,6 +37,6 @@ export default class PopupWithForm extends Popup {
     //Сбрасываем форму
     this._formContainer.reset();
     //Снимаем новый слушатель
-    this._popupContainer.removeEventListener('submit', this._submitCallback);
+    this._popupContainer.removeEventListener('submit', this._submitHandler.bind(this));
   }
 }
