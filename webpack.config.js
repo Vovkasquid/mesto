@@ -28,7 +28,12 @@ module.exports = {
         // регулярное выражение, которое ищет все js файлы
         test: /\.js$/,
         // при обработке этих файлов нужно использовать babel-loader
-        use: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: ["@babel/plugin-proposal-class-properties"]
+          }
+        },
         // исключает папку node_modules, файлы в ней обрабатывать не нужно
         exclude: '/node_modules/'
       },
