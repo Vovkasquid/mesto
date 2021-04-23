@@ -4,26 +4,27 @@ export default class Popup {
     //Сразу ищем Дом-элемент по селектору
     this._popupContainer = document.querySelector(popupSelector);
     this._closeButton = this._popupContainer.querySelector('.popup__close-btn');
+    this.close = this.close.bind(this);
   }
 
   //Метод навешивания слушателей закрытия попапа по esc, оверлею и кнопке закрытия
   setEventListeners() {
     //слушатель закрытия по esc
-    document.addEventListener('keydown', this._handleEscClose.bind(this));
+    document.addEventListener('keydown', this._handleEscClose);
     //слушатель закрытия при клике по оверлею
-    document.addEventListener('click', this._handleOverleyClick.bind(this));
+    document.addEventListener('click', this._handleOverleyClick);
     //слушатель закрытия по кнопке закрытия
-    this._closeButton.addEventListener('click', this.close.bind(this));
+    this._closeButton.addEventListener('click', this.close);
   }
 
   //Метод снимания слушателей закрытия попапа по esc, оверлею и кнопке закрытия
   removeEventListeners() {
     //слушатель закрытия по esc
-    document.removeEventListener('keydown', this._handleEscClose.bind(this));
+    document.removeEventListener('keydown', this._handleEscClose);
     //слушатель закрытия при клике по оверлею
-    document.removeEventListener('click', this._handleOverleyClick.bind(this));
+    document.removeEventListener('click', this._handleOverleyClick);
     //слушатель закрытия по кнопке закрытия
-    this._closeButton.removeEventListener('click', this.close.bind(this));
+    this._closeButton.removeEventListener('click', this.close);
   }
 
   //метод открытия попапа
@@ -43,7 +44,7 @@ export default class Popup {
   }
 
   //Метод, закрывающий попапы при нажатии эскейп
-  _handleEscClose(event) {
+  _handleEscClose = event => {
     if (event.key === 'Escape') {
       //закрываем попап
       this.close();
@@ -52,7 +53,7 @@ export default class Popup {
 
   //Метод, закрывающий попапа при клике по оверлею
   //Слушатель, закрывающий попап по клику мимо него
-  _handleOverleyClick(event) {
+  _handleOverleyClick = event => {
     if (event.target.classList.contains('popup')) {
       this.close();
     }
