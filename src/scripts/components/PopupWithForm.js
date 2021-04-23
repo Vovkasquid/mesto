@@ -32,7 +32,6 @@ export default class PopupWithForm extends Popup {
   }
 
   close() {
-    debugger
     //Закрываем попап
     super.close();
     //Сбрасываем форму
