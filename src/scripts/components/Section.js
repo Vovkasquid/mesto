@@ -1,7 +1,9 @@
 export default class Section {
-  constructor({initialCards, renderer}, containerSelector) {
+  constructor({data, renderer}, containerSelector) {
+    console.log('карточки в конструкторе секции');
+    console.log(data);
     //items - массив начальных карточек
-    this._items = initialCards;
+    this._items = data;
     //renderer - колбек отрисовки карточек
     this._renderer = renderer;
     this._container = document.querySelector(containerSelector);

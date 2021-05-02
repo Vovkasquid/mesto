@@ -10,14 +10,13 @@
   }
 });*/
 export default class Api {
-  //По пути родим, что надо добавить
-  //TODO родить, что надо передавать в конструктор
   constructor({baseUrl, headers}) {
   this._baseUrl = baseUrl;
   this._headers = headers;
   }
 
   getUserInformation() {
+    //Получаем Промис с данными от сервера
     const userInfoPromise = fetch(`${this._baseUrl}/users/me`,{
       method: 'GET',
       headers: this._headers
@@ -30,16 +29,23 @@ export default class Api {
         //Если условие не выполнено, то делаем промис с ошибкой
         return Promise.reject(`Ошибка: ${res.status}`);
       });
-      /*.then((result) => {
-        console.log(result);
-        this._userID = result._id;
-        console.log(this._userID);
-      });*/
-
+    //Отдаём промис выше
     return userInfoPromise;
   }
 
-  getInitialCard() {
-
+  getInitialCards() {
+    const initialCardPromise = fetch(`${this._baseUrl}/cards`, {
+      method: 'GET',
+      headers: this._headers
+    })
+      .then(res => {
+        //Проверяем успешен ли запрос
+        if (res.ok) {
+          return res.json();
+        }
+        //Если условие не выполнено, то делаем промис с ошибкой
+        return Promise.reject(`Ошибка: ${res.status}`);
+      });
+    return initialCardPromise;
   }
 }

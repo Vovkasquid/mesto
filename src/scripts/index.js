@@ -92,10 +92,11 @@ const renderer = (item, container) => {
   container.prepend(cardDomNode);
 }
 
+/*
 //Создаём экземпляр Секции
 const section = new Section({initialCards, renderer}, contentGallerySelector);
 //Рендерим начальные карточки
-section.renderAllElements();
+section.renderAllElements();*/
 
 //Активируем валидацию
 profileValidation.enableValidation();
@@ -135,11 +136,16 @@ userInfoPromise.then(data => {
     console.log(err); // выведем ошибку в консоль
   });
 
-//TODO не забывать ловить catch
-/*api.getInitialCards()
-  .then((result) => {
-    // обрабатываем результат
-  })
+//Зона работы в получением карточки
+const initialCardFromServer = api.getInitialCards();
+initialCardFromServer.then(data => {
+  console.log('карточки');
+  console.log(data);
+  //Создаём экземпляр Секции
+  const section = new Section({data, renderer}, contentGallerySelector);
+//Рендерим начальные карточки
+  section.renderAllElements();
+})
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
-  });*/
+  });
