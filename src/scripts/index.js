@@ -95,6 +95,13 @@ const renderer = (item, container) => {
   container.prepend(cardDomNode);
 }
 
+//функция для установки данных о пользователе. Аватар меняем не всегда, поэтому если он null, то не меняем
+const updateUserInformation = function (userName, userDescription, userAvatar) {
+  userInfo.setUserInfo(userName, userDescription);
+  if (userAvatar) {
+    userInfo.setUserAvatar(userAvatar);
+  }
+}
 /*
 //Создаём экземпляр Секции
 const section = new Section({initialCards, renderer}, contentGallerySelector);
@@ -130,11 +137,12 @@ userInfoPromise.then(data => {
   _id: "518e2d17af43d2b3f0d5031a",
   cohort: "cohort-23"*/
 });
+
 //Установить Юзера на страницу
 userInfoPromise.then(data => {
-  //userInfo.setUserInfo(editProfileName, editProfileDescription);
-  userInfo.setUserInfo(data.name, data.about);
-  userInfo.setUserAvatar(data.avatar);
+  updateUserInformation(data.name, data.about, data.avatar);
+  //userInfo.setUserInfo(data.name, data.about);
+  //userInfo.setUserAvatar(data.avatar);
 })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
