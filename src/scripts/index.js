@@ -7,6 +7,7 @@ import Section from './components/Section.js';
 import PopupWithImage from './components/PopupWithImage.js';
 import PopupWithForm from './components/PopupWithForm.js';
 import UserInfo from './components/UserInfo.js';
+import Api from './components/Api.js';
 import { editFormContainer, editFormNewPlaceContainer,
   editButton, addCardButton, editFormProfileName,
   editFormProfileDescription, cardTemplate, contentGallerySelector } from './utils/constants.js';
@@ -99,3 +100,46 @@ section.renderAllElements();
 //Активируем валидацию
 profileValidation.enableValidation();
 placeValidation.enableValidation();
+
+//Зона свободная от логики, тут проверяю код
+
+//Токен: 07ccc369-ef7d-4b71-a2f4-33043b0ad800
+// Идентификатор группы: cohort-23
+
+//TODO переделать вызов констуктора
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-23',
+  headers: {
+    authorization: '07ccc369-ef7d-4b71-a2f4-33043b0ad800',
+    'Content-Type': 'application/json'
+  }
+});
+
+//const api = new Api(token, cohordID);
+const userInfoPromise = api.getUserInformation();
+userInfoPromise.then(data => {
+  console.log(`userID = ${data._id}`);
+  console.log(data);
+  /*name: "Jacques Cousteau",
+  about: "Sailor, researcher",
+  avatar: "https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg",
+  _id: "518e2d17af43d2b3f0d5031a",
+  cohort: "cohort-23"*/
+});
+//Установить Юзера на страницу
+userInfoPromise.then(data => {
+  //userInfo.setUserInfo(editProfileName, editProfileDescription);
+  userInfo.setUserInfo(data.name, data.about)
+})
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+
+//TODO не забывать ловить catch
+/*api.getInitialCards()
+  .then((result) => {
+    // обрабатываем результат
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });*/
