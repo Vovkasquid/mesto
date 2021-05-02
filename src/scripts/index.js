@@ -102,22 +102,36 @@ const updateUserInformation = function (userName, userDescription, userAvatar) {
     userInfo.setUserAvatar(userAvatar);
   }
 }
-/*
+
+//Функция получает карточки с сервера и рендерит их
+const updateCardList = function () {
+  const initialCardFromServer = api.getInitialCards();
+  initialCardFromServer.then(data => {
+    //Рендерим карточки
+    section.renderAllElements(data);
+  })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+}
+
+//Функция, которая получает данные с сервера и первично рендерит данные пользователя
+const initializeUser = function () {
+  //Необходимо получить данные о пользователе и установить их
+//Получаем промис с данными
+  const userInfoPromise = api.getUserInformation();
+//Обновляем данные пользователя
+  userInfoPromise.then(data => {
+    updateUserInformation(data.name, data.about, data.avatar);
+  })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+}
+
 //Создаём экземпляр Секции
-const section = new Section({initialCards, renderer}, contentGallerySelector);
-//Рендерим начальные карточки
-section.renderAllElements();*/
-
-//Активируем валидацию
-profileValidation.enableValidation();
-placeValidation.enableValidation();
-
-//Зона свободная от логики, тут проверяю код
-
-//Токен: 07ccc369-ef7d-4b71-a2f4-33043b0ad800
-// Идентификатор группы: cohort-23
-
-//TODO переделать вызов констуктора
+const section = new Section(renderer, contentGallerySelector);
+//Создаём экземпляр класса Api
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-23',
   headers: {
@@ -126,38 +140,12 @@ const api = new Api({
   }
 });
 
-//const api = new Api(token, cohordID);
-const userInfoPromise = api.getUserInformation();
-userInfoPromise.then(data => {
-  console.log(`userID = ${data._id}`);
-  console.log(data);
-  /*name: "Jacques Cousteau",
-  about: "Sailor, researcher",
-  avatar: "https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg",
-  _id: "518e2d17af43d2b3f0d5031a",
-  cohort: "cohort-23"*/
-});
+//Получаем данные с сервера о пользователи и рендерим их
+initializeUser();
+//Рендерим первоначальные карточки с сервера
+updateCardList();
 
-//Установить Юзера на страницу
-userInfoPromise.then(data => {
-  updateUserInformation(data.name, data.about, data.avatar);
-  //userInfo.setUserInfo(data.name, data.about);
-  //userInfo.setUserAvatar(data.avatar);
-})
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
+//Активируем валидацию
+profileValidation.enableValidation();
+placeValidation.enableValidation();
 
-//Зона работы в получением карточки
-const initialCardFromServer = api.getInitialCards();
-initialCardFromServer.then(data => {
-  console.log('карточки');
-  console.log(data);
-  //Создаём экземпляр Секции
-  const section = new Section({data, renderer}, contentGallerySelector);
-//Рендерим начальные карточки
-  section.renderAllElements();
-})
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
