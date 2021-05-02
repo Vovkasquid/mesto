@@ -46,3 +46,5 @@
 @import url(../blocks/edit-form/__info-input/_error/edit-form__info-input_error.css);
 @import url(../blocks/edit-form/__error-text/_active/edit-form__error-text_active.css);
 @import url(../blocks/edit-form/__submit-button/_disabled/edit-form__submit-button_disabled.css);
+@import url(../blocks/edit-form/__form-description/_type/edit-form__form-description_type_delete.css);
+@import url(../blocks/edit-form/__submit-button/_type/edit-form__submit-button_type_delete.css);
