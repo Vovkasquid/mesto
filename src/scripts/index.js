@@ -50,7 +50,10 @@ const editProfilePopup = new PopupWithForm('.edit-form_type_profile', editFormSu
 const createCardPopup = new PopupWithForm('.edit-form_type_place', editFormNewCardSubmitHandler);
 
 //Создаём экземпляр UserInfo
-const userInfo = new UserInfo('.profile__name', '.profile__description');
+const userInfo = new UserInfo('.profile__name',
+  '.profile__description',
+  '.profile__avatar'
+  );
 
 //Обработчик для первичного заполнения полей и открытия
 //Попапа изменения профиля
@@ -130,7 +133,8 @@ userInfoPromise.then(data => {
 //Установить Юзера на страницу
 userInfoPromise.then(data => {
   //userInfo.setUserInfo(editProfileName, editProfileDescription);
-  userInfo.setUserInfo(data.name, data.about)
+  userInfo.setUserInfo(data.name, data.about);
+  userInfo.setUserAvatar(data.avatar);
 })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль

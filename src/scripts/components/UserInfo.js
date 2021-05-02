@@ -1,9 +1,10 @@
 export default class UserInfo {
-  constructor(selectorName, selectorDescription) {
+  constructor(selectorName, selectorDescription, selectorAvatar) {
   //Получаем селекторы имени пользователя и описания. Сразу найдём эти элементы и запишем
   //в приватные свойства
     this._nameElement = document.querySelector(selectorName);
     this._descriptionElement = document.querySelector(selectorDescription);
+    this._selectorAvatar = document.querySelector(selectorAvatar);
   }
 
   //Метод, возвращающий данные пользователя
@@ -15,5 +16,9 @@ export default class UserInfo {
   setUserInfo(userName, userDescription) {
     this._nameElement.textContent = userName;
     this._descriptionElement.textContent = userDescription;
+  }
+
+  setUserAvatar(avatarLink) {
+    this._selectorAvatar.style.backgroundImage = `url(${avatarLink})`;
   }
 }
