@@ -16,7 +16,9 @@
       <!-- Секция с именем пользователя, аватаркой, кнопками редактирования профиля и добавления нового контента -->
       <section class="profile">
         <div class="profile__person">
-          <img src=<%=require('./images/avatar.jpg')%> alt="Фотография профиля" class="profile__avatar">
+          <div class="profile__avatar">
+            <div class="profile__overlay"></div>
+          </div>
           <div class="profile__info">
             <div class="profile__name-container">
               <h1 class="profile__name">Владимир Блинов</h1>

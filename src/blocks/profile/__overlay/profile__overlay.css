@@ -1,0 +1,20 @@
+.profile__overlay {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  background-image: none;
+  transition: 0.3s linear;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+  opacity: 0;
+}
+
+.profile__overlay:hover {
+  background-image: url('../../../images/profile_image_edit.svg');
+  background-color: rgba(0,0,0,0.8);
+  opacity: 1;
+}
