@@ -22,6 +22,8 @@ content-gallery (Грид с фотками)
 card (карточка с контентом)
   __photo
   __description
+  __like-container
+  __card__like-counter
   __like-button
       _status -> card__like-button_status_active (активный статус)
   __delete-button
