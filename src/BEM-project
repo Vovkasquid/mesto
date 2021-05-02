@@ -27,6 +27,7 @@ card (карточка с контентом)
   __like-button
       _status -> card__like-button_status_active (активный статус)
   __delete-button
+    _type_invisible (для того, чтобы не видеть корзину на не своих карточках)
   __info (контейнер для описания и лайка)
 
 footer (подвал с лого)

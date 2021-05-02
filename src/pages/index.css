@@ -44,6 +44,7 @@
 @import url(../blocks/image-popup/__description/image-popup__description.css);
 @import url(../blocks/image-popup/__picture/image-popup__picture.css);
 @import url(../blocks/card/__like-button/_status/card__like-button_status_active.css);
+@import url(../blocks/card/__delete-button/_type/card__delete-button_type_invisible.css);
 @import url(../blocks/image-popup/_status/image-popup_status_active.css);
 @import url(../blocks/edit-form/__info-input/_error/edit-form__info-input_error.css);
 @import url(../blocks/edit-form/__error-text/_active/edit-form__error-text_active.css);
