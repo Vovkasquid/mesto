@@ -1,10 +1,11 @@
 export default class Card {
   //конструктор - данные, темплейт, колбек openFullViewPopup (открытие фуллвь попапа)
-  constructor(placeData, templateCard, openFullViewPopup) {
+  constructor(placeData, templateCard, openFullViewPopup, userID) {
     this._placeData = placeData;
     this._templateCard = templateCard;
     this._openFullViewPopup = openFullViewPopup;
     this._likeCounterSelector = '.card__like-counter';
+    this._userID = userID;
   }
   //Публичный метод один - возвращает элемент карточки
   //Функция создания карточки (Публичный метод)
@@ -23,6 +24,10 @@ export default class Card {
     this._likeCounter.textContent = this._placeData.likes.length;
     //Навешиваем слушателей на карточку
     this._addCardsListeners();
+    //Проверяем надо ли скрывать корзину
+    if (this._userID !== this._placeData.owner._id) {
+      this._deleteCardBtn.classList.add('card__delete-button_type_invisible');
+    }
     //Возвращаем карточку
     return this._newCard;
   }

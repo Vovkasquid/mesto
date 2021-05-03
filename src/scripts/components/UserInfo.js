@@ -21,4 +21,12 @@ export default class UserInfo {
   setUserAvatar(avatarLink) {
     this._selectorAvatar.style.backgroundImage = `url(${avatarLink})`;
   }
+
+  setUserId(userID) {
+    this._userID = userID;
+  }
+
+  getUserId() {
+    return this._userID;
+  }
 }

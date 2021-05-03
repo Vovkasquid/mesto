@@ -22,8 +22,8 @@ function createFormValidatorItem (config, formElement) {
 }
 
 //Функция создания объекта класса Card
-function createCardItem(placeData, templateCard, openFullViewPopup) {
-  return new Card(placeData, templateCard, openFullViewPopup);
+function createCardItem(placeData, templateCard, openFullViewPopup, userID) {
+  return new Card(placeData, templateCard, openFullViewPopup, userID);
 }
 
 //Обработчик события для закрытия первой формы
@@ -90,14 +90,15 @@ addCardButton.addEventListener('click', openPopupNewCardHandler);
 //Колбек отрисовки карточки. Создаёт карточку и добавляет её в контейнер
 const renderer = (item, container) => {
   //Биндим контекст на объекте. А то потеряется, проверено.
-  const card = createCardItem(item, cardTemplate, popupWithImage.open.bind(popupWithImage));
+  const card = createCardItem(item, cardTemplate, popupWithImage.open.bind(popupWithImage), userInfo.getUserId());
   const cardDomNode = card.createCardDomNode();
   container.prepend(cardDomNode);
 }
 
-//функция для установки данных о пользователе. Аватар меняем не всегда, поэтому если он null, то не меняем
-const updateUserInformation = function (userName, userDescription, userAvatar) {
+//функция для установки данных о пользователе. Аватар меняем не всегда, поэтому если он null/undefined, то не меняем
+const updateUserInformation = function (userName, userDescription, userAvatar, userID) {
   userInfo.setUserInfo(userName, userDescription);
+  userInfo.setUserId(userID);
   if (userAvatar) {
     userInfo.setUserAvatar(userAvatar);
   }
@@ -123,7 +124,7 @@ const initializeUser = function () {
   const userInfoPromise = api.getUserInformation();
 //Обновляем данные пользователя
   userInfoPromise.then(data => {
-    updateUserInformation(data.name, data.about, data.avatar);
+    updateUserInformation(data.name, data.about, data.avatar, data._id);
   })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
