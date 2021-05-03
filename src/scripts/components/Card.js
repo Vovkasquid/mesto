@@ -4,7 +4,7 @@ export default class Card {
     this._placeData = placeData;
     this._templateCard = templateCard;
     this._openFullViewPopup = openFullViewPopup;
-
+    this._likeCounterSelector = '.card__like-counter';
   }
   //Публичный метод один - возвращает элемент карточки
   //Функция создания карточки (Публичный метод)
@@ -14,10 +14,13 @@ export default class Card {
     this._newCard =this._templateCard.content.cloneNode(true);
     this._cardDescription = this._newCard.querySelector('.card__description');
     this._cardPhoto = this._newCard.querySelector('.card__photo');
+    this._likeCounter = this._newCard.querySelector(this._likeCounterSelector);
     //Заполняем поля новой карточки элементами поступившего в функцию объекта
     this._cardDescription.textContent = this._placeData.name;
     this._cardPhoto.src = this._placeData.link;
     this._cardPhoto.alt = this._placeData.name;
+    //устанавливаем количество лайков
+    this._likeCounter.textContent = this._placeData.likes.length;
     //Навешиваем слушателей на карточку
     this._addCardsListeners();
     //Возвращаем карточку

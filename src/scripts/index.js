@@ -108,6 +108,7 @@ const updateCardList = function () {
   const initialCardFromServer = api.getInitialCards();
   initialCardFromServer.then(data => {
     //Рендерим карточки
+    console.log(data);
     section.renderAllElements(data);
   })
     .catch((err) => {
