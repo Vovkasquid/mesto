@@ -15,7 +15,6 @@ import '../pages/index.css'; //стили для вебпака
 
 const profileValidation = createFormValidatorItem(validationConfig, editFormContainer);
 const placeValidation = createFormValidatorItem(validationConfig, editFormNewPlaceContainer);
-console.log(avatarFormContainer);
 const avatarValidation = createFormValidatorItem(validationConfig, avatarFormContainer);
 
 //Функция создание объекта валидации
@@ -50,8 +49,7 @@ const editAvatarSubmitHandler = function ({editLinkAvatar}) {
   //Забираем из форм данные и отправляем их на сервер
   const editAvatarPromise = api.editAvatar(editLinkAvatar);
   editAvatarPromise
-    .then(data =>{
-      console.log('Пришла ава с сервера');
+    .then(data => {
       console.log(data);
       userInfo.setUserAvatar(data.avatar);
       editAvatarPopup.close();
@@ -104,12 +102,11 @@ const openPopupNewCardHandler = function () {
 //Обработчик открытия попапа редактирования аватара
 const openPopupAvatarHandler =  () => {
   //Предварительно удаляем старые ошибки
-  //avatarValidation.resetFormInputError();
+  avatarValidation.resetFormInputError();
   //Открываем форму
   editAvatarPopup.open();
-  console.log('вжух');
   //Выставляем актуальное состояние кнопки сохранения
-  //avatarValidation.checkFormButtonState();
+  avatarValidation.checkFormButtonState();
 }
 
 //Вешаем слушателей на открытие и первого попапа
@@ -183,5 +180,5 @@ updateCardList();
 //Активируем валидацию
 profileValidation.enableValidation();
 placeValidation.enableValidation();
-//avatarValidation.enableValidation();
+avatarValidation.enableValidation();
 
