@@ -44,12 +44,30 @@ const editFormNewCardSubmitHandler = function ({editPlaceName, editLinkPlace}) {
   section.addItem(newPlace);
   createCardPopup.close();
 }
+
+//колбек сабмита для попапа редактирования аватара
+const editAvatarSubmitHandler = function ({editLinkAvatar}) {
+  //Забираем из форм данные и отправляем их на сервер
+  const editAvatarPromise = api.editAvatar(editLinkAvatar);
+  editAvatarPromise
+    .then(data =>{
+      console.log('Пришла ава с сервера');
+      console.log(data);
+      userInfo.setUserAvatar(data.avatar);
+      editAvatarPopup.close();
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+}
+
 //Дебажим класс PopupWithImage
 const popupWithImage = new PopupWithImage('.image-popup');
 
-//Дебажим класс PopupWithForm
+//Создаём экземпляры попапов
 const editProfilePopup = new PopupWithForm('.edit-form_type_profile', editFormSubmitHandler);
 const createCardPopup = new PopupWithForm('.edit-form_type_place', editFormNewCardSubmitHandler);
+const editAvatarPopup = new PopupWithForm('.edit-form_type_avatar', editAvatarSubmitHandler);
 
 //Создаём экземпляр UserInfo
 const userInfo = new UserInfo('.profile__name',
@@ -83,10 +101,23 @@ const openPopupNewCardHandler = function () {
   placeValidation.checkFormButtonState();
 }
 
+//Обработчик открытия попапа редактирования аватара
+const openPopupAvatarHandler =  () => {
+  //Предварительно удаляем старые ошибки
+  //avatarValidation.resetFormInputError();
+  //Открываем форму
+  editAvatarPopup.open();
+  console.log('вжух');
+  //Выставляем актуальное состояние кнопки сохранения
+  //avatarValidation.checkFormButtonState();
+}
+
 //Вешаем слушателей на открытие и первого попапа
 editButton.addEventListener('click', openPopupProfileHandler);
 //Вешаем слушателей на открытие и закрытие второго попапа
 addCardButton.addEventListener('click', openPopupNewCardHandler);
+//Вещаем слушатель на открытие попапа
+editAvatarBtn.addEventListener('click', openPopupAvatarHandler);
 
 
 //Колбек отрисовки карточки. Создаёт карточку и добавляет её в контейнер
@@ -153,45 +184,4 @@ updateCardList();
 profileValidation.enableValidation();
 placeValidation.enableValidation();
 //avatarValidation.enableValidation();
-
-//    const editFormSubmitHandler = function  ({editProfileName, editProfileDescription}) {
-//       //Передаём поля в форму
-//       userInfo.setUserInfo(editProfileName, editProfileDescription);
-//       //Закрываем форму
-//       editProfilePopup.close();
-//    }
-
-//колбек сабмита для попапа редактирования аватара
-const editAvatarSubmitHandler = function ({editLinkAvatar}) {
-  //Забираем из форм данные и отправляем их на сервер
-  const editAvatarPromise = api.editAvatar(editLinkAvatar);
-  editAvatarPromise
-    .then(data =>{
-      console.log('Пришла ава с сервера');
-      console.log(data);
-      //TODO здесь будет добавление авы локально когда всё проверю
-      //userInfo.setUserAvatar(data);
-    })
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
-}
-
-//Имеем попап с формами
-const editAvatarPopup = new PopupWithForm('.edit-form_type_avatar', editAvatarSubmitHandler);
-
-//Обработчик открытия попапа редактирования аватара
-const openPopupAvatarHandler =  () => {
-  //Предварительно удаляем старые ошибки
-  //avatarValidation.resetFormInputError();
-  //Открываем форму
-  editAvatarPopup.open();
-  console.log('вжух');
-  //Выставляем актуальное состояние кнопки сохранения
-  //avatarValidation.checkFormButtonState();
-}
-
-//Вещаем слушатель на открытие попапа
-editAvatarBtn.addEventListener('click', openPopupAvatarHandler);
-avatarValidation.enableValidation();
 
