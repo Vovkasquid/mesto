@@ -21,7 +21,6 @@ export default class Card {
     this._cardPhoto.src = this._placeData.link;
     this._cardPhoto.alt = this._placeData.name;
     //устанавливаем количество лайков
-    //Если их нет, то ставим ноль
     this._likeCounter.textContent = this._placeData.likes.length;
     //Навешиваем слушателей на карточку
     this._addCardsListeners();

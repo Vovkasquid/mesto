@@ -38,9 +38,12 @@ const editFormSubmitHandler = function  ({editProfileName, editProfileDescriptio
 //Обработчик события для второй формы
 const editFormNewCardSubmitHandler = function ({editPlaceName, editLinkPlace}) {
   //Необходимо создать новую карточку с новыми полями
-  const newPlace = { name: editPlaceName, link: editLinkPlace, likes: [], owner: {_id: userInfo.getUserId()} };
-  //Добавляем элемент на страницу
-  section.addItem(newPlace);
+  //Надо добавить страницу на сервер, а потом отрендерить локально
+  api.addCard(editPlaceName, editLinkPlace)
+    .then(newPlace => {
+      //Добавляем элемент на страницу
+      section.addItem(newPlace);
+    })
   createCardPopup.close();
 }
 
@@ -50,7 +53,6 @@ const editAvatarSubmitHandler = function ({editLinkAvatar}) {
   const editAvatarPromise = api.editAvatar(editLinkAvatar);
   editAvatarPromise
     .then(data => {
-      console.log(data);
       userInfo.setUserAvatar(data.avatar);
       editAvatarPopup.close();
     })
@@ -140,7 +142,8 @@ const updateCardList = function () {
   initialCardFromServer.then(data => {
     //Рендерим карточки
     console.log(data);
-    section.renderAllElements(data);
+    //Карточки с сервера приходят в странном формате, их надо ревёрснуть
+    section.renderAllElements(data.reverse());
   })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
