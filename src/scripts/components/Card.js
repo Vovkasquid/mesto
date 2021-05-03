@@ -1,11 +1,12 @@
 export default class Card {
   //конструктор - данные, темплейт, колбек openFullViewPopup (открытие фуллвь попапа)
-  constructor(placeData, templateCard, openFullViewPopup, userID) {
+  constructor(placeData, templateCard, openFullViewPopup, userID, deleteCardCallback) {
     this._placeData = placeData;
     this._templateCard = templateCard;
     this._openFullViewPopup = openFullViewPopup;
     this._likeCounterSelector = '.card__like-counter';
     this._userID = userID;
+    this._deleteCardCallback = deleteCardCallback;
   }
   //Публичный метод один - возвращает элемент карточки
   //Функция создания карточки (Публичный метод)
@@ -26,6 +27,7 @@ export default class Card {
     this._addCardsListeners();
     //Проверяем надо ли скрывать корзину
     if (this._userID !== this._placeData.owner._id) {
+      console.log('Скрыл кнопку');
       this._deleteCardBtn.classList.add('card__delete-button_type_invisible');
     }
     //Возвращаем карточку
@@ -39,11 +41,22 @@ export default class Card {
   }
 
   //Обработчик удаления карточки
-  _deleteCard(evt) {
-    //Вытаскиваем карточку из таргета
-    this._target = evt.target;
-    this._card = this._target.closest('.card');
-    this._card.remove();
+  _deleteCard = (evt) => {
+    //Сначала надо удалить карточку с сервера
+    //ID карточки есть в самой карточке
+    this._deleteCardCallback(this._placeData)
+      .then(data => {
+        //В душе не знаю какой ответ у этого промиса
+        console.log(data);
+        //Раз мы здесь, значит карточка удалилась с сервера. Удаляем теперь её локально
+        //Вытаскиваем карточку из таргета
+        this._target = evt.target;
+        this._card = this._target.closest('.card');
+        this._card.remove();
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
   }
 
   //Обработчик открывания попапа с фулвью попапом передан колбеком

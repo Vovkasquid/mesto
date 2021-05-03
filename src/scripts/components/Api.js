@@ -103,6 +103,23 @@ export default class Api {
     return addCardPromise;
   }
 
+  removeCard(cardID) {
+    const removeCardPromise = fetch(`${this._baseUrl}/cards/${cardID}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+      .then(res => {
+        //Проверяем успешен ли запрос
+        if (res.ok) {
+          return res.json();
+        }
+        //Если условие не выполнено, то делаем промис с ошибкой
+        return Promise.reject(`Ошибка: ${res.status}`);
+      });
+    //Отдаём промис
+    return removeCardPromise;
+  }
+
   addLike(cardID) {
     const addLikePromise = fetch(`${this._baseUrl}/cards/likes/${cardID}`, {
       method: 'PUT',

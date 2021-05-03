@@ -17,14 +17,19 @@ const profileValidation = createFormValidatorItem(validationConfig, editFormCont
 const placeValidation = createFormValidatorItem(validationConfig, editFormNewPlaceContainer);
 const avatarValidation = createFormValidatorItem(validationConfig, avatarFormContainer);
 
+//Колбек удаления карточки локально и с сервера
+const deleteCardCallback = function (cardData) {
+  return api.removeCard(cardData._id);
+}
+
 //Функция создание объекта валидации
 function createFormValidatorItem (config, formElement) {
   return new FormValidator(config, formElement);
 }
 
 //Функция создания объекта класса Card
-function createCardItem(placeData, templateCard, openFullViewPopup, userID) {
-  return new Card(placeData, templateCard, openFullViewPopup, userID);
+function createCardItem(placeData, templateCard, openFullViewPopup, userID, deleteCardCallback) {
+  return new Card(placeData, templateCard, openFullViewPopup, userID, deleteCardCallback);
 }
 
 //Обработчик события для закрытия первой формы
@@ -122,7 +127,7 @@ editAvatarBtn.addEventListener('click', openPopupAvatarHandler);
 //Колбек отрисовки карточки. Создаёт карточку и добавляет её в контейнер
 const renderer = (item, container) => {
   //Биндим контекст на объекте. А то потеряется, проверено.
-  const card = createCardItem(item, cardTemplate, popupWithImage.open.bind(popupWithImage), userInfo.getUserId());
+  const card = createCardItem(item, cardTemplate, popupWithImage.open.bind(popupWithImage), userInfo.getUserId(), deleteCardCallback);
   const cardDomNode = card.createCardDomNode();
   container.prepend(cardDomNode);
 }
