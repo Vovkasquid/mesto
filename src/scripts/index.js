@@ -38,7 +38,7 @@ const editFormSubmitHandler = function  ({editProfileName, editProfileDescriptio
 //Обработчик события для второй формы
 const editFormNewCardSubmitHandler = function ({editPlaceName, editLinkPlace}) {
   //Необходимо создать новую карточку с новыми полями
-  const newPlace = { name: editPlaceName, link: editLinkPlace };
+  const newPlace = { name: editPlaceName, link: editLinkPlace, likes: [], owner: {_id: userInfo.getUserId()} };
   //Добавляем элемент на страницу
   section.addItem(newPlace);
   createCardPopup.close();
