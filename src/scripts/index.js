@@ -10,11 +10,13 @@ import UserInfo from './components/UserInfo.js';
 import Api from './components/Api.js';
 import { editFormContainer, editFormNewPlaceContainer,
   editButton, addCardButton, editFormProfileName,
-  editFormProfileDescription, cardTemplate, contentGallerySelector } from './utils/constants.js';
+  editFormProfileDescription, cardTemplate, contentGallerySelector, editAvatarBtn, avatarFormContainer } from './utils/constants.js';
 import '../pages/index.css'; //стили для вебпака
 
 const profileValidation = createFormValidatorItem(validationConfig, editFormContainer);
 const placeValidation = createFormValidatorItem(validationConfig, editFormNewPlaceContainer);
+console.log(avatarFormContainer);
+const avatarValidation = createFormValidatorItem(validationConfig, avatarFormContainer);
 
 //Функция создание объекта валидации
 function createFormValidatorItem (config, formElement) {
@@ -150,4 +152,46 @@ updateCardList();
 //Активируем валидацию
 profileValidation.enableValidation();
 placeValidation.enableValidation();
+//avatarValidation.enableValidation();
+
+//    const editFormSubmitHandler = function  ({editProfileName, editProfileDescription}) {
+//       //Передаём поля в форму
+//       userInfo.setUserInfo(editProfileName, editProfileDescription);
+//       //Закрываем форму
+//       editProfilePopup.close();
+//    }
+
+//колбек сабмита для попапа редактирования аватара
+const editAvatarSubmitHandler = function ({editLinkAvatar}) {
+  //Забираем из форм данные и отправляем их на сервер
+  const editAvatarPromise = api.editAvatar(editLinkAvatar);
+  editAvatarPromise
+    .then(data =>{
+      console.log('Пришла ава с сервера');
+      console.log(data);
+      //TODO здесь будет добавление авы локально когда всё проверю
+      //userInfo.setUserAvatar(data);
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+}
+
+//Имеем попап с формами
+const editAvatarPopup = new PopupWithForm('.edit-form_type_avatar', editAvatarSubmitHandler);
+
+//Обработчик открытия попапа редактирования аватара
+const openPopupAvatarHandler =  () => {
+  //Предварительно удаляем старые ошибки
+  //avatarValidation.resetFormInputError();
+  //Открываем форму
+  editAvatarPopup.open();
+  console.log('вжух');
+  //Выставляем актуальное состояние кнопки сохранения
+  //avatarValidation.checkFormButtonState();
+}
+
+//Вещаем слушатель на открытие попапа
+editAvatarBtn.addEventListener('click', openPopupAvatarHandler);
+avatarValidation.enableValidation();
 

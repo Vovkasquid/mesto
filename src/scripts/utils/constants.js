@@ -20,3 +20,9 @@ export const editFormPlaceLink = document.querySelector('.edit-form__info-input_
 export const cardTemplate = document.querySelector('.card-template');
 //Получаем список с карточками
 export const contentGallerySelector = '.content-gallery__cards';
+//Получаем кнопку редактирования аватара
+export const editAvatarBtn = document.querySelector('.profile__avatar');
+//Получаем попап редактирования аватара
+export const avatarForm = document.querySelector('.edit-form_type_avatar');
+//Получаем контейнер формы редактирования аватара
+export const avatarFormContainer = avatarForm.querySelector('.edit-form__form-container');
