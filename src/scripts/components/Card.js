@@ -47,18 +47,6 @@ export default class Card {
     console.log(this._deleteCardCallback);
     //Передаём необходимые данные в колбек
     this._deleteCardCallback(evt, this._placeData);
-      /*.then(data => {
-        //В душе не знаю какой ответ у этого промиса
-        console.log(data);
-        //Раз мы здесь, значит карточка удалилась с сервера. Удаляем теперь её локально
-        //Вытаскиваем карточку из таргета
-        this._target = evt.target;
-        this._card = this._target.closest('.card');
-        this._card.remove();
-      })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      });*/
   }
 
   //Обработчик открывания попапа с фулвью попапом передан колбеком

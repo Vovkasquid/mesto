@@ -19,13 +19,16 @@ const avatarValidation = createFormValidatorItem(validationConfig, avatarFormCon
 
 //Колбек удаления карточки локально и с сервера
 const deleteCardCallback = (evt, cardData) => {
+  //Перезаписываем колбек попапа
   confirmPopup.setSubmitCallback(() => {
-    confirmPopup.close();
+    //Просим сервер удалить карту
     api.removeCard(cardData._id)
       .then(data => {
       //В душе не знаю какой ответ у этого промиса
       console.log(data);
       //Раз мы здесь, значит карточка удалилась с сервера. Удаляем теперь её локально
+      //Карточка уже удалена из разметки, можно закрыть попап
+      confirmPopup.close();
       //Вытаскиваем карточку из таргета
       const target = evt.target;
       const card = target.closest('.card');
@@ -35,6 +38,7 @@ const deleteCardCallback = (evt, cardData) => {
         console.log(err); // выведем ошибку в консоль
       });
   })
+  //Открываем попап по клику
   confirmPopup.open();
 }
 
