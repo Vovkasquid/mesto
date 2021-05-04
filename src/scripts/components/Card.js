@@ -13,7 +13,7 @@ export default class Card {
   createCardDomNode() {
     /*Создаём временные переменне. newCard для заполнения новой карточки
     и cardDescription и CardPhoto - элементы новых карточек*/
-    this._newCard =this._templateCard.content.cloneNode(true);
+    this._newCard = this._templateCard.content.cloneNode(true);
     this._cardDescription = this._newCard.querySelector('.card__description');
     this._cardPhoto = this._newCard.querySelector('.card__photo');
     this._likeCounter = this._newCard.querySelector(this._likeCounterSelector);
@@ -30,13 +30,23 @@ export default class Card {
       console.log('Скрыл кнопку');
       this._deleteCardBtn.classList.add('card__delete-button_type_invisible');
     }
+    //Нужно понять есть ли мой лайк в карточке
+    //Для этого нужно перебрать массив лайков и сравнить ID лайкателя
+    //Если есть мой лайк, красим сердце
+    //массив лайков лежит в this._placeData.likes
+    //внутри массива объекты. В объекте есть поле _id. Оно нам и нужно
+    this._placeData.likes.forEach(person => {
+      if (person._id === this._userID) {
+        //Если айди совпал с моим, рендерю лайк
+        this._toggleLikeButton();
+      }
+    });
     //Возвращаем карточку
     return this._newCard;
   }
 
-  //Функция выставления лайка
-  _toggleLikeButton(evt) {
-    this._likeBtn = evt.target;
+  //Функция выставления лайка по клику
+  _toggleLikeButton = () => {
     this._likeBtn.classList.toggle('card__like-button_status_active');
   }
 

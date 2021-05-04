@@ -211,4 +211,3 @@ updateCardList();
 profileValidation.enableValidation();
 placeValidation.enableValidation();
 avatarValidation.enableValidation();
-
