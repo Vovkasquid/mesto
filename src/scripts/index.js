@@ -18,8 +18,24 @@ const placeValidation = createFormValidatorItem(validationConfig, editFormNewPla
 const avatarValidation = createFormValidatorItem(validationConfig, avatarFormContainer);
 
 //Колбек удаления карточки локально и с сервера
-const deleteCardCallback = function (cardData) {
-  return api.removeCard(cardData._id);
+const deleteCardCallback = (evt, cardData) => {
+  confirmPopup.setSubmitCallback(() => {
+    confirmPopup.close();
+    api.removeCard(cardData._id)
+      .then(data => {
+      //В душе не знаю какой ответ у этого промиса
+      console.log(data);
+      //Раз мы здесь, значит карточка удалилась с сервера. Удаляем теперь её локально
+      //Вытаскиваем карточку из таргета
+      const target = evt.target;
+      const card = target.closest('.card');
+      card.remove();
+    })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
+  })
+  confirmPopup.open();
 }
 
 //Функция создание объекта валидации
@@ -73,6 +89,8 @@ const popupWithImage = new PopupWithImage('.image-popup');
 const editProfilePopup = new PopupWithForm('.edit-form_type_profile', editFormSubmitHandler);
 const createCardPopup = new PopupWithForm('.edit-form_type_place', editFormNewCardSubmitHandler);
 const editAvatarPopup = new PopupWithForm('.edit-form_type_avatar', editAvatarSubmitHandler);
+//Передаём любую функцию, потому что все равно её перезапишем в колбеке
+const confirmPopup = new PopupWithForm('.edit-form_type_delete', editAvatarSubmitHandler);
 
 //Создаём экземпляр UserInfo
 const userInfo = new UserInfo('.profile__name',

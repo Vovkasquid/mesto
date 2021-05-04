@@ -7,6 +7,11 @@ export default class PopupWithForm extends Popup {
     //Получаем элемент формы, чтобы сбрасывать его при закрытии
     this._formContainer = this._popupContainer.querySelector('.edit-form__form-container');
   }
+
+  //Метод для переопределения колбека попапа
+  setSubmitCallback(callback) {
+    this._submitCallback = callback;
+  }
   _getInputValues() {
     //Ищем инпуты
     const allInputs = this._formContainer.querySelectorAll('.edit-form__info-input');

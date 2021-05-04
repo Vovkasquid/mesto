@@ -41,11 +41,13 @@ export default class Card {
   }
 
   //Обработчик удаления карточки
-  _deleteCard = (evt) => {
-    //Сначала надо удалить карточку с сервера
-    //ID карточки есть в самой карточке
-    this._deleteCardCallback(this._placeData)
-      .then(data => {
+  deleteCard = (evt) => {
+    evt.preventDefault();
+    console.log('Дебажим колбек удаления карточки');
+    console.log(this._deleteCardCallback);
+    //Передаём необходимые данные в колбек
+    this._deleteCardCallback(evt, this._placeData);
+      /*.then(data => {
         //В душе не знаю какой ответ у этого промиса
         console.log(data);
         //Раз мы здесь, значит карточка удалилась с сервера. Удаляем теперь её локально
@@ -56,7 +58,7 @@ export default class Card {
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
-      });
+      });*/
   }
 
   //Обработчик открывания попапа с фулвью попапом передан колбеком
@@ -66,7 +68,7 @@ export default class Card {
     this._likeBtn = this._newCard.querySelector('.card__like-button');
     this._likeBtn.addEventListener('click', this._toggleLikeButton);
     this._deleteCardBtn = this._newCard.querySelector('.card__delete-button');
-    this._deleteCardBtn.addEventListener('click', this._deleteCard);
+    this._deleteCardBtn.addEventListener('click', this.deleteCard);
     this._cardPhoto.addEventListener('click', this._openFullViewPopup);
   }
 }
