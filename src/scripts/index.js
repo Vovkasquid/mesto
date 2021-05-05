@@ -17,6 +17,28 @@ const profileValidation = createFormValidatorItem(validationConfig, editFormCont
 const placeValidation = createFormValidatorItem(validationConfig, editFormNewPlaceContainer);
 const avatarValidation = createFormValidatorItem(validationConfig, avatarFormContainer);
 
+//Колбек постановки или удаление лайка
+const likeCardCallback = (isLiked, cardData, card) => {
+  //Если isLiked === true, то надо ставить лайк, иначе снять
+  if (isLiked) {
+    api.addLike(cardData._id)
+      .then(answer => {
+        //Устанавливаем новое количество лайков
+        card.setLikeCounter(answer.likes.length);
+      })
+      .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+  } else {
+    api.removeLike(cardData._id)
+      .then(answer => {
+        //Устанавливаем новое количество лайков
+        card.setLikeCounter(answer.likes.length);
+      }).catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+  }
+}
 //Колбек удаления карточки локально и с сервера
 const deleteCardCallback = (evt, cardData) => {
   //Перезаписываем колбек попапа
@@ -48,8 +70,8 @@ function createFormValidatorItem (config, formElement) {
 }
 
 //Функция создания объекта класса Card
-function createCardItem(placeData, templateCard, openFullViewPopup, userID, deleteCardCallback) {
-  return new Card(placeData, templateCard, openFullViewPopup, userID, deleteCardCallback);
+function createCardItem(placeData, templateCard, openFullViewPopup, userID, deleteCardCallback, likeCardCallback) {
+  return new Card(placeData, templateCard, openFullViewPopup, userID, deleteCardCallback, likeCardCallback);
 }
 
 //Обработчик события для закрытия первой формы
@@ -149,7 +171,7 @@ editAvatarBtn.addEventListener('click', openPopupAvatarHandler);
 //Колбек отрисовки карточки. Создаёт карточку и добавляет её в контейнер
 const renderer = (item, container) => {
   //Биндим контекст на объекте. А то потеряется, проверено.
-  const card = createCardItem(item, cardTemplate, popupWithImage.open.bind(popupWithImage), userInfo.getUserId(), deleteCardCallback);
+  const card = createCardItem(item, cardTemplate, popupWithImage.open.bind(popupWithImage), userInfo.getUserId(), deleteCardCallback, likeCardCallback);
   const cardDomNode = card.createCardDomNode();
   container.prepend(cardDomNode);
 }

@@ -1,12 +1,14 @@
 export default class Card {
   //конструктор - данные, темплейт, колбек openFullViewPopup (открытие фуллвь попапа)
-  constructor(placeData, templateCard, openFullViewPopup, userID, deleteCardCallback) {
+  constructor(placeData, templateCard, openFullViewPopup, userID, deleteCardCallback, likeCardCallback) {
     this._placeData = placeData;
     this._templateCard = templateCard;
     this._openFullViewPopup = openFullViewPopup;
     this._likeCounterSelector = '.card__like-counter';
     this._userID = userID;
     this._deleteCardCallback = deleteCardCallback;
+    this._isLiked = false;
+    this._likeCardCallback = likeCardCallback;
   }
   //Публичный метод один - возвращает элемент карточки
   //Функция создания карточки (Публичный метод)
@@ -39,15 +41,34 @@ export default class Card {
       if (person._id === this._userID) {
         //Если айди совпал с моим, рендерю лайк
         this._toggleLikeButton();
+        //Записываем, что лайк есть
+        this._isLiked = true;
       }
     });
     //Возвращаем карточку
     return this._newCard;
   }
 
-  //Функция выставления лайка по клику
+  //Функция рендера лайка
   _toggleLikeButton = () => {
     this._likeBtn.classList.toggle('card__like-button_status_active');
+  }
+
+  //Функция выставляющая количество лайков
+  setLikeCounter (number) {
+    this._likeCounter.textContent = number;
+  }
+
+  //Обработчик клика по лайку
+  _likeButtonHandler = () => {
+    //Красим или наоборот обесцвечиваем лайк
+    this._toggleLikeButton();
+    //меняем статус лайка
+    this._isLiked = !this._isLiked;
+    //Вызываем колбек, который сделает запрос на сервер
+    //и либо удалит лайк, либо поставит
+    //В колбек передаём this, чтобы он смог асинхронно изменить количество лайков
+     this._likeCardCallback(this._isLiked, this._placeData, this);
   }
 
   //Обработчик удаления карточки
@@ -64,7 +85,7 @@ export default class Card {
   //Функция навешивания слушателей на кнопки карточки
   _addCardsListeners() {
     this._likeBtn = this._newCard.querySelector('.card__like-button');
-    this._likeBtn.addEventListener('click', this._toggleLikeButton);
+    this._likeBtn.addEventListener('click', this._likeButtonHandler);
     this._deleteCardBtn = this._newCard.querySelector('.card__delete-button');
     this._deleteCardBtn.addEventListener('click', this.deleteCard);
     this._cardPhoto.addEventListener('click', this._openFullViewPopup);
