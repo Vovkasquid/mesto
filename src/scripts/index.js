@@ -96,6 +96,9 @@ const editFormNewCardSubmitHandler = function ({editPlaceName, editLinkPlace}) {
       //Добавляем элемент на страницу
       section.addItem(newPlace);
     })
+    .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
   createCardPopup.close();
 }
 
