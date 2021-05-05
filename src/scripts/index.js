@@ -58,8 +58,6 @@ const deleteCardCallback = (evt, cardData) => {
     //Просим сервер удалить карту
     api.removeCard(cardData._id)
       .then(data => {
-      //В душе не знаю какой ответ у этого промиса
-      console.log(data);
       //Раз мы здесь, значит карточка удалилась с сервера. Удаляем теперь её локально
       //Карточка уже удалена из разметки, можно закрыть попап
       confirmPopup.close();
@@ -203,8 +201,6 @@ const updateUserInformation = function (userName, userDescription, userAvatar, u
 const updateCardList = function () {
   const initialCardFromServer = api.getInitialCards();
   initialCardFromServer.then(data => {
-    //Рендерим карточки
-    console.log(data);
     //Карточки с сервера приходят в странном формате, их надо ревёрснуть
     section.renderAllElements(data.reverse());
   })

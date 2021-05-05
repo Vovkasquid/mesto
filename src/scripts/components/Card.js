@@ -71,7 +71,7 @@ export default class Card {
   }
 
   //Обработчик удаления карточки
-  deleteCard = (evt) => {
+  _deleteCard = (evt) => {
     evt.preventDefault();
     //Передаём необходимые данные в колбек
     this._deleteCardCallback(evt, this._placeData);
@@ -84,7 +84,7 @@ export default class Card {
     this._likeBtn = this._newCard.querySelector('.card__like-button');
     this._likeBtn.addEventListener('click', this._likeButtonHandler);
     this._deleteCardBtn = this._newCard.querySelector('.card__delete-button');
-    this._deleteCardBtn.addEventListener('click', this.deleteCard);
+    this._deleteCardBtn.addEventListener('click', this._deleteCard);
     this._cardPhoto.addEventListener('click', this._openFullViewPopup);
   }
 }
