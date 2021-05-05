@@ -17,6 +17,22 @@ const profileValidation = createFormValidatorItem(validationConfig, editFormCont
 const placeValidation = createFormValidatorItem(validationConfig, editFormNewPlaceContainer);
 const avatarValidation = createFormValidatorItem(validationConfig, avatarFormContainer);
 
+
+const toggleLoading = (popup, isLoaded) => {
+  if (isLoaded) {
+    //Сравниваем по ссылку попап
+    //Если ссылка ведёт на createCardPopup то необходимо
+    //Написать не "сохранить", а создать
+    if (popup === createCardPopup) {
+      popup.setSubmitBtnText('Создать');
+    } else {
+      popup.setSubmitBtnText('Сохранить');
+    }
+  } else {
+    popup.setSubmitBtnText('Сохранение...');
+  }
+}
+
 //Колбек постановки или удаление лайка
 const likeCardCallback = (isLiked, cardData, card) => {
   //Если isLiked === true, то надо ставить лайк, иначе снять
@@ -59,7 +75,7 @@ const deleteCardCallback = (evt, cardData) => {
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
-  })
+  });
   //Открываем попап по клику
   confirmPopup.open();
 }
@@ -76,19 +92,29 @@ function createCardItem(placeData, templateCard, openFullViewPopup, userID, dele
 
 //Обработчик события для закрытия первой формы
 const editFormSubmitHandler = function  ({editProfileName, editProfileDescription}) {
+  //Меняем текст на кнопке сабмита
+  toggleLoading(editProfilePopup, false);
   //Отправляем новый данные на сервер
-  api.editProfile(editProfileName, editProfileDescription).
-  then(answer => {
+  api.editProfile(editProfileName, editProfileDescription)
+    .then(answer => {
     //Раз мы здесь, значит данные установились и пришёл ответ с новыми данными
     //Установим их по серверу, а не по локальным данным
     userInfo.setUserInfo(answer.name, answer.about);
     //Закрываем форму
     editProfilePopup.close();
   })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    })
+    .finally(() => {
+      toggleLoading(editProfilePopup, true);
+    });
 }
 
 //Обработчик события для второй формы
 const editFormNewCardSubmitHandler = function ({editPlaceName, editLinkPlace}) {
+  //Меняем текст на кнопке сабмита
+  toggleLoading(createCardPopup, false);
   //Необходимо создать новую карточку с новыми полями
   //Надо добавить страницу на сервер, а потом отрендерить локально
   api.addCard(editPlaceName, editLinkPlace)
@@ -98,12 +124,19 @@ const editFormNewCardSubmitHandler = function ({editPlaceName, editLinkPlace}) {
     })
     .catch((err) => {
     console.log(err); // выведем ошибку в консоль
-  });
+  })
+    .finally(() => {
+      toggleLoading(createCardPopup, true);
+    });
   createCardPopup.close();
 }
-
+function he() {
+  console.log('he');
+}
 //колбек сабмита для попапа редактирования аватара
 const editAvatarSubmitHandler = function ({editLinkAvatar}) {
+  //Меняем текст на кнопке сабмита
+  toggleLoading(editAvatarPopup, false);
   //Забираем из форм данные и отправляем их на сервер
   const editAvatarPromise = api.editAvatar(editLinkAvatar);
   editAvatarPromise
@@ -113,6 +146,9 @@ const editAvatarSubmitHandler = function ({editLinkAvatar}) {
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
+    })
+    .finally(() => {
+      toggleLoading(editAvatarPopup, true);
     });
 }
 

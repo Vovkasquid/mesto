@@ -6,12 +6,19 @@ export default class PopupWithForm extends Popup {
     this._submitCallback = submitCallback;
     //Получаем элемент формы, чтобы сбрасывать его при закрытии
     this._formContainer = this._popupContainer.querySelector('.edit-form__form-container');
+    this._submitBtn = this._formContainer.querySelector('.edit-form__submit-button');
   }
+
+  //Метод, меняющий текст на кнопке сабмита
+  setSubmitBtnText(btnText) {
+      this._submitBtn.textContent = btnText;
+}
 
   //Метод для переопределения колбека попапа
   setSubmitCallback(callback) {
     this._submitCallback = callback;
   }
+
   _getInputValues() {
     //Ищем инпуты
     const allInputs = this._formContainer.querySelectorAll('.edit-form__info-input');
