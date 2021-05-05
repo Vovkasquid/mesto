@@ -29,7 +29,6 @@ export default class Card {
     this._addCardsListeners();
     //Проверяем надо ли скрывать корзину
     if (this._userID !== this._placeData.owner._id) {
-      console.log('Скрыл кнопку');
       this._deleteCardBtn.classList.add('card__delete-button_type_invisible');
     }
     //Нужно понять есть ли мой лайк в карточке
@@ -74,8 +73,6 @@ export default class Card {
   //Обработчик удаления карточки
   deleteCard = (evt) => {
     evt.preventDefault();
-    console.log('Дебажим колбек удаления карточки');
-    console.log(this._deleteCardCallback);
     //Передаём необходимые данные в колбек
     this._deleteCardCallback(evt, this._placeData);
   }

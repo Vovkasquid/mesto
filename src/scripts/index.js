@@ -13,11 +13,6 @@ import { editFormContainer, editFormNewPlaceContainer,
   editFormProfileDescription, cardTemplate, contentGallerySelector, editAvatarBtn, avatarFormContainer } from './utils/constants.js';
 import '../pages/index.css'; //стили для вебпака
 
-const profileValidation = createFormValidatorItem(validationConfig, editFormContainer);
-const placeValidation = createFormValidatorItem(validationConfig, editFormNewPlaceContainer);
-const avatarValidation = createFormValidatorItem(validationConfig, avatarFormContainer);
-
-
 const toggleLoading = (popup, isLoaded) => {
   if (isLoaded) {
     //Сравниваем по ссылку попап
@@ -55,6 +50,7 @@ const likeCardCallback = (isLiked, cardData, card) => {
     });
   }
 }
+
 //Колбек удаления карточки локально и с сервера
 const deleteCardCallback = (evt, cardData) => {
   //Перезаписываем колбек попапа
@@ -130,9 +126,7 @@ const editFormNewCardSubmitHandler = function ({editPlaceName, editLinkPlace}) {
     });
   createCardPopup.close();
 }
-function he() {
-  console.log('he');
-}
+
 //колбек сабмита для попапа редактирования аватара
 const editAvatarSubmitHandler = function ({editLinkAvatar}) {
   //Меняем текст на кнопке сабмита
@@ -151,22 +145,6 @@ const editAvatarSubmitHandler = function ({editLinkAvatar}) {
       toggleLoading(editAvatarPopup, true);
     });
 }
-
-//Дебажим класс PopupWithImage
-const popupWithImage = new PopupWithImage('.image-popup');
-
-//Создаём экземпляры попапов
-const editProfilePopup = new PopupWithForm('.edit-form_type_profile', editFormSubmitHandler);
-const createCardPopup = new PopupWithForm('.edit-form_type_place', editFormNewCardSubmitHandler);
-const editAvatarPopup = new PopupWithForm('.edit-form_type_avatar', editAvatarSubmitHandler);
-//Передаём любую функцию, потому что все равно её перезапишем в колбеке
-const confirmPopup = new PopupWithForm('.edit-form_type_delete', editAvatarSubmitHandler);
-
-//Создаём экземпляр UserInfo
-const userInfo = new UserInfo('.profile__name',
-  '.profile__description',
-  '.profile__avatar'
-  );
 
 //Обработчик для первичного заполнения полей и открытия
 //Попапа изменения профиля
@@ -204,14 +182,6 @@ const openPopupAvatarHandler =  () => {
   avatarValidation.checkFormButtonState();
 }
 
-//Вешаем слушателей на открытие и первого попапа
-editButton.addEventListener('click', openPopupProfileHandler);
-//Вешаем слушателей на открытие и закрытие второго попапа
-addCardButton.addEventListener('click', openPopupNewCardHandler);
-//Вещаем слушатель на открытие попапа
-editAvatarBtn.addEventListener('click', openPopupAvatarHandler);
-
-
 //Колбек отрисовки карточки. Создаёт карточку и добавляет её в контейнер
 const renderer = (item, container) => {
   //Биндим контекст на объекте. А то потеряется, проверено.
@@ -246,15 +216,12 @@ const updateCardList = function () {
 //Функция, которая получает данные с сервера и первично рендерит данные пользователя
 const initializeUser = function () {
   //Необходимо получить данные о пользователе и установить их
-//Получаем промис с данными
+  //Получаем промис с данными
   const userInfoPromise = api.getUserInformation();
-//Обновляем данные пользователя
-  userInfoPromise.then(data => {
+  //Обновляем данные пользователя и возвращаем промис
+  return userInfoPromise.then(data => {
     updateUserInformation(data.name, data.about, data.avatar, data._id);
   })
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
 }
 
 //Создаём экземпляр Секции
@@ -267,13 +234,50 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
+//Предварительно вне промиса создаём те объекты
+//для создания которых не нужны данные с сервера
+//Создаём экземпляры объектов валидации
+const profileValidation = createFormValidatorItem(validationConfig, editFormContainer);
+const placeValidation = createFormValidatorItem(validationConfig, editFormNewPlaceContainer);
+const avatarValidation = createFormValidatorItem(validationConfig, avatarFormContainer);
 
-//Получаем данные с сервера о пользователи и рендерим их
-initializeUser();
-//Рендерим первоначальные карточки с сервера
-updateCardList();
+//Создаём экземпляр класса PopupWithImage
+const popupWithImage = new PopupWithImage('.image-popup');
+
+//Создаём экземпляры попапов
+const editProfilePopup = new PopupWithForm('.edit-form_type_profile', editFormSubmitHandler);
+const createCardPopup = new PopupWithForm('.edit-form_type_place', editFormNewCardSubmitHandler);
+const editAvatarPopup = new PopupWithForm('.edit-form_type_avatar', editAvatarSubmitHandler);
+//Передаём любую функцию, потому что все равно её перезапишем в колбеке
+const confirmPopup = new PopupWithForm('.edit-form_type_delete', editAvatarSubmitHandler);
+
+//Создаём экземпляр UserInfo
+const userInfo = new UserInfo('.profile__name',
+  '.profile__description',
+  '.profile__avatar'
+);
+
+//Вешаем слушателей на открытие и первого попапа
+editButton.addEventListener('click', openPopupProfileHandler);
+//Вешаем слушателей на открытие и закрытие второго попапа
+addCardButton.addEventListener('click', openPopupNewCardHandler);
+//Вешаем слушатель на открытие попапа
+editAvatarBtn.addEventListener('click', openPopupAvatarHandler);
 
 //Активируем валидацию
 profileValidation.enableValidation();
 placeValidation.enableValidation();
 avatarValidation.enableValidation();
+
+//Получаем данные с сервера о пользователе и рендерим их
+initializeUser()
+  //после того, как пользователь точно проинициализирован данным с сервера
+  //необходимо получить карточки с сервера
+  .then(() => {
+    //Рендерим первоначальные карточки с сервера
+    updateCardList();
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+

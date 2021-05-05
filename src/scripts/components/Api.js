@@ -5,7 +5,6 @@ export default class Api {
   this._headers = headers;
   }
 
-  //TODO переделать всё на return сразу
   getUserInformation() {
     //Получаем Промис с данными от сервера
     const userInfoPromise = fetch(`${this._baseUrl}/users/me`,{
