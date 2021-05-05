@@ -76,10 +76,15 @@ function createCardItem(placeData, templateCard, openFullViewPopup, userID, dele
 
 //Обработчик события для закрытия первой формы
 const editFormSubmitHandler = function  ({editProfileName, editProfileDescription}) {
-  //Передаём поля в форму
-  userInfo.setUserInfo(editProfileName, editProfileDescription);
-  //Закрываем форму
-  editProfilePopup.close();
+  //Отправляем новый данные на сервер
+  api.editProfile(editProfileName, editProfileDescription).
+  then(answer => {
+    //Раз мы здесь, значит данные установились и пришёл ответ с новыми данными
+    //Установим их по серверу, а не по локальным данным
+    userInfo.setUserInfo(answer.name, answer.about);
+    //Закрываем форму
+    editProfilePopup.close();
+  })
 }
 
 //Обработчик события для второй формы
