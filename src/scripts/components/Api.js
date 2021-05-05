@@ -5,20 +5,21 @@ export default class Api {
   this._headers = headers;
   }
 
+  //Метод для проверки ответа
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    //Если условие не выполнено, то делаем промис с ошибкой
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
   getUserInformation() {
     //Получаем Промис с данными от сервера
     const userInfoPromise = fetch(`${this._baseUrl}/users/me`,{
       method: 'GET',
       headers: this._headers
     })
-      .then(res => {
-        //Проверяем успешен ли запрос
-        if (res.ok) {
-          return res.json();
-        }
-        //Если условие не выполнено, то делаем промис с ошибкой
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkResponse);
     //Отдаём промис выше
     return userInfoPromise;
   }
@@ -28,14 +29,7 @@ export default class Api {
       method: 'GET',
       headers: this._headers
     })
-      .then(res => {
-        //Проверяем успешен ли запрос
-        if (res.ok) {
-          return res.json();
-        }
-        //Если условие не выполнено, то делаем промис с ошибкой
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkResponse);
     //Отдаём промис
     return initialCardPromise;
   }
@@ -49,14 +43,7 @@ export default class Api {
         about: userAbout
       })
     })
-      .then(res => {
-        //Проверяем успешен ли запрос
-        if (res.ok) {
-          return res.json();
-        }
-        //Если условие не выполнено, то делаем промис с ошибкой
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkResponse);
     //Отдаём промис
     return editProfilePromise;
   }
@@ -69,14 +56,7 @@ export default class Api {
         avatar: userAvatar
       })
     })
-      .then(res => {
-        //Проверяем успешен ли запрос
-        if (res.ok) {
-          return res.json();
-        }
-        //Если условие не выполнено, то делаем промис с ошибкой
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkResponse);
     //Отдаём промис
     return editAvatarePromise;
   }
@@ -90,14 +70,7 @@ export default class Api {
         link: pictureLink
       })
     })
-      .then(res => {
-        //Проверяем успешен ли запрос
-        if (res.ok) {
-          return res.json();
-        }
-        //Если условие не выполнено, то делаем промис с ошибкой
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkResponse);
     //Отдаём промис
     return addCardPromise;
   }
@@ -107,14 +80,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-      .then(res => {
-        //Проверяем успешен ли запрос
-        if (res.ok) {
-          return res.json();
-        }
-        //Если условие не выполнено, то делаем промис с ошибкой
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkResponse);
     //Отдаём промис
     return removeCardPromise;
   }
@@ -124,14 +90,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers
     })
-      .then(res => {
-        //Проверяем успешен ли запрос
-        if (res.ok) {
-          return res.json();
-        }
-        //Если условие не выполнено, то делаем промис с ошибкой
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkResponse);
     //Отдаём промис
     return addLikePromise;
   }
@@ -141,14 +100,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-      .then(res => {
-        //Проверяем успешен ли запрос
-        if (res.ok) {
-          return res.json();
-        }
-        //Если условие не выполнено, то делаем промис с ошибкой
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkResponse);
     //Отдаём промис
     return removeLikePromise;
   }
