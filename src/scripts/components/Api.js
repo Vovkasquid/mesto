@@ -15,27 +15,23 @@ export default class Api {
   }
   getUserInformation() {
     //Получаем Промис с данными от сервера
-    const userInfoPromise = fetch(`${this._baseUrl}/users/me`,{
+    return fetch(`${this._baseUrl}/users/me`,{
       method: 'GET',
       headers: this._headers
     })
       .then(this._checkResponse);
-    //Отдаём промис выше
-    return userInfoPromise;
   }
 
   getInitialCards() {
-    const initialCardPromise = fetch(`${this._baseUrl}/cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
       headers: this._headers
     })
       .then(this._checkResponse);
-    //Отдаём промис
-    return initialCardPromise;
   }
 
   editProfile(userName, userAbout) {
-    const editProfilePromise = fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -44,12 +40,10 @@ export default class Api {
       })
     })
       .then(this._checkResponse);
-    //Отдаём промис
-    return editProfilePromise;
   }
 
   editAvatar(userAvatar) {
-    const editAvatarePromise = fetch(`${this._baseUrl}/users/me/avatar `, {
+    return fetch(`${this._baseUrl}/users/me/avatar `, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -57,12 +51,10 @@ export default class Api {
       })
     })
       .then(this._checkResponse);
-    //Отдаём промис
-    return editAvatarePromise;
   }
 
   addCard(placeName, pictureLink) {
-    const addCardPromise = fetch(`${this._baseUrl}/cards `, {
+    return fetch(`${this._baseUrl}/cards `, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -71,37 +63,29 @@ export default class Api {
       })
     })
       .then(this._checkResponse);
-    //Отдаём промис
-    return addCardPromise;
   }
 
   removeCard(cardID) {
-    const removeCardPromise = fetch(`${this._baseUrl}/cards/${cardID}`, {
+    return fetch(`${this._baseUrl}/cards/${cardID}`, {
       method: 'DELETE',
       headers: this._headers
     })
       .then(this._checkResponse);
-    //Отдаём промис
-    return removeCardPromise;
   }
 
   addLike(cardID) {
-    const addLikePromise = fetch(`${this._baseUrl}/cards/likes/${cardID}`, {
+    return fetch(`${this._baseUrl}/cards/likes/${cardID}`, {
       method: 'PUT',
       headers: this._headers
     })
       .then(this._checkResponse);
-    //Отдаём промис
-    return addLikePromise;
   }
 
   removeLike(cardID) {
-    const removeLikePromise = fetch(`${this._baseUrl}/cards/likes/${cardID}`, {
+    return fetch(`${this._baseUrl}/cards/likes/${cardID}`, {
       method: 'DELETE',
       headers: this._headers
     })
       .then(this._checkResponse);
-    //Отдаём промис
-    return removeLikePromise;
   }
 }
