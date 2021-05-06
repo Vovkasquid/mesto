@@ -70,21 +70,31 @@ export default class Card {
      this._likeCardCallback(this._isLiked, this._placeData, this);
   }
 
+  //Публичный метод локального удаления карточки
+  deleteCard = (evt) => {
+    //Вытаскиваем карточку из таргета
+    const target = evt.target;
+    const card = target.closest('.card');
+    card.remove();
+}
+
   //Обработчик удаления карточки
-  _deleteCard = (evt) => {
+  _deleteCardHandler = (evt) => {
     evt.preventDefault();
     //Передаём необходимые данные в колбек
-    this._deleteCardCallback(evt, this._placeData);
+    //Вторым параметром передадим this (экземпляр объекта)
+    //Чтобы колбек мог вызвать публичный метод deleteCard
+    //evt прокидываем, чтобы потом удалить карточку в методе deleteCard
+    this._deleteCardCallback(this._placeData, this, evt);
   }
 
   //Обработчик открывания попапа с фулвью попапом передан колбеком
-
   //Функция навешивания слушателей на кнопки карточки
   _addCardsListeners() {
     this._likeBtn = this._newCard.querySelector('.card__like-button');
     this._likeBtn.addEventListener('click', this._likeButtonHandler);
     this._deleteCardBtn = this._newCard.querySelector('.card__delete-button');
-    this._deleteCardBtn.addEventListener('click', this._deleteCard);
+    this._deleteCardBtn.addEventListener('click', this._deleteCardHandler);
     this._cardPhoto.addEventListener('click', this._openFullViewPopup);
   }
 }

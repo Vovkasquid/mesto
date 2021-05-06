@@ -52,19 +52,18 @@ const likeCardCallback = (isLiked, cardData, card) => {
 }
 
 //Колбек удаления карточки локально и с сервера
-const deleteCardCallback = (evt, cardData) => {
+const deleteCardCallback = (cardData, card, evt) => {
   //Перезаписываем колбек попапа
   confirmPopup.setSubmitCallback(() => {
     //Просим сервер удалить карту
     api.removeCard(cardData._id)
       .then(data => {
-      //Раз мы здесь, значит карточка удалилась с сервера. Удаляем теперь её локально
-      //Карточка уже удалена из разметки, можно закрыть попап
-      confirmPopup.close();
-      //Вытаскиваем карточку из таргета
-      const target = evt.target;
-      const card = target.closest('.card');
-      card.remove();
+        //Раз мы здесь, значит карточка удалилась с сервера. Удаляем теперь её локально
+        //с помощью переданного в колбек экземпляра
+        card.deleteCard(evt);
+        //Карточка уже удалена из разметки, можно закрыть попап
+        confirmPopup.close();
+
     })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
