@@ -63,7 +63,6 @@ const deleteCardCallback = (cardData, card, evt) => {
         card.deleteCard(evt);
         //Карточка уже удалена из разметки, можно закрыть попап
         confirmPopup.close();
-
     })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
@@ -112,8 +111,12 @@ const editFormNewCardSubmitHandler = function ({editPlaceName, editLinkPlace}) {
   //Надо добавить страницу на сервер, а потом отрендерить локально
   api.addCard(editPlaceName, editLinkPlace)
     .then(newPlace => {
-      //Добавляем элемент на страницу
+      //Если мы здесь, значит запрос добавления карточки вызван успешно
+      //Необходимо отрендерить карточку локально
       section.addItem(newPlace);
+      //Попап необходимо закрывать здесь же, чтобы
+      //Не было ситуации, что попап закрылся, а запрос не выполнен
+      createCardPopup.close();
     })
     .catch((err) => {
     console.log(err); // выведем ошибку в консоль
@@ -121,7 +124,6 @@ const editFormNewCardSubmitHandler = function ({editPlaceName, editLinkPlace}) {
     .finally(() => {
       toggleLoading(createCardPopup, true);
     });
-  createCardPopup.close();
 }
 
 //колбек сабмита для попапа редактирования аватара
