@@ -266,15 +266,21 @@ profileValidation.enableValidation();
 placeValidation.enableValidation();
 avatarValidation.enableValidation();
 
-//Получаем данные с сервера о пользователе и рендерим их
-initializeUser()
-  //после того, как пользователь точно проинициализирован данным с сервера
-  //необходимо получить карточки с сервера
-  .then(() => {
-    //Рендерим первоначальные карточки с сервера
-    updateCardList();
+Promise.all([
+  //Передаём Массив промисов, которые необходимо выполнить
+  //Ответ будет в массиве данных, по порядку написания промисов
+  //Но не по порядку их выполнения
+  api.getUserInformation(),
+  api.getInitialCards()
+])
+  .then((values)=>{
+    //Попадаем сюда, только когда оба промиса будут выполнены
+    //Устанавливаем полученные данные пользователя
+    updateUserInformation(values[0].name, values[0].about, values[0].avatar, values[0]._id);
+    //Рендерим полученные карточки
+    section.renderAllElements(values[1].reverse());
   })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
+  .catch((err)=>{
+    console.log(err);
+  })
 
