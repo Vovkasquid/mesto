@@ -198,29 +198,6 @@ const updateUserInformation = function (userName, userDescription, userAvatar, u
   }
 }
 
-//Функция получает карточки с сервера и рендерит их
-const updateCardList = function () {
-  const initialCardFromServer = api.getInitialCards();
-  initialCardFromServer.then(data => {
-    //Карточки с сервера приходят в странном формате, их надо ревёрснуть
-    section.renderAllElements(data.reverse());
-  })
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
-}
-
-//Функция, которая получает данные с сервера и первично рендерит данные пользователя
-const initializeUser = function () {
-  //Необходимо получить данные о пользователе и установить их
-  //Получаем промис с данными
-  const userInfoPromise = api.getUserInformation();
-  //Обновляем данные пользователя и возвращаем промис
-  return userInfoPromise.then(data => {
-    updateUserInformation(data.name, data.about, data.avatar, data._id);
-  })
-}
-
 //Создаём экземпляр Секции
 const section = new Section(renderer, contentGallerySelector);
 //Создаём экземпляр класса Api
